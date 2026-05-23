@@ -1,5 +1,5 @@
-import HeroSection from '../components/home/HeroSection'
-import SearchBlock from '../components/home/SearchBlock'
+import HeroSection from '../../widgets/hero/HeroSection'
+import SearchBlock from '../../widgets/searchblock/SearchBlock'
 
 export default function HomePage() {
   return (
