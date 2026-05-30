@@ -41,7 +41,7 @@ export default function Header() {
           <Link to="/login" className="flex items-center gap-2 text-sm px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-gray-700">
             Войти
           </Link>
-          <Link to="/register" className="flex items-center gap-2 text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition">
+          <Link to="/registration" className="flex items-center gap-2 text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition">
             Зарегистрироваться
           </Link>
         </div>
@@ -77,7 +77,7 @@ export default function Header() {
           <Link to="/how-it-works" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600">Как это работает</Link>
           <div className="flex gap-2 pt-2">
             <Link to="/login" className="flex-1 text-center border border-gray-300 rounded-lg py-2">Войти</Link>
-            <Link to="/register" className="flex-1 text-center bg-blue-600 rounded-lg py-2 text-white">Зарегистрироваться</Link>
+            <Link to="/registration " className="flex-1 text-center bg-blue-600 rounded-lg py-2 text-white">Зарегистрироваться</Link>
           </div>
         </div>
       )}
