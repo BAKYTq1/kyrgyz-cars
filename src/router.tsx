@@ -10,6 +10,9 @@ import Support from './pages/help/Support'
 import Formal from './pages/help/Formal'
 import Payments from './pages/help/Payments'
 import Deposit from './pages/help/Deposit'
+import AccountLayout from './pages/account/AccountLayout'
+import AccountHome from './pages/account/AccountHome'
+import { AccountProfile, AccountDeposits, AccountSettings } from './pages/account/AccountSection'
 import { Registration } from './widgets/Auth/Registration/Registration'
 import { Login } from './widgets/Auth/Login/Login'
 import { ForgotPasswordd } from './widgets/Auth/forgotPassword/ForgotPasswordd'
@@ -39,6 +42,21 @@ export const router = createBrowserRouter([
       { path: 'prePurchaseProcess1', element: <PrePurchaseProcess1 /> },
       { path: 'how-it-works', element: <PurchaseProcess /> },
       { path: 'delivery-times', element: <DeliveryTimes /> },
+      {
+        path: 'account',
+        element: <AccountLayout />,
+        children: [
+          { index: true, element: <AccountHome /> },
+          { path: 'profile', element: <AccountProfile /> },
+          { path: 'watchlist', element: <div>Watchlist</div> },
+          { path: 'shipping', element: <div>Shipping</div> },
+          { path: 'deposits', element: <AccountDeposits /> },
+          { path: 'current', element: <div>Current</div> },
+          { path: 'won', element: <div>Won</div> },
+          { path: 'lost', element: <div>Lost</div> },
+          { path: 'settings', element: <AccountSettings /> },
+        ],
+      },
     ],
   },
   {
