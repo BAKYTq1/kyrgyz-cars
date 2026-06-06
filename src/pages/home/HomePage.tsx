@@ -1,3 +1,6 @@
+import DeliveryMap from '../../widgets/delivery-map/DeliveryMap'
+import HeroSection from '../../widgets/hero/HeroSection'
+import FeaturedLots from '../../widgets/lots/FeaturedLots'
 import { AboutUs } from '../../widgets/AboutUs/AboutUs'
 import HeroSection from '../../widgets/hero/HeroSection'
 import { PopularMakes } from '../../widgets/PopularMakes/PopularMakes'
@@ -8,6 +11,8 @@ export default function HomePage() {
     <div className="bg-gray-100 min-h-screen">
       <HeroSection />
       <SearchBlock />
+      <FeaturedLots/>
+      <DeliveryMap/>
       <PopularMakes />
       <AboutUs />
     </div>

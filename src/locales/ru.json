@@ -1,0 +1,80 @@
+{
+  "common": {
+    "search": "Поиск",
+    "login": "Войти",
+    "register": "Зарегистрироваться",
+    "all": "Все",
+    "archive": "Архив"
+  },
+  "header": {
+    "searchPlaceholder": "Поиск по марке, модели, номеру предложения или VIN...",
+    "current": "Текущие",
+    "archive": "Архив",
+    "navSearch": "Поиск и ставки",
+    "navDelivery": "Сроки доставки",
+    "navHowItWorks": "Как это работает",
+    "navHelp": "Помощь",
+    "navAbout": "О нас",
+    "navContacts": "Контакты",
+    "hours": "Пн-Пт 10:00-22:00 CET",
+    "mobileSearch": "Поиск..."
+  },
+  "hero": {
+    "tags": [
+      "Покупка на аукционе",
+      "Доставка из США",
+      "Таможенное оформление",
+      "Доставка на дом"
+    ],
+    "title": [
+      "Покупка и доставка",
+      "американских",
+      "автомобилей"
+    ],
+    "subtitle": "С опцией \"Доставка на дом\" никогда не было ещё так быстро и легко",
+    "start": "Начать торги",
+    "howItWorks": "Как это работает",
+    "background": "CARS"
+  },
+  "search": {
+    "tabs": ["Автомобиль", "Мотоцикл", "ATV", "Ещё"],
+    "archive": "Архив",
+    "allMakes": "Все марки",
+    "allModels": "Все модели",
+    "allGenerations": "Все поколения",
+    "from": "С",
+    "to": "До",
+    "vinPlaceholder": "Поиск по VIN или номеру лота",
+    "copart": "Copart",
+    "iaai": "IAAI",
+    "showLots": "Показать 122 648 машин"
+  },
+  "featured": {
+    "viewAll": "Смотреть все",
+    "currentBid": "Текущая ставка:",
+    "buyNow": "Купить сейчас:",
+    "categories": {
+      "classics": "Американские классические автомобили",
+      "motorcycles": "Мотоциклы Harley-Davidson",
+      "supercars": "Суперкары"
+    }
+  },
+  "lotCard": {
+    "currentBid": "Текущая ставка:",
+    "buyNow": "Купить сейчас:",
+    "auctionOpen": "Открытый аукцион",
+    "timerPrefix": "Осталось"
+  },
+  "footer": {
+    "company": "Компания",
+    "support": "Поддержка",
+    "keywords": "Ключевые слова",
+    "auctions": "Аукционы",
+    "account": "Аккаунт",
+    "allAuctions": "Все аукционы",
+    "rules": "Правила",
+    "privacy": "Конфиденциальность и cookie",
+    "rights": "Все права защищены",
+    "location": "Бишкек, Кыргызстан"
+  }
+}
