@@ -41,6 +41,7 @@ export default function Header() {
           </Link>
           <Link to="/register" className="flex items-center gap-2 text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition">
             {t('common.register')}
+          </Link>
           <Link to="/registration" className="flex items-center gap-2 text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition">
             Зарегистрироваться
           </Link>
@@ -55,7 +56,7 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4">
           <nav className="flex items-center gap-1 text-sm text-gray-600">
             <Link to="/catalog" className="px-3 py-3 hover:text-blue-600 transition">{t('header.navSearch')}</Link>
-            <Link to="/delivery" className="px-3 py-3 hover:text-blue-600 transition">{t('header.navDelivery')}</Link>
+            <Link to="/delivery-times" className="px-3 py-3 hover:text-blue-600 transition">{t('header.navDelivery')}</Link>
             <Link to="/how-it-works" className="px-3 py-3 hover:text-blue-600 transition">{t('header.navHowItWorks')}</Link>
             <Link to="/help" className="px-3 py-3 hover:text-blue-600 transition">{t('header.navHelp')}</Link>
             <Link to="/about" className="px-3 py-3 hover:text-blue-600 transition">{t('header.navAbout')}</Link>

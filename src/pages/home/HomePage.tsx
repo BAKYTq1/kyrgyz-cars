@@ -2,7 +2,6 @@ import DeliveryMap from '../../widgets/delivery-map/DeliveryMap'
 import HeroSection from '../../widgets/hero/HeroSection'
 import FeaturedLots from '../../widgets/lots/FeaturedLots'
 import { AboutUs } from '../../widgets/AboutUs/AboutUs'
-import HeroSection from '../../widgets/hero/HeroSection'
 import { PopularMakes } from '../../widgets/PopularMakes/PopularMakes'
 import SearchBlock from '../../widgets/searchblock/SearchBlock'
 
