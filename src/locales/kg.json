@@ -1,0 +1,80 @@
+{
+  "common": {
+    "search": "Издөө",
+    "login": "Кирүү",
+    "register": "Катталуу",
+    "all": "Баары",
+    "archive": "Архив"
+  },
+  "header": {
+    "searchPlaceholder": "Марка, модель, лот номери же VIN боюнча издөө...",
+    "current": "Учурдагы",
+    "archive": "Архив",
+    "navSearch": "Издөө жана ставка",
+    "navDelivery": "Жеткирүү мөөнөтү",
+    "navHowItWorks": "Кантип иштейт",
+    "navHelp": "Жардам",
+    "navAbout": "Биз жөнүндө",
+    "navContacts": "Байланыш",
+    "hours": "Дш-Жм 10:00-22:00 CET",
+    "mobileSearch": "Издөө..."
+  },
+  "hero": {
+    "tags": [
+      "Аукциондон сатып алуу",
+      "АКШдан жеткирүү",
+      "Бажы тариздөө",
+      "Үйгө жеткирүү"
+    ],
+    "title": [
+      "Америкалык",
+      "унааларды",
+      "сатып алуу жана жеткирүү"
+    ],
+    "subtitle": "\"Үйгө жеткирүү\" опциясы менен мындан аркысы мындан да тез жана оңой эмес",
+    "start": "Ставка баштоо",
+    "howItWorks": "Кантип иштейт",
+    "background": "CARS"
+  },
+  "search": {
+    "tabs": ["Унаа", "Мотоцикл", "ATV", "Дагы"],
+    "archive": "Архив",
+    "allMakes": "Бардык маркалар",
+    "allModels": "Бардык моделдер",
+    "allGenerations": "Бардык муундар",
+    "from": "Баштап",
+    "to": "Чейин",
+    "vinPlaceholder": "VIN же лот номери боюнча издөө",
+    "copart": "Copart",
+    "iaai": "IAAI",
+    "showLots": "122 648 унааны көрсөтүү"
+  },
+  "featured": {
+    "viewAll": "Баарын көрүү",
+    "currentBid": "Учурдагы ставка:",
+    "buyNow": "Азыр сатып алуу:",
+    "categories": {
+      "classics": "Америкалык классикалык унаалар",
+      "motorcycles": "Harley-Davidson мотоциклдери",
+      "supercars": "Суперкарлар"
+    }
+  },
+  "lotCard": {
+    "currentBid": "Учурдагы ставка:",
+    "buyNow": "Азыр сатып алуу:",
+    "auctionOpen": "Ачык аукцион",
+    "timerPrefix": "Калды"
+  },
+  "footer": {
+    "company": "Компания",
+    "support": "Колдоо",
+    "keywords": "Ачкыч сөздөр",
+    "auctions": "Аукциондор",
+    "account": "Аккаунт",
+    "allAuctions": "Бардык аукциондор",
+    "rules": "Эрежелер",
+    "privacy": "Купуялык жана cookie",
+    "rights": "Бардык укуктар корголгон",
+    "location": "Бишкек, Кыргызстан"
+  }
+}

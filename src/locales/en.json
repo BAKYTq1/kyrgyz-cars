@@ -1,0 +1,80 @@
+{
+  "common": {
+    "search": "Search",
+    "login": "Sign in",
+    "register": "Create account",
+    "all": "All",
+    "archive": "Archive"
+  },
+  "header": {
+    "searchPlaceholder": "Search by make, model, lot number or VIN...",
+    "current": "Current",
+    "archive": "Archive",
+    "navSearch": "Search and bids",
+    "navDelivery": "Delivery times",
+    "navHowItWorks": "How it works",
+    "navHelp": "Help",
+    "navAbout": "About us",
+    "navContacts": "Contacts",
+    "hours": "Mon-Fri 10:00-22:00 CET",
+    "mobileSearch": "Search..."
+  },
+  "hero": {
+    "tags": [
+      "Auction purchase",
+      "Delivery from the USA",
+      "Customs clearance",
+      "Home delivery"
+    ],
+    "title": [
+      "Buying and delivering",
+      "American",
+      "cars"
+    ],
+    "subtitle": "With the \"Home delivery\" option, it has never been this fast and easy",
+    "start": "Start bidding",
+    "howItWorks": "How it works",
+    "background": "CARS"
+  },
+  "search": {
+    "tabs": ["Car", "Motorcycle", "ATV", "More"],
+    "archive": "Archive",
+    "allMakes": "All makes",
+    "allModels": "All models",
+    "allGenerations": "All generations",
+    "from": "From",
+    "to": "To",
+    "vinPlaceholder": "Search by VIN or lot number",
+    "copart": "Copart",
+    "iaai": "IAAI",
+    "showLots": "Show 122,648 cars"
+  },
+  "featured": {
+    "viewAll": "View all",
+    "currentBid": "Current bid:",
+    "buyNow": "Buy now:",
+    "categories": {
+      "classics": "American classic cars",
+      "motorcycles": "Harley-Davidson motorcycles",
+      "supercars": "Supercars"
+    }
+  },
+  "lotCard": {
+    "currentBid": "Current bid:",
+    "buyNow": "Buy now:",
+    "auctionOpen": "Open auction",
+    "timerPrefix": "Left"
+  },
+  "footer": {
+    "company": "Company",
+    "support": "Support",
+    "keywords": "Keywords",
+    "auctions": "Auctions",
+    "account": "Account",
+    "allAuctions": "All auctions",
+    "rules": "Rules",
+    "privacy": "Privacy and cookies",
+    "rights": "All rights reserved",
+    "location": "Bishkek, Kyrgyzstan"
+  }
+}
