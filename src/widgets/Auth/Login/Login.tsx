@@ -164,9 +164,12 @@ export function Login() {
   }, [current]);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
-      <div className="flex-none lg:w-[48%] flex flex-col bg-gray-100 px-8 py-7">
-        <div className="flex items-center gap-2 mb-12">
+    // ≥1100px: flex-row | <1100px: flex-col
+    <div className="min-h-screen bg-gray-100 flex flex-col min-[1100px]:flex-row">
+      {/* ═══ Левая часть — форма ═══ */}
+      <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-gray-100 px-5 sm:px-8 py-6 sm:py-7">
+        {/* Логотип */}
+        <div className="flex items-center gap-2 mb-10 sm:mb-12">
           <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center shrink-0">
             <svg
               className="w-4 h-4 text-white"
@@ -188,15 +191,18 @@ export function Login() {
         </div>
 
         <div className="flex-1 flex items-start justify-center">
-          <div className="w-full max-w-[550px]">
-            {/* Кликабельная иконка — переход на регистрацию */}
+          <div className="w-full max-w-[520px]">
+            {/* Иконка */}
             <a
               href="/"
               title="Перейти к регистрации"
-              className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-7 hover:bg-blue-200 active:scale-95 transition-all cursor-pointer"
+              className="w-12 h-12
+              sm:w-14 sm:h-14 rounded-full bg-blue-100 flex items-center
+              justify-center mb-5 sm:mb-7 hover:bg-blue-200 active:scale-95
+              transition-all cursor-pointer"
             >
               <svg
-                className="w-6 h-6 text-blue-500"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -210,14 +216,14 @@ export function Login() {
               </svg>
             </a>
 
-            <h1 className="text-2xl font-bold text-gray-800 mb-1">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">
               Войдите в BidCars
             </h1>
-            <p className="text-gray-400 text-sm mb-7">
+            <p className="text-gray-400 text-sm mb-5 sm:mb-7">
               Введите свои данные ниже.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   Электронная почта <span className="text-red-500">*</span>
@@ -304,7 +310,7 @@ export function Login() {
               </button>
             </div>
 
-            <p className="text-center text-sm text-gray-400 mt-6">
+            <p className="text-center text-sm text-gray-400 mt-5 sm:mt-6">
               <a
                 href="/forgotpassword"
                 className="hover:text-blue-500 transition-colors"
@@ -312,7 +318,7 @@ export function Login() {
                 Забыли пароль / Повторно отправить письмо активации?
               </a>
             </p>
-            <p className="text-center text-sm text-gray-400 mt-20">
+            <p className="text-center text-sm text-gray-400 mt-16 sm:mt-20">
               Не зарегистрированы?{" "}
               <a
                 href="/registration"
@@ -325,15 +331,7 @@ export function Login() {
         </div>
       </div>
 
-      <div className="hidden lg:flex flex-1 items-stretch p-5">
-        <Slideshow
-          current={current}
-          visible={visible}
-          onPrev={() => go(current - 1)}
-          onNext={() => go(current + 1)}
-        />
-      </div>
-      <div className="lg:hidden mx-4 mb-6 h-64">
+      <div className="hidden min-[620px]:flex min-[620px]:h-72 min-[1100px]:h-auto min-[1100px]:flex-1 items-stretch p-4 min-[1100px]:p-5">
         <Slideshow
           current={current}
           visible={visible}

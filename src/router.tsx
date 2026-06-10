@@ -12,7 +12,7 @@ import Payments from './pages/help/Payments'
 import Deposit from './pages/help/Deposit'
 import AccountLayout from './pages/account/AccountLayout'
 import AccountHome from './pages/account/AccountHome'
-import { AccountProfile, AccountDeposits, AccountSettings } from './pages/account/AccountSection'
+import { AccountProfile } from './pages/account/AccountSection'
 import { Registration } from './widgets/Auth/Registration/Registration'
 import { Login } from './widgets/Auth/Login/Login'
 import { ForgotPasswordd } from './widgets/Auth/forgotPassword/ForgotPasswordd'
@@ -20,6 +20,12 @@ import { PopularMakes } from './widgets/PopularMakes/PopularMakes'
 import PrePurchaseProcess1 from './widgets/howItWorks/PrePurchaseProcess1/PrePurchaseProcess1'
 import PurchaseProcess from './widgets/howItWorks/PurchaseProcess/PurchaseProcess'
 import { DeliveryTimes } from './widgets/DeliveryTimes/DeliveryTimes'
+import { Current } from './widgets/current/Current'
+import { Won } from './widgets/won/Won'
+import { Lost } from './widgets/lost/Lost'
+import { Settings } from './widgets/settings/Settings'
+import { Shipping } from './widgets/shipping/Shipping'
+import { Watchlist } from './widgets/watchlist/Watchlist'
 
 export const router = createBrowserRouter([
   {
@@ -48,13 +54,13 @@ export const router = createBrowserRouter([
         children: [
           { index: true, element: <AccountHome /> },
           { path: 'profile', element: <AccountProfile /> },
-          { path: 'watchlist', element: <div>Watchlist</div> },
-          { path: 'shipping', element: <div>Shipping</div> },
-          { path: 'deposits', element: <AccountDeposits /> },
-          { path: 'current', element: <div>Current</div> },
-          { path: 'won', element: <div>Won</div> },
-          { path: 'lost', element: <div>Lost</div> },
-          { path: 'settings', element: <AccountSettings /> },
+          { path: 'watchlist', element: <Watchlist /> },
+          { path: 'shipping', element: <Shipping /> },
+          // { path: 'deposits', element: <AccountDeposits /> },
+          { path: 'current', element: <Current /> },
+          { path: 'won', element: <Won /> },
+          { path: 'lost', element: <Lost /> },
+          { path: 'settings', element: <Settings /> },
         ],
       },
     ],
