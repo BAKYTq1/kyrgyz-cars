@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useI18n } from "../../../shared/i18n/I18nProvider"; // Скорректируйте путь к вашему провайдеру локализации
 
 const slides = [
   {
@@ -45,6 +46,8 @@ function Slideshow({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const { t } = useI18n();
+
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden">
       {slides.map((slide, index) => (
@@ -88,7 +91,7 @@ function Slideshow({
                 fill="#EA4335"
               />
             </svg>
-            Опубликовано <span className="underline">Google</span>
+            {t("auth.published")} <span className="underline">Google</span>
           </div>
           <div className="flex gap-2">
             <button
@@ -137,6 +140,7 @@ function Slideshow({
 }
 
 export function ForgotPasswordd() {
+  const { t } = useI18n();
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [current, setCurrent] = useState(0);
@@ -159,9 +163,15 @@ export function ForgotPasswordd() {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim()) {
-      setError("Электронная почта обязательна для заполнения");
+      setError(
+        t("auth.forgotPassword.emailRequired") ||
+          "Электронная почта обязательна для заполнения",
+      );
     } else if (!emailRegex.test(email)) {
-      setError("Введите корректный адрес электронной почты");
+      setError(
+        t("auth.forgotPassword.emailInvalid") ||
+          "Введите корректный адрес электронной почты",
+      );
     } else {
       setError(null);
       console.log("Ссылка для сброса отправлена на:", email);
@@ -215,17 +225,16 @@ export function ForgotPasswordd() {
             </div>
 
             <h1 className="text-lg sm:text-[23px] font-bold text-[#1e293b] tracking-tight mb-2">
-              Забыли пароль / Повторно отправить письмо активации?
+              {t("auth.forgotPassword.title")}
             </h1>
             <p className="text-[#94a3b8] text-xs sm:text-[13.5px] font-medium mb-5 sm:mb-6">
-              Введите адрес вашей электронной почты ниже, чтобы получить ссылку
-              для сброса пароля.
+              {t("auth.forgotPassword.subtitle")}
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-[12.5px] font-semibold text-[#475569] mb-1.5">
-                  Электронная почта
+                  {t("auth.forgotPassword.email")}
                   <span className="text-red-500 ml-0.5">*</span>
                 </label>
                 <input
@@ -235,7 +244,7 @@ export function ForgotPasswordd() {
                     setEmail(e.target.value);
                     if (error) setError(null);
                   }}
-                  placeholder="Введите вашу электронную почту"
+                  placeholder={t("auth.forgotPassword.emailPlaceholder")}
                   className={`w-full px-4 py-2.5 border rounded-xl text-sm bg-white focus:outline-none focus:ring-2 transition-all ${
                     error
                       ? "border-red-500 focus:ring-red-200"
@@ -253,7 +262,7 @@ export function ForgotPasswordd() {
                 type="submit"
                 className="w-full py-2.5 bg-[#2563eb] hover:bg-blue-600 active:scale-[0.995] text-white font-medium rounded-xl text-sm shadow-sm transition-all mt-2"
               >
-                Отправить ссылку для сброса
+                {t("auth.forgotPassword.submit")}
               </button>
             </form>
 
@@ -262,7 +271,7 @@ export function ForgotPasswordd() {
                 href="/login"
                 className="text-[#94a3b8] hover:text-blue-500 text-[13.5px] font-medium transition-colors"
               >
-                Вернуться к входу
+                {t("auth.forgotPassword.backToLogin")}
               </a>
             </div>
           </div>
