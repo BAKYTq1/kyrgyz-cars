@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useRef, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface Terminal {

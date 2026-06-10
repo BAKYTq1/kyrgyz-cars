@@ -1,5 +1,3 @@
-import React from "react";
-
 // Массив с данными для галереи.
 const galleryImages = [
   {

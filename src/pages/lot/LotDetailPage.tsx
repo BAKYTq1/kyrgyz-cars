@@ -43,7 +43,7 @@ const bids = [
 ]
 
 export default function LotDetailPage() {
-  const { id } = useParams()
+  const { id: _id } = useParams()
   const [activeImage, setActiveImage] = useState(0)
   const [bidAmount, setBidAmount] = useState('')
 
