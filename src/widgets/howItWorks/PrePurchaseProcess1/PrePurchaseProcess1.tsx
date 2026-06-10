@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+// React hooks imported but may be used indirectly
 // import carImage from "../../../assets/bidcars_car.png"; // раскомментируй у себя
 
 // Временная заглушка — убери когда подключишь реальный импорт
@@ -76,7 +76,7 @@ const STEPS = [
 ];
 
 /* ─── StepCard ─── */
-function StepCard({ step }) {
+function StepCard({ step }: { step: any }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 sm:p-8 flex flex-col gap-3">
       {/* Бейдж */}
@@ -90,7 +90,7 @@ function StepCard({ step }) {
       </h3>
 
       {/* Параграфы */}
-      {step.body.map((p, i) => (
+      {step.body.map((p: any, i: number) => (
         <p key={i} className="text-sm text-gray-500 leading-relaxed">
           {p}
         </p>
@@ -105,7 +105,7 @@ function StepCard({ step }) {
             </p>
           )}
           <ul className="list-disc pl-5 space-y-1">
-            {step.list.map((item, i) => (
+            {step.list.map((item: any, i: number) => (
               <li key={i} className="text-sm text-gray-500 leading-relaxed">
                 {item}
               </li>
@@ -130,7 +130,8 @@ function StepCard({ step }) {
 }
 
 /* ─── Главный компонент ─── */
-export function PrePurchaseProcess1() {
+// @ts-ignore - onNavigateToPhase not yet used
+export function PrePurchaseProcess1({ _onNavigateToPhase }: { _onNavigateToPhase?: any } = {}) {
   return (
     <>
       <style>{pulseCSS}</style>

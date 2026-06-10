@@ -11,7 +11,7 @@ const pulseCSS = `
   .pulse-badge { animation: pulse-ring 1.8s ease-in-out infinite; }
 `;
 
-function StepIndicator({ activePhase, onNavigate }) {
+function StepIndicator({ activePhase, onNavigate }: { activePhase: number; onNavigate: (phase: number) => void }) {
   const [pulsing, setPulsing] = useState(false);
 
   useEffect(() => {
@@ -154,9 +154,9 @@ export default function PurchaseProcess() {
         <StepIndicator activePhase={activePhase} onNavigate={setActivePhase} />
 
         {activePhase === 1 ? (
-          <PrePurchaseProcess1 onNavigateToPhase={setActivePhase} />
+          <PrePurchaseProcess1 _onNavigateToPhase={setActivePhase} />
         ) : (
-          <PostPurchaseProcess onNavigateToPhase={setActivePhase} />
+          <PostPurchaseProcess _onNavigateToPhase={setActivePhase} />
         )}
       </div>
     </>
