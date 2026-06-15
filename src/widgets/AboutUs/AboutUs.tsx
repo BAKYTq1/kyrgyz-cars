@@ -1,3 +1,6 @@
+"use client";
+
+import { useI18n } from "../../shared/i18n/I18nProvider"; // Скорректируйте путь к вашему провайдеру локализации
 // Массив с данными для галереи.
 const galleryImages = [
   {
@@ -28,19 +31,50 @@ const galleryImages = [
 ];
 
 export function AboutUs() {
+  const { t } = useI18n();
+
+  // Массив с данными для галереи внутри компонента для динамического перевода alt-текстов
+  const galleryImages = [
+    {
+      id: 1,
+      src: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=600",
+      alt: t("about.gallery.alt1"),
+    },
+    {
+      id: 2,
+      src: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=600",
+      alt: t("about.gallery.alt2"),
+    },
+    {
+      id: 3,
+      src: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&q=80&w=600",
+      alt: t("about.gallery.alt3"),
+    },
+    {
+      id: 4,
+      src: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600",
+      alt: t("about.gallery.alt4"),
+    },
+    {
+      id: 5,
+      src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600",
+      alt: t("about.gallery.alt5"),
+    },
+  ];
+
   return (
     <section className="w-full max-w-[1440px] mx-auto px-4 py-8 md:px-8 font-sans bg-gray-150">
       {/* Верхняя панель: Заголовок и Кнопка */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 md:mb-8">
         <h2 className="text-xl md:text-2xl lg:text-[26px] font-semibold text-slate-900 tracking-tight">
-          Мы осуществляем погрузку, выгрузку и транспортировку контейнеров
+          {t("about.title")}
         </h2>
 
         <a
           href="#about"
           className="inline-flex items-center justify-center px-5 py-2.5 bg-[#1488e4] hover:bg-[#1070bd] text-white font-medium text-sm rounded-full transition-colors duration-200 shrink-0 self-start sm:self-auto group"
         >
-          О нас
+          {t("about.button")}
           {/* Иконка стрелочки > */}
           <svg
             className="w-3 h-3 ml-1.5 transform group-hover:translate-x-0.5 transition-transform"

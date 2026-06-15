@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useI18n } from "../../shared/i18n/I18nProvider"; // Скорректируйте путь к вашему провайдеру локализации
 
-type Tab = "Автомобили" | "Мотоциклы" | "Квадроциклы";
+type Tab = "Automobiles" | "Motorcycles" | "ATVs";
 
 const automobiles = [
   { name: "Acura" },
@@ -220,14 +221,15 @@ function BrandCard({ name }: { name: string }) {
 }
 
 const tabData: Record<Tab, { name: string }[]> = {
-  Автомобили: automobiles,
-  Мотоциклы: motorcycles,
-  Квадроциклы: atvs,
+  Automobiles: automobiles,
+  Motorcycles: motorcycles,
+  ATVs: atvs,
 };
 
 export function PopularMakes() {
-  const [activeTab, setActiveTab] = useState<Tab>("Автомобили");
-  const [renderTab, setRenderTab] = useState<Tab>("Автомобили");
+  const { t } = useI18n();
+  const [activeTab, setActiveTab] = useState<Tab>("Automobiles");
+  const [renderTab, setRenderTab] = useState<Tab>("Automobiles");
   const [opacity, setOpacity] = useState(1);
 
   const handleTabChange = (newTab: Tab) => {
@@ -244,6 +246,12 @@ export function PopularMakes() {
 
   const items = tabData[renderTab];
 
+  const tabsConfig: { id: Tab; labelKey: string }[] = [
+    { id: "Automobiles", labelKey: "makes.tabs.automobiles" },
+    { id: "Motorcycles", labelKey: "makes.tabs.motorcycles" },
+    { id: "ATVs", labelKey: "makes.tabs.atvs" },
+  ];
+
   return (
     <div
       style={{
@@ -257,13 +265,13 @@ export function PopularMakes() {
       }}
     >
       <style>{`
-        /* Десктопные (обычные) размеры */
+        /* Desktop styles */
         .responsive-card { width: 100px; height: 100px; }
         .responsive-logo-container { width: 68px; height: 46px; }
         .responsive-fallback-text { font-size: 10px; }
         .responsive-brand-name { font-size: 12px; max-width: 105px; }
 
-        /* Мобильные размеры (экраны меньше 640px) */
+        /* Mobile styles (< 640px) */
         @media (max-width: 640px) {
           .responsive-card { width: 95px; height: 90px; padding: 8px 4px !important; gap: 4px !important; }
           .responsive-logo-container { width: 55px; height: 36px; }
@@ -292,36 +300,33 @@ export function PopularMakes() {
               letterSpacing: -0.5,
             }}
           >
-            Популярные марки
+            {t("makes.title")}
           </h2>
 
           <div style={{ display: "flex", gap: 24 }}>
-            {(["Автомобили", "Мотоциклы", "Квадроциклы"] as Tab[]).map(
-              (tab) => (
-                <button
-                  key={tab}
-                  onClick={() => handleTabChange(tab)}
-                  style={{
-                    background: "none",
-                    border: "none",
-                    padding: "0 0 8px",
-                    fontSize: 15,
-                    fontWeight: activeTab === tab ? 600 : 400,
-                    color: activeTab === tab ? "#3b82f6" : "#9aa5b4",
-                    cursor: "pointer",
-                    borderBottom:
-                      activeTab === tab
-                        ? "2px solid #3b82f6"
-                        : "2px solid transparent",
-                    transition: "all 0.2s",
-                    fontFamily:
-                      "'Helvetica Neue', Helvetica, Arial, sans-serif",
-                  }}
-                >
-                  {tab}
-                </button>
-              ),
-            )}
+            {tabsConfig.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => handleTabChange(tab.id)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  padding: "0 0 8px",
+                  fontSize: 15,
+                  fontWeight: activeTab === tab.id ? 600 : 400,
+                  color: activeTab === tab.id ? "#3b82f6" : "#9aa5b4",
+                  cursor: "pointer",
+                  borderBottom:
+                    activeTab === tab.id
+                      ? "2px solid #3b82f6"
+                      : "2px solid transparent",
+                  transition: "all 0.2s",
+                  fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                }}
+              >
+                {t(tab.labelKey)}
+              </button>
+            ))}
           </div>
         </div>
 

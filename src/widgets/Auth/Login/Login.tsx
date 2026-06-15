@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useI18n } from "../../../shared/i18n/I18nProvider"; // Проверь правильность пути к твоему провайдеру
 
 const slides = [
   {
@@ -52,6 +53,7 @@ function Slideshow({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const { t } = useI18n();
   const slide = slides[current];
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden">
@@ -96,7 +98,7 @@ function Slideshow({
                 fill="#EA4335"
               />
             </svg>
-            Опубликовано <span className="underline">Google</span>
+            {t("auth.published")} <span className="underline">Google</span>
           </div>
           <div className="flex gap-2">
             <button
@@ -143,6 +145,7 @@ function Slideshow({
 }
 
 export function Login() {
+  const { t } = useI18n();
   const [current, setCurrent] = useState(0);
   const [visible, setVisible] = useState(true);
   const [email, setEmail] = useState("");
@@ -159,12 +162,11 @@ export function Login() {
   };
 
   useEffect(() => {
-    const t = setInterval(() => go(current + 1), 5500);
-    return () => clearInterval(t);
+    const tInterval = setInterval(() => go(current + 1), 5500);
+    return () => clearInterval(tInterval);
   }, [current]);
 
   return (
-    // ≥1100px: flex-row | <1100px: flex-col
     <div className="min-h-screen bg-gray-100 flex flex-col min-[1100px]:flex-row">
       {/* ═══ Левая часть — форма ═══ */}
       <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-gray-100 px-5 sm:px-8 py-6 sm:py-7">
@@ -192,14 +194,11 @@ export function Login() {
 
         <div className="flex-1 flex items-start justify-center">
           <div className="w-full max-w-[520px]">
-            {/* Иконка */}
+            {/* Иконка перехода на регистрацию */}
             <a
-              href="/"
-              title="Перейти к регистрации"
-              className="w-12 h-12
-              sm:w-14 sm:h-14 rounded-full bg-blue-100 flex items-center
-              justify-center mb-5 sm:mb-7 hover:bg-blue-200 active:scale-95
-              transition-all cursor-pointer"
+              href="/registration"
+              title={t("auth.login.register")}
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-100 flex items-center justify-center mb-5 sm:mb-7 hover:bg-blue-200 active:scale-95 transition-all cursor-pointer"
             >
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500"
@@ -217,36 +216,38 @@ export function Login() {
             </a>
 
             <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">
-              Войдите в BidCars
+              {t("auth.login.title")}
             </h1>
             <p className="text-gray-400 text-sm mb-5 sm:mb-7">
-              Введите свои данные ниже.
+              {t("auth.login.subtitle")}
             </p>
 
             <div className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Электронная почта <span className="text-red-500">*</span>
+                  {t("auth.login.email")}{" "}
+                  <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Введите свой адрес электронной почты"
+                  placeholder={t("auth.login.emailPlaceholder")}
                   className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                  Пароль <span className="text-red-500">*</span>
+                  {t("auth.login.password")}{" "}
+                  <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <input
                     type={showPass ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Введите свой пароль"
+                    placeholder={t("auth.login.passwordPlaceholder")}
                     className="w-full px-4 py-2.5 pr-11 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
                   />
                   <button
@@ -299,14 +300,16 @@ export function Login() {
                   onChange={(e) => setRemember(e.target.checked)}
                   className="w-4 h-4 rounded border-gray-300 accent-blue-500"
                 />
-                <span className="text-sm text-gray-600">Запомнить меня</span>
+                <span className="text-sm text-gray-600">
+                  {t("auth.login.remember")}
+                </span>
               </label>
 
               <button
                 type="button"
                 className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1"
               >
-                Войти
+                {t("auth.login.submit")}
               </button>
             </div>
 
@@ -315,16 +318,16 @@ export function Login() {
                 href="/forgotpassword"
                 className="hover:text-blue-500 transition-colors"
               >
-                Забыли пароль / Повторно отправить письмо активации?
+                {t("auth.login.forgotPassword")}
               </a>
             </p>
             <p className="text-center text-sm text-gray-400 mt-16 sm:mt-20">
-              Не зарегистрированы?{" "}
+              {t("auth.login.noAccount")}{" "}
               <a
                 href="/registration"
                 className="text-blue-500 hover:underline font-medium"
               >
-                Зарегистрироваться
+                {t("auth.login.register")}
               </a>
             </p>
           </div>
