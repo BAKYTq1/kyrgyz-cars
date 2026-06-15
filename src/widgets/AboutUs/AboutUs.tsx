@@ -1,6 +1,34 @@
 "use client";
 
 import { useI18n } from "../../shared/i18n/I18nProvider"; // Скорректируйте путь к вашему провайдеру локализации
+// Массив с данными для галереи.
+const galleryImages = [
+  {
+    id: 1,
+    src: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=600",
+    alt: "Офис и компьютеры для заказа авто",
+  },
+  {
+    id: 2,
+    src: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=600",
+    alt: "Грузовые автомобили автовозы BidCars",
+  },
+  {
+    id: 3,
+    src: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&q=80&w=600",
+    alt: "Презентация спорткара на выставке",
+  },
+  {
+    id: 4,
+    src: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600",
+    alt: "Погрузка автомобилей в морской контейнер",
+  },
+  {
+    id: 5,
+    src: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=600",
+    alt: "Транспортировка легковых машин",
+  },
+];
 
 export function AboutUs() {
   const { t } = useI18n();

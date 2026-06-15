@@ -156,8 +156,8 @@ export default function About() {
   const [activeTab, setActiveTab] = useState<ActiveTab>('all');
   const [animatedStats, setAnimatedStats] = useState<number[]>(stats.map(() => 1));
   const [currentPage, setCurrentPage] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const perPage = useCardsPerPage(containerRef);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const perPage = useCardsPerPage(containerRef as React.RefObject<HTMLDivElement>);
 
   // Reset page when tab changes
   useEffect(() => {

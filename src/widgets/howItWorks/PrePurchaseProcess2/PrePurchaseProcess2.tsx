@@ -45,6 +45,8 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
   const links = STEP_LINKS[stepIndex + 1];
 
   if (isCompletion) {
+function StepContent({ current }: { current: any }) {
+  if (current.content.isCompletion) {
     return (
       <div className="text-center py-6">
         <div className="text-6xl mb-4">🚗</div>
@@ -70,6 +72,7 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
       {bullets.length > 0 && (
         <ul className="list-disc ml-5 mb-4 space-y-1.5">
           {bullets.map((b, i) => (
+          {current.content.bullets.map((b: any, i: number) => (
             <li key={i} className="text-sm text-gray-600 leading-relaxed">
               {b}
             </li>
@@ -82,6 +85,7 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
           <p className="text-sm text-gray-600 mb-2">{pdfLabel}</p>
           <ul className="list-disc ml-5 space-y-1">
             {links.map((l, i) => (
+            {current.content.links.map((l: any, i: number) => (
               <li key={i}>
                 <span className="text-sm text-gray-700">{l.label} — </span>
                 <a
@@ -117,6 +121,7 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
             alt={imageCaption || ""}
             className="w-full object-cover block"
             onError={(e) => {
+            onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
               (e.target as HTMLImageElement).style.display = "none";
             }}
           />
@@ -138,6 +143,8 @@ export function PostPurchaseProcess({
   onNavigateToPhase?: (phase: number) => void;
 }) {
   const { t, tl } = useI18n();
+// @ts-ignore - onNavigateToPhase not yet used
+export function PostPurchaseProcess({ _onNavigateToPhase }: { _onNavigateToPhase?: any }) {
   const [activeStep, setActiveStep] = useState(1);
   const total = 16;
 

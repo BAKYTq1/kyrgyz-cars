@@ -25,6 +25,7 @@ function StepIndicator({
   label1: string;
   label2: string;
 }) {
+function StepIndicator({ activePhase, onNavigate }: { activePhase: number; onNavigate: (phase: number) => void }) {
   const [pulsing, setPulsing] = useState(false);
 
   useEffect(() => {
@@ -117,9 +118,9 @@ export default function PurchaseProcess() {
         />
 
         {activePhase === 1 ? (
-          <PrePurchaseProcess1 onNavigateToPhase={setActivePhase} />
+          <PrePurchaseProcess1 _onNavigateToPhase={setActivePhase} />
         ) : (
-          <PostPurchaseProcess onNavigateToPhase={setActivePhase} />
+          <PostPurchaseProcess _onNavigateToPhase={setActivePhase} />
         )}
       </div>
     </>
