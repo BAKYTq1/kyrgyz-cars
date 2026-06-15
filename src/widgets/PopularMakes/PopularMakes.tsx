@@ -249,7 +249,6 @@ export function PopularMakes() {
       style={{
         fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
         backgroundColor: "#f9fafb",
-        minHeight: "80vh",
         padding: "40px 24px",
         display: "flex",
         flexDirection: "column",

@@ -134,7 +134,7 @@ export default function DeliveryMap() {
 
           {/* Карта */}
           <div className="flex-1 relative">
-            <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100" style={{ minHeight: '420px' }}>
+            <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
 
               {/* Tooltip */}
               {tooltip && (
@@ -156,8 +156,8 @@ export default function DeliveryMap() {
 
               <ComposableMap
                 projection="geoMercator"
-                projectionConfig={{ center: [65, 45], scale: 400 }}
-                style={{ width: '100%', height: '100%', minHeight: '420px' }}
+                projectionConfig={{ center: [65, 45], scale: 350 }}
+                style={{ width: '100%', height: '660px' }}
               >
                 <Geographies geography={GEO_URL}>
                   {({ geographies }: { geographies: any[] }) =>

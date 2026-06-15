@@ -29,7 +29,7 @@ const galleryImages = [
 
 export function AboutUs() {
   return (
-    <section className="w-full max-w-[1440px] mx-auto px-4 py-8 md:px-8 font-sans bg-gray-150">
+    <section className="w-full max-w-[1280px] mx-auto px-4 py-8 md:px-0 font-sans bg-gray-150">
       {/* Верхняя панель: Заголовок и Кнопка */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 md:mb-8">
         <h2 className="text-xl md:text-2xl lg:text-[26px] font-semibold text-slate-900 tracking-tight">

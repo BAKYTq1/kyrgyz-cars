@@ -12,9 +12,9 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
         <Link to="/" className="flex items-center gap-2 shrink-0">
           <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white text-lg font-bold">B</span>
+            <span className="text-white text-lg font-bold">D</span>
           </div>
-          <span className="text-xl font-bold text-gray-900 tracking-wide">BIDCARS</span>
+          <span className="text-xl font-bold text-gray-900 tracking-wide">DEALCARS</span>
         </Link>
 
         <div className="hidden md:flex flex-1 max-w-2xl border border-gray-300 rounded-lg overflow-hidden">
@@ -42,14 +42,20 @@ export default function Header() {
           <Link to="/register" className="flex items-center gap-2 text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition">
             {t('common.register')}
           </Link>
-          <Link to="/registration" className="flex items-center gap-2 text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition">
-            Зарегистрироваться
-          </Link>
         </div>
 
-        <button className="md:hidden text-2xl ml-auto" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? '×' : '☰'}
-        </button>
+        <div className="md:hidden flex items-center gap-2 ml-auto">
+          <LocaleSwitcher />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="w-9 h-9 flex flex-col justify-center items-center gap-1.5 rounded-lg hover:bg-gray-100 transition"
+            aria-label="Меню"
+          >
+            <span className={`block w-5 h-0.5 bg-gray-700 transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-gray-700 transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
+            <span className={`block w-5 h-0.5 bg-gray-700 transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+          </button>
+        </div>
       </div>
 
       <div className="border-t border-gray-200 hidden md:block">
@@ -66,28 +72,42 @@ export default function Header() {
         </div>
       </div>
 
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 px-4 py-4 flex flex-col gap-3 text-sm">
-          <LocaleSwitcher />
-          <input type="text" placeholder={t('header.mobileSearch')} className="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none" />
-          <Link to="/catalog" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600">
-            {t('header.navSearch')}
-          </Link>
-          <Link to="/how-it-works" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600">
-            {t('header.navHowItWorks')}
-          </Link>
-          <div className="flex gap-2 pt-2">
-            <Link to="/login" className="flex-1 text-center border border-gray-300 rounded-lg py-2">
-              {t('common.login')}
-            </Link>
-            <Link to="/register" className="flex-1 text-center bg-blue-600 rounded-lg py-2 text-white">
-              {t('common.register')}
-            </Link>
-            <Link to="/login" className="flex-1 text-center border border-gray-300 rounded-lg py-2">Войти</Link>
-            <Link to="/registration " className="flex-1 text-center bg-blue-600 rounded-lg py-2 text-white">Зарегистрироваться</Link>
-          </div>
-        </div>
-      )}
+    {/* Мобильное меню — absolute поверх контента */}
+<div className={`md:hidden fixed inset-x-0 top-[57px] bg-white border-t border-gray-200 shadow-lg z-50 overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
+  <div className="px-4 py-4 flex flex-col gap-3 text-sm">
+    <input
+      type="text"
+      placeholder={t('header.mobileSearch')}
+      className="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none"
+    />
+    <Link to="/catalog" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600 transition">
+      {t('header.navSearch')}
+    </Link>
+    <Link to="/delivery-times" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600 transition">
+      {t('header.navDelivery')}
+    </Link>
+    <Link to="/how-it-works" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600 transition">
+      {t('header.navHowItWorks')}
+    </Link>
+    <Link to="/help" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600 transition">
+      {t('header.navHelp')}
+    </Link>
+    <Link to="/about" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600 transition">
+      {t('header.navAbout')}
+    </Link>
+    <Link to="/contacts" onClick={() => setMenuOpen(false)} className="py-2 text-gray-700 hover:text-blue-600 transition">
+      {t('header.navContacts')}
+    </Link>
+    <div className="flex gap-2 pt-2">
+      <Link to="/login" className="flex-1 text-center border border-gray-300 rounded-lg py-2 text-gray-700">
+        {t('common.login')}
+      </Link>
+      <Link to="/register" className="flex-1 text-center bg-blue-600 rounded-lg py-2 text-white">
+        {t('common.register')}
+      </Link>
+    </div>
+  </div>
+</div>
     </header>
   )
 }
