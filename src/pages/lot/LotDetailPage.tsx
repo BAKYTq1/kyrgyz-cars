@@ -4,6 +4,7 @@ import { FaCar, FaClock, FaMapMarkerAlt, FaFileAlt, FaShieldAlt, FaChevronLeft, 
 import { useAppDispatch, useAppSelector } from '../../lib/store'
 import { fetchLotById } from '../../lib/lot/lotSlice'
 import { useI18n } from '../../shared/i18n/I18nProvider'
+import { CountdownTimer } from '../../shared/ui/countdown/Countdown'
 
 const transmissionMap: Record<number, string> = { 0: '—', 1: 'Автомат', 2: 'Механика', 3: 'CVT' }
 const driveMap: Record<number, string> = { 0: '—', 1: 'FWD', 2: 'RWD', 3: 'AWD', 4: '4WD' }
@@ -85,11 +86,11 @@ export default function LotDetailPage() {
             </div>
           </div>
           {car.time_left && (
-            <div className="flex items-center gap-1.5 text-orange-500 bg-orange-50 px-3 py-2 rounded-lg border border-orange-100">
-              <FaClock className="text-sm" />
-              <span className="text-sm font-semibold">{formatTime(Number(car.time_left))}</span>
-            </div>
-          )}
+  <div className="flex items-center gap-2 text-orange-500 bg-orange-50 px-3 py-2 rounded-lg border border-orange-100">
+    <FaClock className="text-sm shrink-0" />
+    <CountdownTimer seconds={Number(car.time_left)} />
+  </div>
+)}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">

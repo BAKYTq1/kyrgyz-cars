@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { PrePurchaseProcess1 } from "../../../widgets/howItWorks/PrePurchaseProcess1/PrePurchaseProcess1";
+import { PrePurchaseProcess1 } from "../PrePurchaseProcess1/PrePurchaseProcess1";
 import { PostPurchaseProcess } from "../PrePurchaseProcess2/PrePurchaseProcess2";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 
-// Кастомные стили для анимации (оставляем через тег style, чтобы не раздувать tailwind.config.js)
 const pulseCSS = `
   @keyframes pulse-ring {
     0%   { transform: scale(1);   opacity: 0.7; }
@@ -13,7 +12,6 @@ const pulseCSS = `
   .pulse-badge { animation: pulse-ring 1.8s ease-in-out infinite; }
 `;
 
-// ─── StepIndicator ────────────────────────────────────────────────────────────
 function StepIndicator({
   activePhase,
   onNavigate,
@@ -25,7 +23,6 @@ function StepIndicator({
   label1: string;
   label2: string;
 }) {
-function StepIndicator({ activePhase, onNavigate }: { activePhase: number; onNavigate: (phase: number) => void }) {
   const [pulsing, setPulsing] = useState(false);
 
   useEffect(() => {
@@ -38,7 +35,6 @@ function StepIndicator({ activePhase, onNavigate }: { activePhase: number; onNav
     return () => clearInterval(interval);
   }, []);
 
-  // Общие базовые классы для кружков индикатора
   const circleBaseClass = `
     w-9 h-9 rounded-full flex items-center justify-center 
     font-bold text-[15px] shrink-0 cursor-pointer
@@ -48,25 +44,15 @@ function StepIndicator({ activePhase, onNavigate }: { activePhase: number; onNav
   return (
     <div className="flex items-start justify-center mb-12">
       {/* Phase 1 */}
-      <div
-        onClick={() => onNavigate(1)}
-        className="flex flex-col items-center cursor-pointer"
-      >
-        <span
-          className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${
-            activePhase === 1 ? "text-[#1a1a2e]" : "text-[#999999]"
-          }`}
-        >
+      <div onClick={() => onNavigate(1)} className="flex flex-col items-center cursor-pointer">
+        <span className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 1 ? "text-[#1a1a2e]" : "text-[#999999]"}`}>
           {label1}
         </span>
-        <div
-          className={`
-            ${circleBaseClass}
-            ${activePhase === 1 || pulsing ? "bg-[#2196f3] text-white" : "bg-[#c5c5c5] text-[#888888]"}
-            ${activePhase === 1 || pulsing ? "shadow-[0_0_0_4px_#bde0fc]" : "shadow-none"}
-            ${activePhase === 2 && pulsing ? "scale-125 pulse-badge" : "scale-100"}
-          `}
-        >
+        <div className={`
+          ${circleBaseClass}
+          ${activePhase === 1 ? "bg-[#2196f3] text-white shadow-[0_0_0_4px_#bde0fc]" : "bg-[#c5c5c5] text-[#888888] shadow-none"}
+          ${activePhase === 2 && pulsing ? "scale-125 pulse-badge" : "scale-100"}
+        `}>
           1
         </div>
       </div>
@@ -75,25 +61,15 @@ function StepIndicator({ activePhase, onNavigate }: { activePhase: number; onNav
       <div className="flex-1 max-w-[420px] border-t-2 border-dashed border-[#c5c5c5] mt-[30px]" />
 
       {/* Phase 2 */}
-      <div
-        onClick={() => onNavigate(2)}
-        className="flex flex-col items-center cursor-pointer"
-      >
-        <span
-          className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${
-            activePhase === 2 ? "text-[#1a1a2e]" : "text-[#999999]"
-          }`}
-        >
+      <div onClick={() => onNavigate(2)} className="flex flex-col items-center cursor-pointer">
+        <span className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 2 ? "text-[#1a1a2e]" : "text-[#999999]"}`}>
           {label2}
         </span>
-        <div
-          className={`
-            ${circleBaseClass}
-            ${activePhase === 2 ? "bg-[#2196f3] text-white" : "bg-[#c5c5c5] text-[#888888]"}
-            ${activePhase === 2 ? "shadow-[0_0_0_4px_#bde0fc]" : "shadow-none"}
-            ${activePhase === 1 && pulsing ? "scale-125 pulse-badge" : "scale-100"}
-          `}
-        >
+        <div className={`
+          ${circleBaseClass}
+          ${activePhase === 2 ? "bg-[#2196f3] text-white shadow-[0_0_0_4px_#bde0fc]" : "bg-[#c5c5c5] text-[#888888] shadow-none"}
+          ${activePhase === 1 && pulsing ? "scale-125 pulse-badge" : "scale-100"}
+        `}>
           2
         </div>
       </div>
@@ -101,7 +77,6 @@ function StepIndicator({ activePhase, onNavigate }: { activePhase: number; onNav
   );
 }
 
-// ─── Главный компонент ────────────────────────────────────────────────────────
 export default function PurchaseProcess() {
   const { t } = useI18n();
   const [activePhase, setActivePhase] = useState(1);
@@ -116,7 +91,6 @@ export default function PurchaseProcess() {
           label1={t("howItWorks.prePurchase")}
           label2={t("howItWorks.postPurchase")}
         />
-
         {activePhase === 1 ? (
           <PrePurchaseProcess1 _onNavigateToPhase={setActivePhase} />
         ) : (
