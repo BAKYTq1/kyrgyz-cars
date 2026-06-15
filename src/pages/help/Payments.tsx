@@ -1,42 +1,38 @@
 import { useState } from 'react';
-
+import { useI18n } from '../../shared/i18n/I18nProvider';
 import HelpCategoryLayout, { type FaqItem } from './HelpCategoryLayout';
 
-const paymentFaqs: FaqItem[] = [
-  {
-    question: 'How do I pay for a won vehicle?',
-    answer:
-      'After winning, you receive payment instructions with the amount, bank details, and transfer title. Payment is usually made by international bank transfer.',
-  },
-  {
-    question: 'Which currency is used for payment?',
-    answer:
-      'Auction vehicle payment is usually made in USD. Logistics, service fees, and European costs may be calculated separately in EUR.',
-  },
-  {
-    question: 'Are bank transfer fees included?',
-    answer:
-      'Bank transfer fees are usually charged by the client bank and are not included in the auction invoice.',
-  },
-  {
-    question: 'Can I pay by card?',
-    answer:
-      'Vehicle payment normally requires bank transfer. Some smaller platform-related payments may depend on available payment methods.',
-  },
-  {
-    question: 'When do I pay the BidCars commission?',
-    answer:
-      'The BidCars commission is paid separately according to the instructions provided after the vehicle is purchased.',
-  },
-];
-
 export default function Payments() {
+  const { t } = useI18n();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  
+  const paymentFaqs: FaqItem[] = [
+    {
+      question: t('help.faq.payments.q1'),
+      answer: t('help.faq.payments.a1'),
+    },
+    {
+      question: t('help.faq.payments.q2'),
+      answer: t('help.faq.payments.a2'),
+    },
+    {
+      question: t('help.faq.payments.q3'),
+      answer: t('help.faq.payments.a3'),
+    },
+    {
+      question: t('help.faq.payments.q4'),
+      answer: t('help.faq.payments.a4'),
+    },
+    {
+      question: t('help.faq.payments.q5'),
+      answer: t('help.faq.payments.a5'),
+    },
+  ];
 
   return (
     <HelpCategoryLayout
       activeIndex={4}
-      title="Payments and Related Questions"
+      title={t('help.faq.payments.title')}
       faqs={paymentFaqs}
       openIndex={openIndex}
       setOpenIndex={setOpenIndex}

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useI18n } from '../../shared/i18n/I18nProvider';
 
 import galleryImg1 from '../../assets/about1.jpg';
 import galleryImg2 from '../../assets/about1.jpg';
@@ -22,15 +23,15 @@ type Review = {
 };
 
 type DeliveryCard = {
-  title: string;
-  text: string;
+  titleKey: string;
+  textKey: string;
   image: string;
   wide?: boolean;
 };
 
 type Stat = {
   target: number;
-  label: string;
+  labelKey: string;
   prefix?: string;
   suffix?: string;
   decimals?: number;
@@ -89,32 +90,32 @@ const reviewsData: Review[] = [
 
 const deliveryCards: DeliveryCard[] = [
   {
-    title: 'Морская перевозка',
-    text: 'Мы сотрудничаем с надежными транспортными компаниями, имеющими склады в Ньюарке, Чикаго, Хьюстоне и Лос-Анджелесе. Это позволяет быстро доставлять автомобили в порт и отправлять их морем.',
+    titleKey: 'about.deliveryCards.seaShipping.title',
+    textKey: 'about.deliveryCards.seaShipping.text',
     image: galleryImg7,
     wide: true,
   },
   {
-    title: 'Таможенное оформление',
-    text: 'В порту Роттердама BidCars работает с таможенными агентствами, чтобы оформление проходило без задержек.',
+    titleKey: 'about.deliveryCards.customs.title',
+    textKey: 'about.deliveryCards.customs.text',
     image: galleryImg3,
   },
   {
-    title: 'Доставка на дом',
-    text: 'После прибытия в Европу автомобиль можно доставить по выбранному направлению до вашего города.',
+    titleKey: 'about.deliveryCards.homeDelivery.title',
+    textKey: 'about.deliveryCards.homeDelivery.text',
     image: galleryImg1,
   },
 ];
 
 const stats: Stat[] = [
-  { target: 250, suffix: '+', label: 'Ежедневные ставки' },
-  { target: 14574, label: 'Импортированные транспортные средства' },
-  { target: 98, suffix: '%', label: 'Уровень удовлетворенности' },
-  { target: 109.01, prefix: '$', suffix: 'M+', decimals: 2, label: 'Стоимость импортированных транспортных средств' },
+  { target: 250, suffix: '+', labelKey: 'about.stats.dailyBids' },
+  { target: 14574, labelKey: 'about.stats.importedVehicles' },
+  { target: 98, suffix: '%', labelKey: 'about.stats.satisfactionRate' },
+  { target: 109.01, prefix: '$', suffix: 'M+', decimals: 2, labelKey: 'about.stats.importedVehicleValue' },
 ];
 
 const tabs: { id: ActiveTab; label: string; rating: string }[] = [
-  { id: 'all', label: 'Все отзывы', rating: '4.9' },
+  { id: 'all', label: 'about.reviews.all', rating: '4.9' },
   { id: 'google', label: 'Google', rating: '4.9' },
   { id: 'opinie', label: 'Opinie', rating: '5.0' },
   { id: 'facebook', label: 'Facebook', rating: '4.9' },
@@ -131,7 +132,7 @@ const sourceBadgeClasses: Record<ReviewPlatform, string> = {
 
 
 
-function useCardsPerPage(containerRef: React.RefObject<HTMLDivElement>) {
+function useCardsPerPage(containerRef: React.RefObject<HTMLDivElement | null>) {
   const [perPage, setPerPage] = useState(4);
 
   useEffect(() => {
@@ -153,6 +154,7 @@ function useCardsPerPage(containerRef: React.RefObject<HTMLDivElement>) {
 }
 
 export default function About() {
+  const { t } = useI18n();
   const [activeTab, setActiveTab] = useState<ActiveTab>('all');
   const [animatedStats, setAnimatedStats] = useState<number[]>(stats.map(() => 1));
   const [currentPage, setCurrentPage] = useState(0);
@@ -210,11 +212,10 @@ export default function About() {
         {/* Header + Gallery */}
         <div className="text-left md:text-center">
           <h2 className="mb-4 text-4xl font-black leading-tight text-gray-950 md:text-6xl">
-            Познакомьтесь с BidCars
+            {t('about.title')}
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-base leading-7 text-gray-600 md:text-lg">
-            Мы эксперты в области импорта транспортных средств из США, и наша страсть и знания в
-            этой области растут с 2015 года.
+            {t('about.subtitle')}
           </p>
 
           <div className="grid gap-4 md:grid-cols-2 lg:min-h-[420px] lg:grid-cols-[1.15fr_0.85fr_0.85fr_1.15fr]">
@@ -247,7 +248,7 @@ export default function About() {
         <div className="my-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <div
-              key={stat.label}
+              key={stat.labelKey}
               className="min-h-36 rounded-lg border border-gray-200 bg-white p-5 shadow-sm md:p-6"
             >
               <h3 className="mb-3 text-3xl font-black leading-none text-red-600 md:text-4xl">
@@ -258,7 +259,7 @@ export default function About() {
                 })}
                 {stat.suffix}
               </h3>
-              <p className="leading-6 text-gray-600">{stat.label}</p>
+              <p className="leading-6 text-gray-600">{t(stat.labelKey)}</p>
             </div>
           ))}
         </div>
@@ -280,7 +281,7 @@ export default function About() {
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
                 >
-                  {tab.label}{' '}
+                  {tab.id === 'all' ? t(tab.label) : tab.label}{' '}
                   <span className={isActive ? 'text-white' : 'text-red-600'}>{tab.rating}</span>
                 </button>
               );
@@ -306,7 +307,7 @@ export default function About() {
                       </h4>
                       <p className="leading-6 text-gray-600">{review.text}</p>
                       <span className="mt-4 inline-block font-bold text-blue-600">
-                        Читать далее
+                        {t('about.reviews.readMore')}
                       </span>
 
                       <div className="mt-5 flex items-center gap-3">
@@ -400,7 +401,7 @@ export default function About() {
               </>
             ) : (
               <p className="col-span-full rounded-lg bg-white p-7 text-center text-gray-600">
-                В этой категории пока нет отзывов.
+                {t('about.reviews.empty')}
               </p>
             )}
           </div>
@@ -410,20 +411,11 @@ export default function About() {
         <section className="my-14 rounded bg-white px-6 py-8 md:px-10 md:py-10">
           <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_220px] lg:grid-cols-[minmax(0,1fr)_260px]">
             <div>
-              <h3 className="mb-4 text-base font-black leading-tight text-black">Аукционы</h3>
+              <h3 className="mb-4 text-base font-black leading-tight text-black">{t('about.auctions.title')}</h3>
               <p className="max-w-3xl text-[11px] leading-[1.75] text-slate-700 md:text-xs">
-                Наша компания занимается приобретением и транспортировкой автомобилей из Соединенных
-                Штатов с 2015 года. С тех пор мы успешно импортировали более пяти тысяч автомобилей
-                из различных частей Северной Америки. Помимо автомобилей, мы также импортируем
-                мотоциклы, квадроциклы и гидроциклы. Мы обслуживаем как частных клиентов, так и
-                дилеров, а также оптовых покупателей.
+                {t('about.auctions.text')}
                 <br />
-                Благодаря нашему постоянному сотрудничеству с иностранными компаниями мы можем
-                гарантировать лучшие согласованные тарифы на морские и наземные перевозки. В BidCars
-                мы делаем акцент на прозрачности и удобстве покупки, поэтому транспортные расходы
-                известны до подачи ставки на покупку. На нашем сайте есть калькулятор, который
-                рассчитывает общую стоимость сделки, обеспечивая отсутствие скрытых платежей для
-                наших клиентов.
+                {t('about.auctions.textSecond')}
               </p>
             </div>
 
@@ -447,20 +439,20 @@ export default function About() {
         <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {deliveryCards.map((card) => (
             <article
-              key={card.title}
+              key={card.titleKey}
               className="group overflow-hidden rounded-xl bg-white shadow-sm transition-shadow hover:shadow-md"
             >
               <div className="relative h-56 overflow-hidden">
                 <img
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   src={card.image}
-                  alt={card.title}
+                  alt={t(card.titleKey)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
               <div className="px-6 py-6">
-                <h4 className="mb-3 text-base font-black leading-tight text-gray-950">{card.title}</h4>
-                <p className="text-sm leading-relaxed text-slate-600">{card.text}</p>
+                <h4 className="mb-3 text-base font-black leading-tight text-gray-950">{t(card.titleKey)}</h4>
+                <p className="text-sm leading-relaxed text-slate-600">{t(card.textKey)}</p>
               </div>
             </article>
           ))}

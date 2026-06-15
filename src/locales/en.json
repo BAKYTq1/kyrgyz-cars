@@ -65,6 +65,177 @@
     "auctionOpen": "Open auction",
     "timerPrefix": "Left"
   },
+  "about": {
+    "title": "Meet BidCars",
+    "subtitle": "We are experts in importing vehicles from the USA, and our passion and knowledge in this field have been growing since 2015.",
+    "stats": {
+      "dailyBids": "Daily bids",
+      "importedVehicles": "Imported vehicles",
+      "satisfactionRate": "Satisfaction rate",
+      "importedVehicleValue": "Value of imported vehicles"
+    },
+    "reviews": {
+      "all": "All reviews",
+      "readMore": "Read more",
+      "empty": "There are no reviews in this category yet."
+    },
+    "auctions": {
+      "title": "Auctions",
+      "text": "Our company has been purchasing and transporting cars from the United States since 2015. Since then, we have successfully imported thousands of vehicles from different parts of North America. In addition to cars, we also import motorcycles, ATVs and jet skis. We serve private clients, dealers and wholesale buyers.",
+      "textSecond": "Thanks to our long-term cooperation with foreign companies, we can guarantee the best agreed rates for sea and land transport. At BidCars, we focus on transparent and convenient purchasing, so transport costs are known before placing a bid. Our website includes a calculator that estimates the total transaction cost and helps avoid hidden fees."
+    },
+    "deliveryCards": {
+      "seaShipping": {
+        "title": "Ocean shipping",
+        "text": "We work with reliable transport companies that have warehouses in Newark, Chicago, Houston and Los Angeles. This helps quickly deliver vehicles to the port and ship them by sea."
+      },
+      "customs": {
+        "title": "Customs clearance",
+        "text": "At the port of Rotterdam, BidCars works with customs agencies to keep the clearance process moving without delays."
+      },
+      "homeDelivery": {
+        "title": "Home delivery",
+        "text": "After arrival in Europe, the vehicle can be delivered along the selected route to your city."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "We are waiting for your message - choose the most convenient communication method below!",
+    "onlineBadge": "24/7 online",
+    "cards": {
+      "chat": {
+        "title": "Online chat",
+        "text": "Get a quick answer from our team.",
+        "meta": "from 10:00 to 22:00",
+        "action": "Start chat"
+      },
+      "phone": {
+        "title": "Call us",
+        "text": "Talk to a purchase and delivery manager.",
+        "meta": "+48 608 887 240",
+        "action": "Call"
+      },
+      "message": {
+        "title": "Send a message",
+        "text": "Write to us and we will prepare a detailed reply.",
+        "meta": "support@bidcars.eu",
+        "action": "Write"
+      }
+    },
+    "supportNote": "BidCars support is available to active platform users for important details about bidding, purchasing and vehicle delivery.",
+    "location": {
+      "title": "Our location",
+      "text": "We work throughout the European Union. By clicking the point, you can see our main office and build a route."
+    },
+    "team": {
+      "title": "Our team",
+      "text": "Our professional team of managers is always ready to help you deliver your dream car quickly and reliably.",
+      "roles": {
+        "leadCustomerManager": "Lead customer manager",
+        "carPurchaseSpecialist": "Car purchase specialist",
+        "carLogisticsSpecialist": "Car logistics specialist",
+        "customerServiceSpecialist": "Customer service specialist"
+      }
+    }
+  },
+  "help": {
+    "title": "Purchase Process",
+    "showAll": "Show all",
+    "menu": {
+      "purchaseProcess": "Purchase process",
+      "supportConsultation": "Support and consultation",
+      "deliveryDocuments": "Delivery, shipping and documents",
+      "formalRules": "Formal aspects and rules",
+      "payments": "Payments and related questions",
+      "deposit": "Deposit"
+    },
+    "links": {
+      "beforePurchase": "Step by step - before purchase",
+      "afterPurchase": "Step by step - after purchase",
+      "saleDocuments": "Sale documents",
+      "deliveryTimes": "Delivery times",
+      "about": "About us",
+      "blog": "Blog"
+    },
+    "faq": {
+      "processQuestion": "Is the process of buying and importing cars through BidCars complicated?",
+      "processAnswer": "The car purchase process through the BidCars platform is simple and transparent. The key requirement is basic website navigation skills, including placing auction bids, paying a deposit, and making international transfers in USD and EUR through your own bank. We handle all formalities for the client: communication with the auction house, documents, transport in the USA, container loading and unloading, customs clearance and delivery to the specified address.",
+      "biddingQuestion": "Do I personally participate in live bidding when using your service, or does BidCars bid on my behalf?",
+      "biddingAnswer": "When using our service, you do not bid live personally. Instead, you delegate the bid on our website by entering the maximum amount you are ready to offer on the selected vehicle page. This amount is confidential and visible only to BidCars before the auction starts. If your amount is high enough, we represent your interests during the live auction within your maximum bid.",
+      "calculatorQuestion": "Is the fee calculator available on the BidCars website accurate?",
+      "calculatorAnswer": "The calculator gives an estimated import cost based on available auction and logistics data. The final cost can change because of exchange rates, bank fees, storage, late payment penalties, or document-related fees.",
+      "support": {
+        "title": "Support and Consultation",
+        "q1": "How can I contact BidCars support?",
+        "a1": "You can contact support through online chat, email, or phone. Our team helps with platform use, bidding questions, payments, documents, and delivery updates.",
+        "q2": "Can BidCars help me choose a vehicle?",
+        "a2": "BidCars provides tools, vehicle data, and consultation, but the final purchase decision, budget, and risk assessment remain with the client.",
+        "q3": "Can I get additional information about a vehicle?",
+        "a3": "Available vehicle data is shown on the lot page. If reports or additional photos are available, support can help you find them before bidding.",
+        "q4": "Do you inspect vehicles before the auction?",
+        "a4": "Physical inspection depends on location and availability. Many auction vehicles are sold as-is, so photos, history reports, and auction descriptions should be reviewed carefully.",
+        "q5": "Can support cancel my bid?",
+        "a5": "Bid cancellation depends on auction status and timing. Contact support as quickly as possible, because live auction bids may become binding."
+      },
+      "delivery": {
+        "title": "Delivery, Shipping, and Documents",
+        "q1": "How much does it cost to import a vehicle?",
+        "a1": "The total import cost depends on the auction price, auction fees, inland transport in the USA, ocean shipping, customs clearance, taxes, port handling, and delivery to the final address.",
+        "q2": "Do you offer home delivery?",
+        "a2": "Yes. After the vehicle reaches Europe and customs procedures are completed, BidCars can organize delivery to the address selected by the client.",
+        "q3": "To which ports do you ship vehicles?",
+        "a3": "Vehicles are usually shipped to major European ports used by BidCars logistics partners. The destination port depends on country, route availability, and the best current transport option.",
+        "q4": "When will I receive the vehicle documents?",
+        "a4": "Documents are prepared and transferred after the auction house releases them and all required payments are completed.",
+        "q5": "Where can I check the vehicle status?",
+        "a5": "The vehicle status can be checked in your BidCars account. Important updates are also sent by the support team.",
+        "q6": "Can I request additional inspections or photos of the vehicle at the port terminal?",
+        "a6": "Additional photos or inspection requests may be possible depending on the terminal and vehicle location.",
+        "q7": "Is it possible to use your export services for vehicles that were not purchased directly through BidCars?",
+        "a7": "In selected cases, BidCars can help with export or logistics for vehicles purchased outside the platform."
+      },
+      "formal": {
+        "title": "Formal Aspects and Rules",
+        "q1": "What rules do I need to accept before bidding?",
+        "a1": "Before bidding, you need to register, accept platform terms, place the required deposit, and agree to pay for any vehicle you win.",
+        "q2": "Is signing a separate contract required?",
+        "a2": "In most cases, accepting the platform terms during registration is enough. Additional documents may be requested for company purchases or specific transactions.",
+        "q3": "Who is responsible for checking vehicle condition?",
+        "a3": "Auction vehicles are sold according to auction information and photos. The buyer should review all available data before placing a bid.",
+        "q4": "Can the seller reject my winning bid?",
+        "a4": "Some lots require seller approval. The seller can accept, reject, or counter the offer after the auction.",
+        "q5": "What happens if payment is late?",
+        "a5": "Late payment may cause penalties, storage fees, cancellation, or account restrictions depending on auction and platform rules."
+      },
+      "payments": {
+        "title": "Payments and Related Questions",
+        "q1": "How do I pay for a won vehicle?",
+        "a1": "After winning, you receive payment instructions with the amount, bank details, and transfer title. Payment is usually made by international bank transfer.",
+        "q2": "Which currency is used for payment?",
+        "a2": "Auction vehicle payment is usually made in USD. Logistics, service fees, and European costs may be calculated separately in EUR.",
+        "q3": "Are bank transfer fees included?",
+        "a3": "Bank transfer fees are usually charged by the client bank and are not included in the auction invoice.",
+        "q4": "Can I pay by card?",
+        "a4": "Vehicle payment normally requires bank transfer. Some smaller platform-related payments may depend on available payment methods.",
+        "q5": "When do I pay the BidCars commission?",
+        "a5": "The BidCars commission is paid separately according to the instructions provided after the vehicle is purchased."
+      },
+      "deposit": {
+        "title": "Deposit",
+        "q1": "Why is a deposit required?",
+        "a1": "The deposit confirms serious bidding intent and unlocks the ability to place bids. It also protects the platform against unpaid winning bids.",
+        "q2": "Is the deposit refundable?",
+        "a2": "Yes, the deposit is refundable if there are no unpaid winning bids, active transactions, or unresolved obligations on the account.",
+        "q3": "How much deposit do I need?",
+        "a3": "The required deposit depends on the maximum bid amount. A higher bid limit usually requires a higher deposit.",
+        "q4": "Can I use one deposit for several bids?",
+        "a4": "You can place bids according to your available deposit limit, but every won auction creates a purchase obligation.",
+        "q5": "How do I request a deposit return?",
+        "a5": "Contact support from your account and request a refund. The team will check whether the account has no active obligations."
+      }
+    }
+  },
   "footer": {
     "company": "Company",
     "support": "Support",
