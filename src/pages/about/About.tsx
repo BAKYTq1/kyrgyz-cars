@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useI18n } from '../../shared/i18n/I18nProvider';
 
 import galleryImg1 from '../../assets/about1.jpg';
@@ -162,9 +162,10 @@ export default function About() {
   const perPage = useCardsPerPage(containerRef);
 
   // Reset page when tab changes
-  useEffect(() => {
+  const handleTabChange = useCallback((tab: ActiveTab) => {
+    setActiveTab(tab);
     setCurrentPage(0);
-  }, [activeTab]);
+  }, []);
 
   useEffect(() => {
     const duration = 1600;
@@ -279,7 +280,7 @@ export default function About() {
                       : 'border-gray-200 bg-white text-gray-700 hover:border-blue-600 hover:text-blue-600'
                   }`}
                   type="button"
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => handleTabChange(tab.id)}
                 >
                   {tab.id === 'all' ? t(tab.label) : tab.label}{' '}
                   <span className={isActive ? 'text-white' : 'text-red-600'}>{tab.rating}</span>

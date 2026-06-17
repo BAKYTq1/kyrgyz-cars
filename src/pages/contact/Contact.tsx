@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { useI18n } from '../../shared/i18n/I18nProvider';
 
 import teamImg1 from '../../assets/about1.jpg';
@@ -209,9 +209,10 @@ export default function Contact() {
     action: t(card.actionKey),
   }));
 
-  useEffect(() => {
+  const handleTabChange = useCallback((tab: ActiveTab) => {
+    setActiveTab(tab);
     setCurrentPage(0);
-  }, [activeTab]);
+  }, []);
 
   const filteredReviews =
     activeTab === 'all'
@@ -294,7 +295,7 @@ export default function Contact() {
                       : 'border-gray-200 bg-white text-gray-700 hover:border-blue-600 hover:text-blue-600'
                   }`}
                   type="button"
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => handleTabChange(tab.id)}
                 >
                   {t(`contact.reviews.all`)}{' '}
                   <span className={isActive ? 'text-white' : 'text-red-600'}>{tab.rating}</span>
