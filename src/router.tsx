@@ -26,6 +26,7 @@ import { Lost } from './widgets/lost/Lost'
 import { Settings } from './widgets/settings/Settings'
 import { Shipping } from './widgets/shipping/Shipping'
 import { Watchlist } from './widgets/watchlist/Watchlist'
+import AuctionCatalog from './widgets/AuctionCatalog/AuctionCatalog'
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: 'catalog', element: <div>Catalog</div> },
+      { path: 'catalog', element: <AuctionCatalog /> },
       { path: 'calculator', element: <div>Calculator</div> },
       { path: 'lot/:id', element: <LotDetailPage /> },
       { path: 'help', element: <Help /> },

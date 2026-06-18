@@ -405,5 +405,157 @@
       "alt4": "Погрузка автомобилей в морской контейнер",
       "alt5": "Транспортировка легковых машин"
     }
+  },
+  "featuredLots": {
+    "activeTitle": "Активные лоты",
+    "moreTitle": "Ещё лоты",
+    "viewAll": "Смотреть все"
+  },
+  "deliveryMap": {
+    "title": "Варианты доставки и получения",
+    "homeDelivery": "Доставка на дом",
+    "pickup": "Самовывоз",
+    "pickupLocationsTitle": "Самовывоз из локаций",
+    "deliveryPeriod": "Срок доставки",
+    "extraFee": "(дополнительная плата)",
+    "legendActive": "Выбранная страна",
+    "markers": {
+      "bishkek": "Бишкек, KG",
+      "almaty": "Алматы, KZ",
+      "tashkent": "Ташкент, UZ",
+      "tbilisi": "Тбилиси, GE",
+      "moscow": "Москва, RU"
+    },
+    "countries": {
+      "Kyrgyzstan": "Кыргызстан",
+      "Kazakhstan": "Казахстан",
+      "Russia": "Россия",
+      "Uzbekistan": "Узбекистан",
+      "Tajikistan": "Таджикистан",
+      "Turkmenistan": "Туркменистан",
+      "Azerbaijan": "Азербайджан",
+      "Georgia": "Грузия",
+      "Armenia": "Армения",
+      "Mongolia": "Монголия",
+      "Belarus": "Беларусь",
+      "Ukraine": "Украина",
+      "Moldova": "Молдова"
+    },
+    "times": {
+      "Kyrgyzstan": "45–60 дней",
+      "Kazakhstan": "50–65 дней",
+      "Russia": "60–75 дней",
+      "Uzbekistan": "45–60 дней",
+      "Tajikistan": "50–65 дней",
+      "Turkmenistan": "50–65 дней",
+      "Azerbaijan": "45–60 дней",
+      "Georgia": "45–60 дней",
+      "Armenia": "45–60 дней",
+      "Mongolia": "60–75 дней",
+      "Belarus": "55–70 дней",
+      "Ukraine": "55–70 дней",
+      "Moldova": "55–70 дней"
+    }
+  },
+  "footer": {
+    "address": "Бишкек, Кыргызстан",
+    "tax": "Налог №: 000-00-00-000",
+    "copyright": "Все права защищены",
+    "timezone": "(UTC+06:00) Бишкек",
+    "currentLanguage": "🇷🇺 Русский",
+    "sections": {
+      "company": "Компания",
+      "support": "Поддержка",
+      "keywords": "Ключевые слова",
+      "auctions": "Аукционы",
+      "account": "Аккаунт"
+    },
+    "links": {
+      "blog": "Blog",
+      "about": "О компании",
+      "press": "Для прессы",
+      "contacts": "Свяжитесь с нами",
+      "faq": "Часто задаваемые вопросы",
+      "beforeBuy": "Перед покупкой",
+      "afterBuy": "После покупки",
+      "delivery": "Сроки доставки",
+      "docs": "Документы о продаже",
+      "calculator": "Калькулятор транспортировки",
+      "allAuctions": "Все аукционы",
+      "statusOpen": "- Открытые",
+      "statusProcess": "- В процессе",
+      "statusFinished": "- Завершённые сегодня",
+      "statusBuyNow": "- Быстрая покупка",
+      "archive": "Архив",
+      "forgotPassword": "Восстановление пароля",
+      "rules": "Правила",
+      "privacy": "Конфиденциальность и файлы cookie"
+    }
+  },
+  "catalog": {
+    "emptyState": "Лоты не найдены.",
+    "loadMore": "Загрузить больше"
+  },
+  "filters": {
+    "title": "Фильтры",
+    "clearAll": "Сбросить все",
+    "brand": "Марка",
+    "brandPlaceholder": "Например, BMW, Toyota...",
+    "year": "Год выпуска",
+    "rangeFrom": "От",
+    "rangeTo": "До",
+    "engineStatus": "Статус двигателя",
+    "primaryDamage": "Основное повреждение",
+    "transmission": "Коробка передач",
+    "auction": "Аукцион",
+    "engineStatuses": {
+      "all": "Все",
+      "run": "На ходу (Run & Drive)",
+      "stat": "Стационарный"
+    },
+    "damages": {
+      "any": "Любое повреждение",
+      "front": "Front End (Передняя часть)",
+      "rear": "Rear End (Задняя часть)",
+      "side": "Side (Боковое)",
+      "hail": "Hail (Град)",
+      "flood": "Water/Flood (Потоп)"
+    },
+    "transmissions": {
+      "auto": "Автомат",
+      "manual": "Механика"
+    }
+  },
+  "catalog2": {
+    "emptyState": "Лоты не найдены.",
+    "loadMore": "Загрузить больше",
+    "tabs": {
+      "all": "Все лоты",
+      "open": "Идут торги",
+      "buyNow": "Купить сейчас",
+      "tomorrow": "Торги завтра"
+    }
+  },
+  "card": {
+    "video": "Видео",
+    "vin": "VIN",
+    "lot": "Лот",
+    "driveDefault": "Привод",
+    "odometer": "Одометр",
+    "miles": "миль",
+    "seller": "Продавец",
+    "document": "Документ",
+    "location": "Расположение",
+    "damage": "Повреждение",
+    "engineStatus": "Статус мотора",
+    "runAndDriveDefault": "На ходу",
+    "estValue": "Est Value",
+    "currentBid": "Текущая ставка",
+    "viewAuction": "Посмотреть аукцион",
+    "transmissions": {
+      "auto": "Автомат",
+      "manual": "Механика",
+      "default": "АКПП"
+    }
   }
 }

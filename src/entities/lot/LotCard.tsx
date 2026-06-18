@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useI18n } from '../../shared/i18n/I18nProvider'
 import type { Car } from '../../lib/lot/lotSlice'
-
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { MdKeyboardArrowRight } from "react-icons/md";
 
 function ImageSlider({ img, auction }: { img: Car['img'], auction: 'Copart' | 'IAAI' }) {
   const images = [img.img_1, img.img_2, img.img_3, img.img_4, img.img_5].filter(Boolean) as string[]
@@ -56,8 +57,8 @@ function ImageSlider({ img, auction }: { img: Car['img'], auction: 'Copart' | 'I
 
       {images.length > 1 && (
         <>
-          <button onClick={(e) => go(-1, e)} className="absolute left-1 top-1/2 -translate-y-1/2 w-6 h-6 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center text-lg leading-none transition">‹</button>
-          <button onClick={(e) => go(1, e)} className="absolute right-1 top-1/2 -translate-y-1/2 w-6 h-6 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center text-lg leading-none transition">›</button>
+          <button onClick={(e) => go(-1, e)} className="absolute left-1 top-1/2 -translate-y-1/2 w-[22px] h-[22px]  bg-black/40 hover:bg-black/60 text-white rounded-full flex justify-center items-center text-lg leading-none transition"><MdKeyboardArrowLeft /></button>
+          <button onClick={(e) => go(1, e)} className="absolute right-1 top-1/2 -translate-y-1/2 w-[22px] h-[22px] bg-black/40 hover:bg-black/60 text-white rounded-full flex justify-center items-center  text-lg leading-none transition"><MdKeyboardArrowRight /></button>
           <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 flex gap-1">
             {images.map((_, i) => (
               <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === current ? 'w-4 bg-white' : 'w-1 bg-white/50'}`} />

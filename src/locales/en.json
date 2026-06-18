@@ -402,5 +402,157 @@
       "alt4": "Loading cars into a sea container",
       "alt5": "Transportation of passenger cars"
     }
+  },
+  "featuredLots": {
+    "activeTitle": "Active Lots",
+    "moreTitle": "More Lots",
+    "viewAll": "View All"
+  },
+  "deliveryMap": {
+    "title": "Delivery & Pickup Options",
+    "homeDelivery": "Home Delivery",
+    "pickup": "Local Pickup",
+    "pickupLocationsTitle": "Pickup from Locations",
+    "deliveryPeriod": "Delivery period",
+    "extraFee": "(additional fee applies)",
+    "legendActive": "Selected country",
+    "markers": {
+      "bishkek": "Bishkek, KG",
+      "almaty": "Almaty, KZ",
+      "tashkent": "Tashkent, UZ",
+      "tbilisi": "Tbilisi, GE",
+      "moscow": "Moscow, RU"
+    },
+    "countries": {
+      "Kyrgyzstan": "Kyrgyzstan",
+      "Kazakhstan": "Kazakhstan",
+      "Russia": "Russia",
+      "Uzbekistan": "Uzbekistan",
+      "Tajikistan": "Tajikistan",
+      "Turkmenistan": "Turkmenistan",
+      "Azerbaijan": "Azerbaijan",
+      "Georgia": "Georgia",
+      "Armenia": "Armenia",
+      "Mongolia": "Mongolia",
+      "Belarus": "Belarus",
+      "Ukraine": "Ukraine",
+      "Moldova": "Moldova"
+    },
+    "times": {
+      "Kyrgyzstan": "45–60 days",
+      "Kazakhstan": "50–65 days",
+      "Russia": "60–75 days",
+      "Uzbekistan": "45–60 days",
+      "Tajikistan": "50–65 days",
+      "Turkmenistan": "50–65 days",
+      "Azerbaijan": "45–60 days",
+      "Georgia": "45–60 days",
+      "Armenia": "45–60 days",
+      "Mongolia": "60–75 days",
+      "Belarus": "55–70 days",
+      "Ukraine": "55–70 days",
+      "Moldova": "55–70 days"
+    }
+  },
+  "footer": {
+    "address": "Bishkek, Kyrgyzstan",
+    "tax": "Tax No: 000-00-00-000",
+    "copyright": "All rights reserved",
+    "timezone": "(UTC+06:00) Bishkek",
+    "currentLanguage": "🇺🇸 English",
+    "sections": {
+      "company": "Company",
+      "support": "Support",
+      "keywords": "Keywords",
+      "auctions": "Auctions",
+      "account": "Account"
+    },
+    "links": {
+      "blog": "Blog",
+      "about": "About Us",
+      "press": "Press",
+      "contacts": "Contact Us",
+      "faq": "FAQ",
+      "beforeBuy": "Before Buy",
+      "afterBuy": "After Buy",
+      "delivery": "Delivery Times",
+      "docs": "Sales Documents",
+      "calculator": "Shipping Calculator",
+      "allAuctions": "All Auctions",
+      "statusOpen": "- Open",
+      "statusProcess": "- In Progress",
+      "statusFinished": "- Finished Today",
+      "statusBuyNow": "- Buy Now",
+      "archive": "Archive",
+      "forgotPassword": "Forgot Password",
+      "rules": "Rules",
+      "privacy": "Privacy & Cookies"
+    }
+  },
+  "catalog": {
+    "emptyState": "No lots found.",
+    "loadMore": "Load More"
+  },
+  "filters": {
+    "title": "Filters",
+    "clearAll": "Clear all",
+    "brand": "Make",
+    "brandPlaceholder": "E.g., BMW, Toyota...",
+    "year": "Year",
+    "rangeFrom": "From",
+    "rangeTo": "To",
+    "engineStatus": "Engine Status",
+    "primaryDamage": "Primary Damage",
+    "transmission": "Transmission",
+    "auction": "Auction",
+    "engineStatuses": {
+      "all": "All",
+      "run": "Run & Drive",
+      "stat": "Stationary"
+    },
+    "damages": {
+      "any": "Any Damage",
+      "front": "Front End",
+      "rear": "Rear End",
+      "side": "Side",
+      "hail": "Hail",
+      "flood": "Water/Flood"
+    },
+    "transmissions": {
+      "auto": "Automatic",
+      "manual": "Manual"
+    }
+  },
+  "catalog2": {
+    "emptyState": "No lots found.",
+    "loadMore": "Load More",
+    "tabs": {
+      "all": "All Lots",
+      "open": "Live Auctions",
+      "buyNow": "Buy It Now",
+      "tomorrow": "Auctions Tomorrow"
+    }
+  },
+  "card": {
+    "video": "Video",
+    "vin": "VIN",
+    "lot": "Lot",
+    "driveDefault": "Drive",
+    "odometer": "Odometer",
+    "miles": "miles",
+    "seller": "Seller",
+    "document": "Doc Type",
+    "location": "Location",
+    "damage": "Damage",
+    "engineStatus": "Engine code",
+    "runAndDriveDefault": "Run & Drive",
+    "estValue": "Est. Value",
+    "currentBid": "Current Bid",
+    "viewAuction": "View Auction",
+    "transmissions": {
+      "auto": "Automatic",
+      "manual": "Manual",
+      "default": "Automatic"
+    }
   }
 }
