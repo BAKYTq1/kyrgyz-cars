@@ -26,11 +26,7 @@
       "Customs clearance",
       "Home delivery"
     ],
-    "title": [
-      "Buying and delivering",
-      "American",
-      "cars"
-    ],
+    "title": ["Buying and delivering", "American", "cars"],
     "subtitle": "With the \"Home delivery\" option, it has never been this fast and easy",
     "start": "Start bidding",
     "howItWorks": "How it works",
@@ -247,5 +243,335 @@
     "privacy": "Privacy and cookies",
     "rights": "All rights reserved",
     "location": "Bishkek, Kyrgyzstan"
+  },
+  "deliveryTimes": {
+    "title": "Current delivery times",
+    "subtitle": "Data is automatically updated based on completed shipments.",
+    "updated": "Updated:",
+    "status": "Status",
+    "working": "Working",
+    "weatherToday": "Weather today",
+    "humidity": "Humidity",
+    "windSpeed": "Wind speed",
+    "weatherAlert": "Weather alert",
+    "currentStatus": "Current status",
+    "localTime": "time",
+    "wmo": {
+      "clear": "Clear",
+      "partlyCloudy": "Partly cloudy",
+      "fog": "Fog",
+      "drizzle": "Drizzle",
+      "rain": "Rain",
+      "snow": "Snow",
+      "thunderstorm": "Thunderstorm"
+    },
+    "steps": [
+      { "label": "From purchase to terminal arrival", "days": "3-7 days" },
+      {
+        "label": "From vehicle / documents arrival at terminal to container loading*",
+        "days": "3-11 days"
+      },
+      {
+        "label": "From container loading to vessel departure",
+        "days": "2-13 days"
+      },
+      {
+        "label": "From vessel departure to vessel arrival",
+        "days": "21-27 days"
+      }
+    ],
+    "terminals": {
+      "ny": {
+        "name": "New York Terminal",
+        "status": "Goods arrive in New York fairly quickly after purchase. Loading time may vary, but once loaded, vessels depart promptly and reach the destination within an average timeframe."
+      },
+      "sv": {
+        "name": "Savannah Terminal",
+        "status": "Goods arrive in Savannah fairly quickly after purchase. Loading doesn't take too long, but vessel departure wait times can vary significantly. The sea voyage may take a considerable amount of time."
+      },
+      "hs": {
+        "name": "Houston Terminal",
+        "status": "Houston provides fast cargo handling. The terminal operates in standard mode without significant delays."
+      },
+      "la": {
+        "name": "Los Angeles Terminal",
+        "status": "The Port of Los Angeles is the largest in the USA. Minor delays are possible during peak periods; otherwise normal operations."
+      },
+      "in": {
+        "name": "Indianapolis Terminal",
+        "status": "The Indianapolis inland terminal operates as a distribution hub. Delivery times are stable."
+      },
+      "rt": {
+        "name": "Rotterdam Terminal",
+        "status": "Rotterdam is the largest port in Europe. High throughput capacity and excellent logistics infrastructure."
+      }
+    }
+  },
+  "howItWorks": {
+    "prePurchase": "Pre-purchase process",
+    "postPurchase": "Post-purchase process",
+    "pre": {
+      "heroTitle": "Car buying process",
+      "heroSubtitle": "Interested in importing cars from the USA? Read our guide on how the car buying process works on our site. We explain everything important step by step. US auctions will no longer be a mystery to you.",
+      "introTitle": "4 steps to buying a car with BidCars",
+      "introP1": "To make the process of importing cars from the USA clear and transparent, we created BidCars. Auctions are held without intermediaries, without hidden costs — you make all the decisions yourself! You choose the car and the amount you are willing to pay, and we help you win the auction! Important: there are no costs in BidCars until you win the bid.",
+      "introP2": "Registration and participation in the auction are free! We only require a refundable deposit to secure your bids! BidCars makes it quick and easy to order, buy and deliver cars, including door-to-door delivery. BidCars is 100% transparency and full control over the location of your car.",
+      "steps": [
+        {
+          "num": "STEP 1",
+          "title": "Find your dream car",
+          "body": [
+            "Choose from over 450,000 listings. Our search engine and detailed filters will help you easily find the car you need in our database. You don't need to create an account at BidCars to browse cars and auctions.",
+            "An account is only needed to participate in the auction. The registration process is simple and will take no more than 5 minutes."
+          ],
+          "listTitle": "After creating an account you will also get:",
+          "list": [
+            "The ability to add cars to your watchlist.",
+            "Access to prices of archived listings."
+          ],
+          "footer": "Every month we add new convenient features for our users.",
+          "btn": "Create a free account"
+        },
+        {
+          "num": "STEP 2",
+          "title": "Make a refundable deposit",
+          "body": [
+            "A refundable deposit is required to participate in auctions — this is a requirement of auction houses (Copart and IAAI). We do not charge a commission for participating in auctions. If you change your mind — the deposit can be returned at any time.",
+            "After the deposit is credited, you can place bids on the same day. If you win, the funds are frozen for the amount of the car. If you lose — they are automatically returned."
+          ],
+          "listTitle": "Deposit levels:",
+          "list": [
+            "Starter plan — deposit $300; bids up to $50,000; up to 5 cars at a time.",
+            "Professional plan — deposit $3,000; bids up to $500,000; up to 10 cars.",
+            "Corporate plan — deposit $20,000; bids up to $200,000; up to 20 cars."
+          ],
+          "btn": "Increase bid limit →"
+        },
+        {
+          "num": "STEP 3",
+          "title": "The auction starts — feel the excitement of bidding!",
+          "body": [
+            "Specify the maximum amount you are willing to pay for the car. The BidCars calculator will show a preliminary list of expenses. The car will be put up for auction on your behalf.",
+            "US auctions take place in two stages:"
+          ],
+          "list": [
+            "Pre-Bids — placed several days before the start, open 5 days before the main auction.",
+            "Live auction — starts from the highest pre-bid. The one who offered more wins."
+          ],
+          "footer": "BidCars represents you at the live auction within your set maximum. This allows you to buy a car at the lowest possible price."
+        },
+        {
+          "num": "STEP 4",
+          "title": "Pay for the car and wait for it to arrive!",
+          "body": [
+            "After winning the auction, you will receive bank transfer details and payment instructions. After the funds are credited, we will pick up your car and take care of all the formalities.",
+            "We will be in touch throughout the entire transportation process. You can track the status of the car in your personal account — we take care of customs clearance and all related procedures.",
+            "All you need to do is wait for your new car to be delivered right to your door!",
+            "Go to the 'After purchase' tab to read a detailed action plan after winning the auction, including all import stages."
+          ],
+          "btn": "After purchase →"
+        }
+      ]
+    },
+    "post": {
+      "back": "Back",
+      "next": "Next",
+      "pdfLabel": "PDF with transfer details:",
+      "steps": [
+        {
+          "title": "Car bid accepted",
+          "payment": false,
+          "description": "After winning the car and logging into the BidCars personal account, the auction status changes to \"Car won\". This means the bid was accepted — it's time to open a bottle of champagne!",
+          "imageCaption": "2015 Audi S3 — \"Car won\" status on BidCars"
+        },
+        {
+          "title": "Payment for the car",
+          "payment": true,
+          "description": "After winning the auction, within a few hours, an SMS and email are sent with a screenshot from the auction house confirming the car win.",
+          "quote": "You won 2015 Audi S3 #483982. Payment details have been sent to your email address. Please ensure timely payment.",
+          "extra": "The email contains the amount to be paid in USD (bid amount + auction fees), transfer description, and an attachment with account number, SWIFT number, bank address, etc.",
+          "imageCaption": "Unpaid invoice on the auction platform"
+        },
+        {
+          "title": "Payment receipt confirmation",
+          "payment": false,
+          "description": "Once the funds arrive at the auction house account, an SMS is sent confirming receipt of payment. The car pickup request is automatically forwarded to the transport company.",
+          "quote": "We have recorded your payment for 2015 Audi S3 and arranged its pickup from the auction house."
+        },
+        {
+          "title": "Car transportation updates",
+          "payment": false,
+          "description": "The \"Transport\" tab in the BidCars personal account provides information about:",
+          "bullets": [
+            "Car pickup from the auction house,",
+            "Car delivery to the shipping terminal,",
+            "Planned car departure (ETD),",
+            "Expected time of arrival (ETA),",
+            "Container pickup from the port."
+          ],
+          "imageCaption": "Transportation tracking timeline"
+        },
+        {
+          "title": "Photos from the shipping terminal",
+          "payment": false,
+          "description": "Photo documentation of the car from the shipping terminal is available a few days after its arrival.",
+          "quote": "Photos of 2015 Audi S3 have been sent to your email address.",
+          "imageCaption": "Car at the shipping terminal"
+        },
+        {
+          "title": "Car delivery to Europe",
+          "payment": false,
+          "description": "In the \"Transport\" tab, the car status is updated with departure and arrival dates, container number and a map showing the location of the container ship.",
+          "imageCaption": "Container ship location map"
+        },
+        {
+          "title": "Transportation cost calculation",
+          "payment": true,
+          "description": "Within a few days after shipping to Europe, a report on car carrier and freight costs with transfer details is provided. Payment is made in USD to a US account.",
+          "quote": "Transportation calculation for 2015 Audi S3 has been sent to your email address. Please make payment within 72 hours.",
+          "imageCaption": "Transportation cost invoice"
+        },
+        {
+          "title": "Customs clearance form",
+          "payment": false,
+          "description": "A few days before the car arrives in Europe, a customs clearance form is sent for entering the necessary data (private or fiscal processing), car delivery information and transport document details.",
+          "quote": "Customs clearance authorization for 2015 Audi S3 has been sent to your email address. Please fill in the form within 3 days."
+        },
+        {
+          "title": "BidCars commission fee",
+          "payment": true,
+          "description": "A few days before arrival in Europe, a link to pay the BidCars service fee is sent. Payment can be made via instant bank transfer or credit card (Stripe-based).",
+          "quote": "Your car is on its way and will soon arrive at the port in Europe. Expected arrival date is Monday, December 11, 2023. Please make payment for our logistics services:\n\nhttps://payments.bid.cars/en/fee/WAULC68E14A227038/482925780\n\nBest regards, BidCars.",
+          "imageCaption": "BidCars payment portal"
+        },
+        {
+          "title": "Customs clearance invoice",
+          "payment": true,
+          "description": "After customs clearance, an email is sent with an invoice to be paid in EUR directly to the customs agency account.",
+          "quote": "Customs clearance for 2015 Audi S3 has been sent to your email address. Please make payment within 72 hours.",
+          "extra": "Note: Transfer in EUROS (€), not US dollars. A storage fee of 15 EUR per day or more may apply.",
+          "imageCaption": "Customs clearance invoice"
+        },
+        {
+          "title": "Car pickup notification",
+          "payment": false,
+          "description": "An SMS is sent indicating that the logistics service has scheduled car pickup from Rotterdam for a specific day.",
+          "quote": "Pickup of 2015 Audi S3 from Rotterdam port is scheduled for Friday (2023-12-16). Confirmation will be sent separately. Pickup date may change."
+        },
+        {
+          "title": "Car pickup confirmation",
+          "payment": false,
+          "description": "After the car is picked up, an email and SMS are sent with pickup confirmation, transport company phone number and amount due.",
+          "quote": "2015 Audi S3 has been picked up from the port. BidCars transport company (+48 726 099 099). The driver will contact you regarding delivery. Please prepare 450 EUR — cash payment to the driver."
+        },
+        {
+          "title": "Car document scans",
+          "payment": false,
+          "description": "After the car is picked up, scans of vehicle documents are automatically sent to your email address.",
+          "extra": "Original documents will be sent by GLS courier within 2 weeks after pickup. In special cases up to 30 days. Documents are sent from our office at least once a week."
+        },
+        {
+          "title": "Documents arrival at office",
+          "payment": false,
+          "description": "When documents arrive at the office, an SMS notification is sent. After assembly they are sent by UPS / GLS / DPD courier service.",
+          "quote": "Original documents for 2015 Audi S3 have arrived at our office. Dispatch with translations by UPS / GLS / DPD courier will take place within 5 business days."
+        },
+        {
+          "title": "Document dispatch confirmation",
+          "payment": false,
+          "description": "Upon dispatch, an SMS notification is automatically generated informing about the shipment.",
+          "quote": "Documents for 2015 Audi S3 are scheduled for dispatch on Thursday (2023-12-21). DPD courier (1000667692324U).",
+          "imageCaption": "BidCars document envelope"
+        },
+        {
+          "title": "BidCars service completion",
+          "payment": false,
+          "description": "Completion of BidCars service means successful completion of all transaction stages — from winning the auction to delivering the car and documents. Clients can count on support at every step.",
+          "extra": "BidCars ensures full transparency and provides detailed service reporting, guaranteeing clarity and honesty.",
+          "isCompletion": true
+        }
+      ]
+    }
+  },
+  "auth": {
+    "published": "Published on",
+    "registration": {
+      "title": "Welcome to BidCars",
+      "subtitle": "Set up your account and start placing your first bids!",
+      "stepOf": "Step",
+      "stepTotal": "/ 2",
+      "back": "Go back",
+      "email": "Email address",
+      "emailPlaceholder": "Enter your email address",
+      "emailRequired": "Email address is required",
+      "emailInvalid": "Please enter a valid email address",
+      "firstName": "First name",
+      "firstNamePlaceholder": "Enter your first name",
+      "firstNameRequired": "First name is required",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Enter your last name",
+      "lastNameRequired": "Last name is required",
+      "phone": "Phone",
+      "phonePlaceholder": "Number",
+      "country": "Country",
+      "continue": "Continue",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "promoEmails": "I want to receive BidCars promotional emails",
+      "agreeTerms": "I agree to the",
+      "terms": "Terms",
+      "agreeOrderTerms": "I agree to the",
+      "orderTerms": "order terms",
+      "isAdult": "I hereby declare that I am over eighteen years of age.",
+      "submit": "Create account",
+      "haveAccount": "Already have an account?",
+      "login": "Sign in"
+    },
+    "login": {
+      "title": "Sign in to BidCars",
+      "subtitle": "Enter your details below.",
+      "email": "Email address",
+      "emailPlaceholder": "Enter your email address",
+      "password": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "remember": "Remember me",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot password / Resend activation email?",
+      "noAccount": "Not registered?",
+      "register": "Create account"
+    },
+    "forgotPassword": {
+      "title": "Forgot password / Resend activation email?",
+      "subtitle": "Enter your email address below to receive a password reset link.",
+      "email": "Email address",
+      "emailPlaceholder": "Enter your email address",
+      "emailRequired": "Email address is required",
+      "emailInvalid": "Please enter a valid email address",
+      "submit": "Send reset link",
+      "backToLogin": "Back to sign in"
+    }
+  },
+
+  "makes": {
+    "title": "Popular Makes",
+    "tabs": {
+      "automobiles": "Automobiles",
+      "motorcycles": "Motorcycles",
+      "atvs": "ATVs"
+    }
+  },
+
+  "about": {
+    "title": "We load, unload and transport containers",
+    "button": "About Us",
+    "gallery": {
+      "alt1": "Office and computers for ordering cars",
+      "alt2": "BidCars car carrier trucks",
+      "alt3": "Presentation of a sports car at the exhibition",
+      "alt4": "Loading cars into a sea container",
+      "alt5": "Transportation of passenger cars"
+    }
   }
 }

@@ -11,9 +11,10 @@ export default function HomePage() {
       <HeroSection />
       <SearchBlock />
       <FeaturedLots/>
-      <DeliveryMap/>
-      <PopularMakes />
       <AboutUs />
+      <PopularMakes />
+      <DeliveryMap/>
+      <></>
     </div>
   )
 }

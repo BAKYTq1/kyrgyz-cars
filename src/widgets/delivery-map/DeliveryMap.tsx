@@ -1,4 +1,5 @@
 import { useState } from 'react'
+// @ts-ignore - react-simple-maps has no type declarations
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { FaAnchor, FaHome, FaTruck, FaMapMarkerAlt } from 'react-icons/fa'
 
@@ -133,7 +134,7 @@ export default function DeliveryMap() {
 
           {/* Карта */}
           <div className="flex-1 relative">
-            <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100" style={{ minHeight: '420px' }}>
+            <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
 
               {/* Tooltip */}
               {tooltip && (
@@ -155,12 +156,12 @@ export default function DeliveryMap() {
 
               <ComposableMap
                 projection="geoMercator"
-                projectionConfig={{ center: [65, 45], scale: 400 }}
-                style={{ width: '100%', height: '100%', minHeight: '420px' }}
+                projectionConfig={{ center: [65, 45], scale: 350 }}
+                style={{ width: '100%', height: '660px' }}
               >
                 <Geographies geography={GEO_URL}>
-                  {({ geographies }) =>
-                    geographies.map((geo) => {
+                  {({ geographies }: { geographies: any[] }) =>
+                    geographies.map((geo: any) => {
                       const name = geo.properties.name
                       return (
                         <Geography
@@ -174,11 +175,11 @@ export default function DeliveryMap() {
                             hover: { outline: 'none', cursor: homeDeliveryCountries[name] || pickupCountries[name] ? 'pointer' : 'default' },
                             pressed: { outline: 'none' },
                           }}
-                          onMouseEnter={(e) => {
+                          onMouseEnter={(e: React.MouseEvent<SVGPathElement>) => {
                             setHoveredCountry(name)
                             setTooltip({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY, name })
                           }}
-                          onMouseMove={(e) => {
+                          onMouseMove={(e: React.MouseEvent<SVGPathElement>) => {
                             setTooltip({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY, name })
                           }}
                           onMouseLeave={() => {

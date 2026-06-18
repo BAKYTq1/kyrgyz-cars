@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useI18n } from "../../../shared/i18n/I18nProvider"; // Проверь правильность пути к провайдеру
 
 const slides = [
   {
@@ -60,6 +61,7 @@ function Slideshow({
   onPrev: () => void;
   onNext: () => void;
 }) {
+  const { t } = useI18n();
   const slide = slides[current];
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden">
@@ -104,7 +106,7 @@ function Slideshow({
                 fill="#EA4335"
               />
             </svg>
-            Опубликовано <span className="underline">Google</span>
+            {t("auth.published")} <span className="underline">Google</span>
           </div>
           <div className="flex gap-2">
             <button
@@ -151,6 +153,7 @@ function Slideshow({
 }
 
 export function Registration() {
+  const { t } = useI18n();
   const [step, setStep] = useState<1 | 2>(1);
   const [current, setCurrent] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -177,14 +180,13 @@ export function Registration() {
   const handleNextStep = () => {
     const newErrors: typeof errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.trim())
-      newErrors.email = "Электронная почта обязательна для заполнения";
+    if (!email.trim()) newErrors.email = t("auth.registration.emailRequired");
     else if (!emailRegex.test(email))
-      newErrors.email = "Введите корректный адрес электронной почты";
+      newErrors.email = t("auth.registration.emailInvalid");
     if (!firstName.trim())
-      newErrors.firstName = "Имя обязательно для заполнения";
+      newErrors.firstName = t("auth.registration.firstNameRequired");
     if (!lastName.trim())
-      newErrors.lastName = "Фамилия обязательна для заполнения";
+      newErrors.lastName = t("auth.registration.lastNameRequired");
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) setStep(2);
   };
@@ -198,15 +200,16 @@ export function Registration() {
   };
 
   useEffect(() => {
-    const t = setInterval(() => go(current + 1), 5500);
-    return () => clearInterval(t);
+    const tInterval = setInterval(() => go(current + 1), 5500);
+    return () => clearInterval(tInterval);
   }, [current]);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col lg:flex-row">
-      <div className="flex-none lg:w-[48%] flex flex-col bg-gray-100 px-8 py-7">
+    <div className="min-h-screen bg-gray-100 flex flex-col min-[1100px]:flex-row">
+      {/* ═══ Форма ═══ */}
+      <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-gray-100 px-5 sm:px-8 py-6 sm:py-7">
         {/* Логотип */}
-        <div className="flex items-center gap-2 mb-10">
+        <div className="flex items-center gap-2 mb-8 sm:mb-10">
           <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center shrink-0">
             <svg
               className="w-4 h-4 text-white"
@@ -228,15 +231,13 @@ export function Registration() {
         </div>
 
         <div className="flex-1 flex items-start justify-center">
-          <div className="w-full max-w-[600px]">
-            {/* Кликабельная иконка — переход на логин */}
+          <div className="w-full max-w-[520px]">
             <a
               href="/"
-              title="Перейти ко входу"
-              className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center mb-6 hover:bg-blue-200 active:scale-95 transition-all cursor-pointer"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-100 flex items-center justify-center mb-5 sm:mb-6 hover:bg-blue-200 active:scale-95 transition-all cursor-pointer"
             >
               <svg
-                className="w-6 h-6 text-blue-500"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -250,11 +251,11 @@ export function Registration() {
               </svg>
             </a>
 
-            <h1 className="text-2xl font-bold text-gray-800 mb-1">
-              Добро пожаловать в BidCars
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">
+              {t("auth.registration.title")}
             </h1>
-            <p className="text-gray-400 text-sm mb-5">
-              Настройте свою учетную запись и начните делать первые ставки!
+            <p className="text-gray-400 text-sm mb-4 sm:mb-5">
+              {t("auth.registration.subtitle")}
             </p>
 
             {/* Прогресс */}
@@ -281,296 +282,302 @@ export function Registration() {
                     d="M15 19l-7-7 7-7"
                   />
                 </svg>
-                Вернуться
+                {t("auth.registration.back")}
               </button>
-              <span className="text-sm text-gray-400">Шаг {step} / 2</span>
+              <span className="text-sm text-gray-400">
+                {t("auth.registration.stepOf")} {step}{" "}
+                {t("auth.registration.stepTotal")}
+              </span>
             </div>
-            <div className="w-full h-1 bg-gray-200 rounded-full mb-5">
+            <div className="w-full h-1 bg-gray-200 rounded-full mb-4 sm:mb-5">
               <div
                 className="h-1 bg-blue-500 rounded-full transition-all duration-300"
                 style={{ width: step === 1 ? "50%" : "100%" }}
               />
             </div>
 
-            {/* Форма */}
-            <div className="space-y-4">
-              {step === 1 ? (
-                <>
+            {/* Шаг 1 */}
+            {step === 1 && (
+              <div className="space-y-3 sm:space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    {t("auth.registration.email")}{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (errors.email)
+                        setErrors({ ...errors, email: undefined });
+                    }}
+                    placeholder={t("auth.registration.emailPlaceholder")}
+                    className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${
+                      errors.email
+                        ? "border-red-500 focus:ring-red-400"
+                        : "border-gray-200 focus:ring-blue-400"
+                    }`}
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Электронная почта <span className="text-red-500">*</span>
+                      {t("auth.registration.firstName")}{" "}
+                      <span className="text-red-500">*</span>
                     </label>
                     <input
-                      type="email"
-                      value={email}
+                      type="text"
+                      value={firstName}
                       onChange={(e) => {
-                        setEmail(e.target.value);
-                        if (errors.email)
-                          setErrors({ ...errors, email: undefined });
+                        setFirstName(e.target.value);
+                        if (errors.firstName)
+                          setErrors({ ...errors, firstName: undefined });
                       }}
-                      placeholder="Введите свою электронную почту"
-                      className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${errors.email ? "border-red-500 focus:ring-red-400" : "border-gray-200 focus:ring-blue-400"}`}
+                      placeholder={t("auth.registration.firstNamePlaceholder")}
+                      className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${
+                        errors.firstName
+                          ? "border-red-500 focus:ring-red-400"
+                          : "border-gray-200 focus:ring-blue-400"
+                      }`}
                     />
-                    {errors.email && (
+                    {errors.firstName && (
                       <p className="text-red-500 text-xs mt-1">
-                        {errors.email}
+                        {errors.firstName}
                       </p>
                     )}
                   </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                        Имя <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => {
-                          setFirstName(e.target.value);
-                          if (errors.firstName)
-                            setErrors({ ...errors, firstName: undefined });
-                        }}
-                        placeholder="Введите свое имя"
-                        className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${errors.firstName ? "border-red-500 focus:ring-red-400" : "border-gray-200 focus:ring-blue-400"}`}
-                      />
-                      {errors.firstName && (
-                        <p className="text-red-500 text-xs mt-1">
-                          {errors.firstName}
-                        </p>
-                      )}
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                        Фамилия <span className="text-red-500">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => {
-                          setLastName(e.target.value);
-                          if (errors.lastName)
-                            setErrors({ ...errors, lastName: undefined });
-                        }}
-                        placeholder="Введите свою фамилию"
-                        className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${errors.lastName ? "border-red-500 focus:ring-red-400" : "border-gray-200 focus:ring-blue-400"}`}
-                      />
-                      {errors.lastName && (
-                        <p className="text-red-500 text-xs mt-1">
-                          {errors.lastName}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                        Телефон
-                      </label>
-                      <div className="flex items-center border border-gray-200 rounded-xl bg-white overflow-hidden focus-within:ring-2 focus-within:ring-blue-400">
-                        <div className="flex items-center gap-1 px-2.5 border-r border-gray-200 shrink-0 py-2.5">
-                          <span className="text-base">{country.flag}</span>
-                          <span className="text-xs text-gray-400">
-                            {country.dial}
-                          </span>
-                        </div>
-                        <input
-                          type="tel"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="Номер телефона"
-                          className="flex-1 px-2 py-2.5 text-sm focus:outline-none placeholder-gray-300 bg-white min-w-0"
-                        />
-                      </div>
-                    </div>
-                    <div className="relative">
-                      <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                        Страна <span className="text-red-500">*</span>
-                      </label>
-                      <button
-                        type="button"
-                        onClick={() => setShowCountryDrop(!showCountryDrop)}
-                        className="w-full flex items-center justify-between px-3 py-2.5 border border-green-400 rounded-xl bg-white text-sm focus:outline-none"
-                      >
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <span className="text-base shrink-0">
-                            {country.flag}
-                          </span>
-                          <span className="text-gray-700 truncate text-xs">
-                            {country.name}
-                          </span>
-                        </div>
-                        <svg
-                          className="w-4 h-4 text-green-500 shrink-0 ml-1"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2.5}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      </button>
-                      {showCountryDrop && (
-                        <div className="absolute z-20 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
-                          {countries.map((c) => (
-                            <button
-                              key={c.code}
-                              type="button"
-                              onClick={() => {
-                                setCountry(c);
-                                setShowCountryDrop(false);
-                              }}
-                              className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 text-sm text-left"
-                            >
-                              <span className="text-base">{c.flag}</span>
-                              <span className="truncate">{c.name}</span>
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={handleNextStep}
-                    className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1"
-                  >
-                    Продолжить
-                  </button>
-                </>
-              ) : (
-                <>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Пароль <span className="text-red-500">*</span>
+                      {t("auth.registration.lastName")}{" "}
+                      <span className="text-red-500">*</span>
                     </label>
                     <input
-                      type="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Введите свой пароль"
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
+                      type="text"
+                      value={lastName}
+                      onChange={(e) => {
+                        setLastName(e.target.value);
+                        if (errors.lastName)
+                          setErrors({ ...errors, lastName: undefined });
+                      }}
+                      placeholder={t("auth.registration.lastNamePlaceholder")}
+                      className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${
+                        errors.lastName
+                          ? "border-red-500 focus:ring-red-400"
+                          : "border-gray-200 focus:ring-blue-400"
+                      }`}
                     />
+                    {errors.lastName && (
+                      <p className="text-red-500 text-xs mt-1">
+                        {errors.lastName}
+                      </p>
+                    )}
                   </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1.5">
-                      Подтвердите пароль <span className="text-red-500">*</span>
+                      {t("auth.registration.phone")}
                     </label>
-                    <input
-                      type="password"
-                      value={confirmPassword}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Подтвердите свой пароль"
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
-                    />
-                  </div>
-
-                  <div className="space-y-2.5 pt-2">
-                    {[
-                      {
-                        state: promoEmails,
-                        set: setPromoEmails,
-                        label: "Я хочу получать электронные письма BidCars",
-                        required: false,
-                      },
-                      {
-                        state: agreeTerms,
-                        set: setAgreeTerms,
-                        label: (
-                          <>
-                            Я согласен с{" "}
-                            <a
-                              href="/terms"
-                              className="text-blue-500 hover:underline"
-                            >
-                              Условиями
-                            </a>
-                          </>
-                        ),
-                        required: true,
-                      },
-                      {
-                        state: agreeOrderTerms,
-                        set: setAgreeOrderTerms,
-                        label: (
-                          <>
-                            Я согласен с{" "}
-                            <a
-                              href="/order-terms"
-                              className="text-blue-500 hover:underline"
-                            >
-                              условиями заказа
-                            </a>
-                          </>
-                        ),
-                        required: true,
-                      },
-                      {
-                        state: isAdult,
-                        set: setIsAdult,
-                        label:
-                          "Настоящим заявляю, что мне больше восемнадцати лет.",
-                        required: true,
-                      },
-                    ].map((item, idx) => (
-                      <label
-                        key={idx}
-                        className="flex items-start gap-2.5 text-xs text-gray-700 cursor-pointer select-none"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={item.state}
-                          onChange={(e) => item.set(e.target.checked)}
-                          className="mt-0.5 rounded border-gray-300 accent-blue-500"
-                        />
-                        <span>
-                          {item.required && (
-                            <span className="text-red-500">* </span>
-                          )}
-                          {item.label}
+                    <div className="flex items-center border border-gray-200 rounded-xl bg-white overflow-hidden focus-within:ring-2 focus-within:ring-blue-400">
+                      <div className="flex items-center gap-1 px-2.5 border-r border-gray-200 shrink-0 py-2.5">
+                        <span className="text-base">{country.flag}</span>
+                        <span className="text-xs text-gray-400">
+                          {country.dial}
                         </span>
-                      </label>
-                    ))}
+                      </div>
+                      <input
+                        type="tel"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder={t("auth.registration.phonePlaceholder")}
+                        className="flex-1 px-2 py-2.5 text-sm focus:outline-none placeholder-gray-300 bg-white min-w-0"
+                      />
+                    </div>
                   </div>
+                  <div className="relative">
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                      {t("auth.registration.country")}{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <button
+                      type="button"
+                      onClick={() => setShowCountryDrop(!showCountryDrop)}
+                      className="w-full flex items-center justify-between px-3 py-2.5 border border-green-400 rounded-xl bg-white text-sm focus:outline-none"
+                    >
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <span className="text-base shrink-0">
+                          {country.flag}
+                        </span>
+                        <span className="text-gray-700 truncate text-xs">
+                          {country.name}
+                        </span>
+                      </div>
+                      <svg
+                        className="w-4 h-4 text-green-500 shrink-0 ml-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2.5}
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    </button>
+                    {showCountryDrop && (
+                      <div className="absolute z-20 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+                        {countries.map((c) => (
+                          <button
+                            key={c.code}
+                            type="button"
+                            onClick={() => {
+                              setCountry(c);
+                              setShowCountryDrop(false);
+                            }}
+                            className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-50 text-sm text-left"
+                          >
+                            <span className="text-base">{c.flag}</span>
+                            <span className="truncate">{c.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
 
-                  <button
-                    type="submit"
-                    className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-3"
-                  >
-                    Зарегистрироваться
-                  </button>
-                </>
-              )}
-            </div>
+                <button
+                  type="button"
+                  onClick={handleNextStep}
+                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1"
+                >
+                  {t("auth.registration.continue")}
+                </button>
+              </div>
+            )}
 
-            <p className="text-center text-sm text-gray-400 mt-16">
-              Уже есть учетная запись?{" "}
+            {/* Шаг 2 */}
+            {step === 2 && (
+              <div className="space-y-3 sm:space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    {t("auth.registration.password")}{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder={t("auth.registration.passwordPlaceholder")}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                    {t("auth.registration.confirmPassword")}{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder={t(
+                      "auth.registration.confirmPasswordPlaceholder",
+                    )}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
+                  />
+                </div>
+
+                <div className="space-y-2.5 pt-2">
+                  <label className="flex items-start gap-2.5 text-xs text-gray-700 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={promoEmails}
+                      onChange={(e) => setPromoEmails(e.target.checked)}
+                      className="mt-0.5 rounded border-gray-300 accent-blue-500"
+                    />
+                    <span>{t("auth.registration.promoEmails")}</span>
+                  </label>
+                  <label className="flex items-start gap-2.5 text-xs text-gray-700 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={agreeTerms}
+                      onChange={(e) => setAgreeTerms(e.target.checked)}
+                      className="mt-0.5 rounded border-gray-300 accent-blue-500"
+                    />
+                    <span>
+                      <span className="text-red-500">* </span>
+                      {t("auth.registration.agreeTerms")}{" "}
+                      <a
+                        href="/terms"
+                        className="text-blue-500 hover:underline"
+                      >
+                        {t("auth.registration.terms")}
+                      </a>
+                    </span>
+                  </label>
+                  <label className="flex items-start gap-2.5 text-xs text-gray-700 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={agreeOrderTerms}
+                      onChange={(e) => setAgreeOrderTerms(e.target.checked)}
+                      className="mt-0.5 rounded border-gray-300 accent-blue-500"
+                    />
+                    <span>
+                      <span className="text-red-500">* </span>
+                      {t("auth.registration.agreeOrderTerms")}{" "}
+                      <a
+                        href="/order-terms"
+                        className="text-blue-500 hover:underline"
+                      >
+                        {t("auth.registration.orderTerms")}
+                      </a>
+                    </span>
+                  </label>
+                  <label className="flex items-start gap-2.5 text-xs text-gray-700 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      checked={isAdult}
+                      onChange={(e) => setIsAdult(e.target.checked)}
+                      className="mt-0.5 rounded border-gray-300 accent-blue-500"
+                    />
+                    <span>
+                      <span className="text-red-500">* </span>
+                      {t("auth.registration.isAdult")}
+                    </span>
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-3"
+                >
+                  {t("auth.registration.submit")}
+                </button>
+              </div>
+            )}
+
+            <p className="text-center text-sm text-gray-400 mt-10 sm:mt-16">
+              {t("auth.registration.haveAccount")}{" "}
               <a
                 href="/login"
                 className="text-blue-500 hover:underline font-medium"
               >
-                Войти
+                {t("auth.registration.login")}
               </a>
             </p>
           </div>
         </div>
       </div>
 
-      <div className="hidden lg:flex flex-1 items-stretch p-6">
-        <Slideshow
-          current={current}
-          visible={visible}
-          onPrev={() => go(current - 1)}
-          onNext={() => go(current + 1)}
-        />
-      </div>
-      <div className="lg:hidden mx-4 mb-6 h-64">
+      <div className="hidden min-[620px]:flex min-[620px]:h-72 min-[1100px]:h-auto min-[1100px]:flex-1 items-stretch p-4 min-[1100px]:p-6">
         <Slideshow
           current={current}
           visible={visible}

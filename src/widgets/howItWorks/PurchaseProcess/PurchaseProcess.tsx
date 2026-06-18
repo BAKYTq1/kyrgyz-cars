@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { PrePurchaseProcess1 } from "../../../widgets/howItWorks/PrePurchaseProcess1/PrePurchaseProcess1";
+import { PrePurchaseProcess1 } from "../PrePurchaseProcess1/PrePurchaseProcess1";
 import { PostPurchaseProcess } from "../PrePurchaseProcess2/PrePurchaseProcess2";
+import { useI18n } from "../../../shared/i18n/I18nProvider";
 
 const pulseCSS = `
   @keyframes pulse-ring {
@@ -11,7 +12,17 @@ const pulseCSS = `
   .pulse-badge { animation: pulse-ring 1.8s ease-in-out infinite; }
 `;
 
-function StepIndicator({ activePhase, onNavigate }) {
+function StepIndicator({
+  activePhase,
+  onNavigate,
+  label1,
+  label2,
+}: {
+  activePhase: number;
+  onNavigate: (phase: number) => void;
+  label1: string;
+  label2: string;
+}) {
   const [pulsing, setPulsing] = useState(false);
 
   useEffect(() => {
@@ -24,112 +35,41 @@ function StepIndicator({ activePhase, onNavigate }) {
     return () => clearInterval(interval);
   }, []);
 
-  const circleBase = {
-    width: "36px",
-    height: "36px",
-    borderRadius: "50%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontWeight: "700",
-    fontSize: "15px",
-    flexShrink: 0,
-    transition:
-      "transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease",
-    cursor: "pointer",
-  };
+  const circleBaseClass = `
+    w-9 h-9 rounded-full flex items-center justify-center 
+    font-bold text-[15px] shrink-0 cursor-pointer
+    transition-all duration-300 ease-in-out
+  `;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        marginBottom: "48px",
-      }}
-    >
+    <div className="flex items-start justify-center mb-12">
       {/* Phase 1 */}
-      <div
-        onClick={() => onNavigate(1)}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          cursor: "pointer",
-        }}
-      >
-        <span
-          style={{
-            fontSize: "13px",
-            fontWeight: "600",
-            marginBottom: "8px",
-            color: activePhase === 1 ? "#1a1a2e" : "#999",
-            transition: "color 0.3s",
-          }}
-        >
-          Процесс до покупки
+      <div onClick={() => onNavigate(1)} className="flex flex-col items-center cursor-pointer">
+        <span className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 1 ? "text-[#1a1a2e]" : "text-[#999999]"}`}>
+          {label1}
         </span>
-        <div
-          style={{
-            ...circleBase,
-            background:
-              activePhase === 1 ? "#2196f3" : pulsing ? "#2196f3" : "#c5c5c5",
-            color: activePhase === 1 ? "#fff" : pulsing ? "#fff" : "#888",
-            boxShadow:
-              activePhase === 1
-                ? "0 0 0 4px #bde0fc"
-                : pulsing
-                  ? "0 0 0 4px #bde0fc"
-                  : "none",
-            transform: activePhase === 2 && pulsing ? "scale(1.2)" : "scale(1)",
-          }}
-          className={activePhase === 2 && pulsing ? "pulse-badge" : ""}
-        >
+        <div className={`
+          ${circleBaseClass}
+          ${activePhase === 1 ? "bg-[#2196f3] text-white shadow-[0_0_0_4px_#bde0fc]" : "bg-[#c5c5c5] text-[#888888] shadow-none"}
+          ${activePhase === 2 && pulsing ? "scale-125 pulse-badge" : "scale-100"}
+        `}>
           1
         </div>
       </div>
 
       {/* Dashed line */}
-      <div
-        style={{
-          flex: 1,
-          maxWidth: "420px",
-          borderTop: "2px dashed #c5c5c5",
-          marginTop: "30px",
-        }}
-      />
+      <div className="flex-1 max-w-[420px] border-t-2 border-dashed border-[#c5c5c5] mt-[30px]" />
 
       {/* Phase 2 */}
-      <div
-        onClick={() => onNavigate(2)}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          cursor: "pointer",
-        }}
-      >
-        <span
-          style={{
-            fontSize: "13px",
-            fontWeight: "600",
-            marginBottom: "8px",
-            color: activePhase === 2 ? "#1a1a2e" : "#999",
-            transition: "color 0.3s",
-          }}
-        >
-          Процесс после покупки
+      <div onClick={() => onNavigate(2)} className="flex flex-col items-center cursor-pointer">
+        <span className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 2 ? "text-[#1a1a2e]" : "text-[#999999]"}`}>
+          {label2}
         </span>
-        <div
-          style={{
-            ...circleBase,
-            background: activePhase === 2 ? "#2196f3" : "#c5c5c5",
-            color: activePhase === 2 ? "#fff" : "#888",
-            boxShadow: activePhase === 2 ? "0 0 0 4px #bde0fc" : "none",
-            transform: activePhase === 1 && pulsing ? "scale(1.2)" : "scale(1)",
-          }}
-          className={activePhase === 1 && pulsing ? "pulse-badge" : ""}
-        >
+        <div className={`
+          ${circleBaseClass}
+          ${activePhase === 2 ? "bg-[#2196f3] text-white shadow-[0_0_0_4px_#bde0fc]" : "bg-[#c5c5c5] text-[#888888] shadow-none"}
+          ${activePhase === 1 && pulsing ? "scale-125 pulse-badge" : "scale-100"}
+        `}>
           2
         </div>
       </div>
@@ -138,25 +78,23 @@ function StepIndicator({ activePhase, onNavigate }) {
 }
 
 export default function PurchaseProcess() {
+  const { t } = useI18n();
   const [activePhase, setActivePhase] = useState(1);
 
   return (
     <>
       <style>{pulseCSS}</style>
-      <div
-        style={{
-          fontFamily: "'Helvetica Neue', Arial, sans-serif",
-          background: "#f0f2f5",
-          minHeight: "100vh",
-          padding: "48px 24px 60px",
-        }}
-      >
-        <StepIndicator activePhase={activePhase} onNavigate={setActivePhase} />
-
+      <div className="font-sans bg-[#f0f2f5] min-h-screen px-6 pt-12 pb-[60px]">
+        <StepIndicator
+          activePhase={activePhase}
+          onNavigate={setActivePhase}
+          label1={t("howItWorks.prePurchase")}
+          label2={t("howItWorks.postPurchase")}
+        />
         {activePhase === 1 ? (
-          <PrePurchaseProcess1 onNavigateToPhase={setActivePhase} />
+          <PrePurchaseProcess1 _onNavigateToPhase={setActivePhase} />
         ) : (
-          <PostPurchaseProcess onNavigateToPhase={setActivePhase} />
+          <PostPurchaseProcess _onNavigateToPhase={setActivePhase} />
         )}
       </div>
     </>
