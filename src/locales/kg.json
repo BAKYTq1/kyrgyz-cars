@@ -573,5 +573,157 @@
       "alt4": "Унааларды деңиз контейнерине жүктөө",
       "alt5": "Жеңил унааларды транспорт менен ташуу"
     }
+  },
+  "featuredLots": {
+    "activeTitle": "Активдүү лоттор",
+    "moreTitle": "Дагы лоттор",
+    "viewAll": "Бардыгын көрүү"
+  },
+  "deliveryMap": {
+    "title": "Жеткирүү жана алуу параметрлери",
+    "homeDelivery": "Үйгө жеткирүү",
+    "pickup": "Өзүңүз алып кетүү",
+    "pickupLocationsTitle": "Локациялардан өзүңүз алып кетүү",
+    "deliveryPeriod": "Жеткирүү мөөнөтү",
+    "extraFee": "(кошумча акы төлөнөт)",
+    "legendActive": "Тандалган өлкө",
+    "markers": {
+      "bishkek": "Бишкек, KG",
+      "almaty": "Алматы, KZ",
+      "tashkent": "Ташкент, UZ",
+      "tbilisi": "Тбилиси, GE",
+      "moscow": "Москва, RU"
+    },
+    "countries": {
+      "Kyrgyzstan": "Кыргызстан",
+      "Kazakhstan": "Казакстан",
+      "Russia": "Орусия",
+      "Uzbekistan": "Өзбекстан",
+      "Tajikistan": "Тажикстан",
+      "Turkmenistan": "Түркмөнстан",
+      "Azerbaijan": "Азербайжан",
+      "Georgia": "Грузия",
+      "Armenia": "Армения",
+      "Mongolia": "Монголия",
+      "Belarus": "Беларусь",
+      "Ukraine": "Украина",
+      "Moldova": "Молдова"
+    },
+    "times": {
+      "Kyrgyzstan": "45–60 күн",
+      "Kazakhstan": "50–65 күн",
+      "Russia": "60–75 күн",
+      "Uzbekistan": "45–60 күн",
+      "Tajikistan": "50–65 күн",
+      "Turkmenistan": "50–65 күн",
+      "Azerbaijan": "45–60 күн",
+      "Georgia": "45–60 күн",
+      "Armenia": "45–60 күн",
+      "Mongolia": "60–75 күн",
+      "Belarus": "55–70 күн",
+      "Ukraine": "55–70 күн",
+      "Moldova": "55–70 күн"
+    }
+  },
+  "footer": {
+    "address": "Бишкек, Кыргызстан",
+    "tax": "Салык №: 000-00-00-000",
+    "copyright": "Бардык укуктар корголгон",
+    "timezone": "(UTC+06:00) Бишкек",
+    "currentLanguage": "🇰🇬 Кыргызча",
+    "sections": {
+      "company": "Компания",
+      "support": "Колдоо",
+      "keywords": "Ачкыч сөздөр",
+      "auctions": "Аукциондор",
+      "account": "Аккаунт"
+    },
+    "links": {
+      "blog": "Блог",
+      "about": "Биз жөнүндө",
+      "press": "Пресса үчүн",
+      "contacts": "Биз менен байланышыңыз",
+      "faq": "Көп берилүүчү суроолор",
+      "beforeBuy": "Сатып алуудан мурун",
+      "afterBuy": "Сатып алгандан кийин",
+      "delivery": "Жеткирүү мөөнөттөрү",
+      "docs": "Сатуу документтери",
+      "calculator": "Транспорт калькулятору",
+      "allAuctions": "Бардык аукциондор",
+      "statusOpen": "- Ачык",
+      "statusProcess": "- Текшерилүүдө",
+      "statusFinished": "- Бүгүн аяктагандар",
+      "statusBuyNow": "- Тез сатып алуу",
+      "archive": "Архив",
+      "forgotPassword": "Сыр сөздү калыбына келтирүү",
+      "rules": "Эрежелер",
+      "privacy": "Купуялык жана куки файлдары"
+    }
+  },
+  "catalog": {
+    "emptyState": "Лоттор табылган жок.",
+    "loadMore": "Дагы жүктөө"
+  },
+  "filters": {
+    "title": "Фильтрлер",
+    "clearAll": "Баарын баштапкы абалга келтирүү",
+    "brand": "Маркасы",
+    "brandPlaceholder": "Мисалы, BMW, Toyota...",
+    "year": "Чыгарылган жылы",
+    "rangeFrom": "-дан",
+    "rangeTo": "-га чейин",
+    "engineStatus": "Кыймылдаткычтын абалы",
+    "primaryDamage": "Негизги бузулушу",
+    "transmission": "Берүү кутусу",
+    "auction": "Аукцион",
+    "engineStatuses": {
+      "all": "Баары",
+      "run": "Жүрүп жатат (Run & Drive)",
+      "stat": "Стационардык"
+    },
+    "damages": {
+      "any": "Каалаган бузулушу",
+      "front": "Front End (Алдыңкы бөлүгү)",
+      "rear": "Rear End (Арткы бөлүгү)",
+      "side": "Side (Каптал бөлүгү)",
+      "hail": "Hail (Мөндүр)",
+      "flood": "Water/Flood (Сууга чөккөн)"
+    },
+    "transmissions": {
+      "auto": "Автомат",
+      "manual": "Механика"
+    }
+  },
+  "catalog2": {
+    "emptyState": "Лоттор табылган жок.",
+    "loadMore": "Дагы жүктөө",
+    "tabs": {
+      "all": "Бардык лоттор",
+      "open": "Тооруктар жүрүүдө",
+      "buyNow": "Азыр сатып алуу",
+      "tomorrow": "Эртеңки тооруктар"
+    }
+  },
+  "card": {
+    "video": "Видео",
+    "vin": "VIN",
+    "lot": "Лот",
+    "driveDefault": "Дөңгөлөк форматы",
+    "odometer": "Одометр",
+    "miles": "миль",
+    "seller": "Сатуучу",
+    "document": "Документ",
+    "location": "Жайгашкан жери",
+    "damage": "Бузулушу",
+    "engineStatus": "Мотордун абалы",
+    "runAndDriveDefault": "Жүрүп жатат",
+    "estValue": "Болжолдуу баасы",
+    "currentBid": "Учурдагы коюм",
+    "viewAuction": "Аукционду көрүү",
+    "transmissions": {
+      "auto": "Автомат",
+      "manual": "Механика",
+      "default": "АКПП"
+    }
   }
 }

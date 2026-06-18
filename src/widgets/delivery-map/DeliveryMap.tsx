@@ -2,78 +2,81 @@ import { useState } from 'react'
 // @ts-ignore - react-simple-maps has no type declarations
 import { ComposableMap, Geographies, Geography, Marker } from 'react-simple-maps'
 import { FaAnchor, FaHome, FaTruck, FaMapMarkerAlt } from 'react-icons/fa'
+import { useI18n } from '../../shared/i18n/I18nProvider'
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'
 
-const homeDeliveryCountries: Record<string, { flag: string; delivery: string; time: string }> = {
-  'Kyrgyzstan': { flag: '🇰🇬', delivery: 'Доставка на дом', time: '45–60 дней' },
-  'Kazakhstan': { flag: '🇰🇿', delivery: 'Доставка на дом', time: '50–65 дней' },
-  'Russia': { flag: '🇷🇺', delivery: 'Доставка на дом', time: '60–75 дней' },
-  'Uzbekistan': { flag: '🇺🇿', delivery: 'Доставка на дом', time: '45–60 дней' },
-  'Tajikistan': { flag: '🇹🇯', delivery: 'Доставка на дом', time: '50–65 дней' },
-  'Turkmenistan': { flag: '🇹🇲', delivery: 'Доставка на дом', time: '50–65 дней' },
-  'Azerbaijan': { flag: '🇦🇿', delivery: 'Доставка на дом', time: '45–60 дней' },
-  'Georgia': { flag: '🇬🇪', delivery: 'Доставка на дом', time: '45–60 дней' },
-  'Armenia': { flag: '🇦🇲', delivery: 'Доставка на дом', time: '45–60 дней' },
-}
-
-const pickupCountries: Record<string, { flag: string; delivery: string; time: string }> = {
-  'Mongolia': { flag: '🇲🇳', delivery: 'Самовывоз', time: '60–75 дней' },
-  'Belarus': { flag: '🇧🇾', delivery: 'Самовывоз', time: '55–70 дней' },
-  'Ukraine': { flag: '🇺🇦', delivery: 'Самовывоз', time: '55–70 дней' },
-  'Moldova': { flag: '🇲🇩', delivery: 'Самовывоз', time: '55–70 дней' },
-}
+// Оставляем ключи на английском, так как они приходят из geo.properties.name карты
+const homeDeliveryCountries = ['Kyrgyzstan', 'Kazakhstan', 'Russia', 'Uzbekistan', 'Tajikistan', 'Turkmenistan', 'Azerbaijan', 'Georgia', 'Armenia']
+const pickupCountries = ['Mongolia', 'Belarus', 'Ukraine', 'Moldova']
 
 const markers = [
-  { name: 'Бишкек, KG', coordinates: [74.5, 42.8] as [number, number] },
-  { name: 'Алматы, KZ', coordinates: [76.9, 43.2] as [number, number] },
-  { name: 'Ташкент, UZ', coordinates: [69.2, 41.3] as [number, number] },
-  { name: 'Тбилиси, GE', coordinates: [44.8, 41.7] as [number, number] },
+  { nameKey: 'deliveryMap.markers.bishkek', coordinates: [74.5, 42.8] as [number, number] },
+  { nameKey: 'deliveryMap.markers.almaty', coordinates: [76.9, 43.2] as [number, number] },
+  { nameKey: 'deliveryMap.markers.tashkent', coordinates: [69.2, 41.3] as [number, number] },
+  { nameKey: 'deliveryMap.markers.tbilisi', coordinates: [44.8, 41.7] as [number, number] },
 ]
 
 const countriesList = [
-  { flag: '🇰🇬', name: 'Кыргызстан' },
-  { flag: '🇰🇿', name: 'Казахстан' },
-  { flag: '🇷🇺', name: 'Россия' },
-  { flag: '🇺🇿', name: 'Узбекистан' },
-  { flag: '🇹🇯', name: 'Таджикистан' },
-  { flag: '🇹🇲', name: 'Туркменистан' },
-  { flag: '🇦🇿', name: 'Азербайджан' },
-  { flag: '🇬🇪', name: 'Грузия' },
-  { flag: '🇦🇲', name: 'Армения' },
-]
-
-const pickupLocations = [
-  { icon: <FaAnchor />, name: 'Бишкек, KG' },
-  { icon: <FaAnchor />, name: 'Алматы, KZ' },
-  { icon: <FaAnchor />, name: 'Ташкент, UZ' },
-  { icon: <FaAnchor />, name: 'Тбилиси, GE' },
-  { icon: <FaHome />, name: 'Москва, RU', note: '(дополнительная плата)' },
+  { id: 'Kyrgyzstan', flag: '🇰🇬' },
+  { id: 'Kazakhstan', flag: '🇰🇿' },
+  { id: 'Russia', flag: '🇷🇺' },
+  { id: 'Uzbekistan', flag: '🇺🇿' },
+  { id: 'Tajikistan', flag: '🇹🇯' },
+  { id: 'Turkmenistan', flag: '🇹🇲' },
+  { id: 'Azerbaijan', flag: '🇦🇿' },
+  { id: 'Georgia', flag: '🇬🇪' },
+  { id: 'Armenia', flag: '🇦🇲' },
 ]
 
 export default function DeliveryMap() {
+  const { t } = useI18n()
   const [hoveredCountry, setHoveredCountry] = useState<string | null>(null)
   const [activeCountry, setActiveCountry] = useState<string | null>('Kyrgyzstan')
   const [tooltip, setTooltip] = useState<{ x: number; y: number; name: string } | null>(null)
 
+  const isHomeDelivery = (name: string) => homeDeliveryCountries.includes(name)
+  const isPickup = (name: string) => pickupCountries.includes(name)
+
   const getColor = (name: string) => {
     if (name === activeCountry) return '#2563eb'
     if (name === hoveredCountry) return '#60a5fa'
-    if (homeDeliveryCountries[name]) return '#bbf7d0'
-    if (pickupCountries[name]) return '#bfdbfe'
+    if (isHomeDelivery(name)) return '#bbf7d0'
+    if (isPickup(name)) return '#bfdbfe'
     return '#e2e8f0'
   }
 
-  const activeInfo = activeCountry
-    ? homeDeliveryCountries[activeCountry] || pickupCountries[activeCountry]
-    : null
+  // Получаем данные для боковой панели на основе выбранного ID страны
+  const getCountryStaticData = (id: string) => {
+    const allFlags: Record<string, string> = {
+      Kyrgyzstan: '🇰🇬', Kazakhstan: '🇰🇿', Russia: '🇷🇺', Uzbekistan: '🇺🇿', 
+      Tajikistan: '🇹🇯', Turkmenistan: '🇹🇲', Azerbaijan: '🇦🇿', Georgia: '🇬🇪', 
+      Armenia: '🇦🇲', Mongolia: '🇲🇳', Belarus: '🇧🇾', Ukraine: '🇺🇦', Moldova: '🇲🇩'
+    }
+    return {
+      flag: allFlags[id] || '🌍',
+      name: t(`deliveryMap.countries.${id}`),
+      delivery: isHomeDelivery(id) ? t('deliveryMap.homeDelivery') : t('deliveryMap.pickup'),
+      time: t(`deliveryMap.times.${id}`)
+    }
+  }
+
+  const activeInfo = activeCountry ? getCountryStaticData(activeCountry) : null
+
+  const pickupLocations = [
+    { icon: <FaAnchor />, name: t('deliveryMap.markers.bishkek') },
+    { icon: <FaAnchor />, name: t('deliveryMap.markers.almaty') },
+    { icon: <FaAnchor />, name: t('deliveryMap.markers.tashkent') },
+    { icon: <FaAnchor />, name: t('deliveryMap.markers.tbilisi') },
+    { icon: <FaHome />, name: t('deliveryMap.markers.moscow'), note: t('deliveryMap.extraFee') },
+  ]
 
   return (
     <section className="py-12 px-4" style={{ backgroundColor: '#f8fafc' }}>
       <div className="max-w-7xl mx-auto">
 
         <h2 className="text-2xl font-bold text-gray-900 mb-8">
-          Варианты доставки и получения
+          {t('deliveryMap.title')}
         </h2>
 
         <div className="flex flex-col md:flex-row gap-6">
@@ -87,13 +90,13 @@ export default function DeliveryMap() {
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">{activeInfo.flag}</span>
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">{activeCountry}</p>
+                    <p className="font-semibold text-gray-900 text-sm">{activeInfo.name}</p>
                     <p className="text-xs text-gray-500">{activeInfo.delivery}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-xs text-gray-600 bg-blue-50 rounded-lg px-3 py-2">
                   <FaTruck className="text-blue-500" />
-                  <span>Срок доставки: <strong>{activeInfo.time}</strong></span>
+                  <span>{t('deliveryMap.deliveryPeriod')}: <strong>{activeInfo.time}</strong></span>
                 </div>
               </div>
             )}
@@ -101,14 +104,14 @@ export default function DeliveryMap() {
             {/* Страны доставки */}
             <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                Доставка на дом
+                {t('deliveryMap.homeDelivery')}
               </p>
               <ul className="space-y-2">
-                {countriesList.map((c, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-gray-700">
+                {countriesList.map((c) => (
+                  <li key={c.id} className="flex items-center gap-2 text-sm text-gray-700">
                     <span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
                     <span>{c.flag}</span>
-                    {c.name}
+                    {t(`deliveryMap.countries.${c.id}`)}
                   </li>
                 ))}
               </ul>
@@ -117,7 +120,7 @@ export default function DeliveryMap() {
             {/* Самовывоз */}
             <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
-                Самовывоз из локаций
+                {t('deliveryMap.pickupLocationsTitle')}
               </p>
               <ul className="space-y-2">
                 {pickupLocations.map((loc, i) => (
@@ -137,20 +140,18 @@ export default function DeliveryMap() {
             <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
 
               {/* Tooltip */}
-              {tooltip && (
+              {tooltip && (isHomeDelivery(tooltip.name) || isPickup(tooltip.name)) && (
                 <div
                   className="absolute z-20 bg-gray-900 text-white text-xs px-3 py-2 rounded-lg pointer-events-none shadow-lg"
                   style={{ left: tooltip.x + 10, top: tooltip.y - 10 }}
                 >
                   <div className="flex items-center gap-1">
                     <FaMapMarkerAlt className="text-blue-400" />
-                    {tooltip.name}
+                    {t(`deliveryMap.countries.${tooltip.name}`)}
                   </div>
-                  {(homeDeliveryCountries[tooltip.name] || pickupCountries[tooltip.name]) && (
-                    <div className="text-gray-300 mt-0.5">
-                      {(homeDeliveryCountries[tooltip.name] || pickupCountries[tooltip.name])?.delivery}
-                    </div>
-                  )}
+                  <div className="text-gray-300 mt-0.5">
+                    {isHomeDelivery(tooltip.name) ? t('deliveryMap.homeDelivery') : t('deliveryMap.pickup')}
+                  </div>
                 </div>
               )}
 
@@ -163,6 +164,7 @@ export default function DeliveryMap() {
                   {({ geographies }: { geographies: any[] }) =>
                     geographies.map((geo: any) => {
                       const name = geo.properties.name
+                      const hasDelivery = isHomeDelivery(name) || isPickup(name)
                       return (
                         <Geography
                           key={geo.rsmKey}
@@ -172,7 +174,7 @@ export default function DeliveryMap() {
                           strokeWidth={0.5}
                           style={{
                             default: { outline: 'none' },
-                            hover: { outline: 'none', cursor: homeDeliveryCountries[name] || pickupCountries[name] ? 'pointer' : 'default' },
+                            hover: { outline: 'none', cursor: hasDelivery ? 'pointer' : 'default' },
                             pressed: { outline: 'none' },
                           }}
                           onMouseEnter={(e: React.MouseEvent<SVGPathElement>) => {
@@ -187,7 +189,7 @@ export default function DeliveryMap() {
                             setTooltip(null)
                           }}
                           onClick={() => {
-                            if (homeDeliveryCountries[name] || pickupCountries[name]) {
+                            if (hasDelivery) {
                               setActiveCountry(name)
                             }
                           }}
@@ -204,9 +206,9 @@ export default function DeliveryMap() {
                     <text
                       textAnchor="middle"
                       y={-8}
-                      style={{ fontSize: '8px', fill: '#1e3a5f', fontWeight: 600 }}
+                      style={{ fontSize: '10px', fill: '#1e3a5f', fontWeight: 600 }}
                     >
-                      {m.name}
+                      {t(m.nameKey)}
                     </text>
                   </Marker>
                 ))}
@@ -217,15 +219,15 @@ export default function DeliveryMap() {
             <div className="flex gap-4 mt-3 text-xs text-gray-500 flex-wrap">
               <span className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded bg-green-200 inline-block" />
-                Доставка на дом
+                {t('deliveryMap.homeDelivery')}
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded bg-blue-200 inline-block" />
-                Самовывоз
+                {t('deliveryMap.pickup')}
               </span>
               <span className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded bg-blue-600 inline-block" />
-                Выбранная страна
+                {t('deliveryMap.legendActive')}
               </span>
             </div>
           </div>

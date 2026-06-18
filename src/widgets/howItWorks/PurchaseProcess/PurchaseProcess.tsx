@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom"; // Импортируем хук для работы с URL
 import { PrePurchaseProcess1 } from "../PrePurchaseProcess1/PrePurchaseProcess1";
 import { PostPurchaseProcess } from "../PrePurchaseProcess2/PrePurchaseProcess2";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
@@ -79,7 +80,17 @@ function StepIndicator({
 
 export default function PurchaseProcess() {
   const { t } = useI18n();
-  const [activePhase, setActivePhase] = useState(1);
+  
+  // Инициализируем работу с query-параметрами URL
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Достаем значение "phase" из URL. Если его там нет, по умолчанию ставим 1
+  const activePhase = Number(searchParams.get("phase")) || 1;
+
+  // Функция переключения, которая теперь обновляет URL вместо локального стейта
+  const handleNavigate = (phase: number) => {
+    setSearchParams({ phase: String(phase) });
+  };
 
   return (
     <>
@@ -87,14 +98,14 @@ export default function PurchaseProcess() {
       <div className="font-sans bg-[#f0f2f5] min-h-screen px-6 pt-12 pb-[60px]">
         <StepIndicator
           activePhase={activePhase}
-          onNavigate={setActivePhase}
+          onNavigate={handleNavigate}
           label1={t("howItWorks.prePurchase")}
           label2={t("howItWorks.postPurchase")}
         />
         {activePhase === 1 ? (
-          <PrePurchaseProcess1 _onNavigateToPhase={setActivePhase} />
+          <PrePurchaseProcess1 _onNavigateToPhase={handleNavigate} />
         ) : (
-          <PostPurchaseProcess _onNavigateToPhase={setActivePhase} />
+          <PostPurchaseProcess _onNavigateToPhase={handleNavigate} />
         )}
       </div>
     </>
