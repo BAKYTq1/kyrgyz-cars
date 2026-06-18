@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { useI18n } from '../../shared/i18n/I18nProvider';
 
 import teamImg1 from '../../assets/about1.jpg';
 import teamImg2 from '../../assets/about3.jpg';
@@ -17,32 +18,32 @@ type Review = {
   avatar: string;
 };
 
-const contactCards = [
+const contactCardsConfig = [
   {
     step: '1',
     icon: 'chat',
-    title: 'Онлайн-чат',
-    text: 'Получите быстрый ответ от нашей команды.',
-    meta: 'с 10:00 до 22:00',
-    action: 'Начать общение',
+    titleKey: 'contact.cards.chat.title',
+    textKey: 'contact.cards.chat.text',
+    metaKey: 'contact.cards.chat.meta',
+    actionKey: 'contact.cards.chat.action',
     accent: 'blue',
   },
   {
     step: '2',
     icon: 'phone',
-    title: 'Позвоните нам',
-    text: 'Поговорите с менеджером по покупке и доставке.',
-    meta: '+48 608 887 240',
-    action: 'Позвонить',
+    titleKey: 'contact.cards.phone.title',
+    textKey: 'contact.cards.phone.text',
+    metaKey: 'contact.cards.phone.meta',
+    actionKey: 'contact.cards.phone.action',
     accent: 'emerald',
   },
   {
     step: '3',
     icon: 'mail',
-    title: 'Отправить сообщение',
-    text: 'Напишите нам, мы подготовим подробный ответ.',
-    meta: 'support@bidcars.eu',
-    action: 'Написать',
+    titleKey: 'contact.cards.message.title',
+    textKey: 'contact.cards.message.text',
+    metaKey: 'contact.cards.message.meta',
+    actionKey: 'contact.cards.message.action',
     accent: 'orange',
   },
 ];
@@ -140,25 +141,25 @@ function useCardsPerPage(containerRef: React.RefObject<HTMLDivElement | null>) {
   return perPage;
 }
 
-const team = [
+const teamMembers = [
   {
     name: 'Patryk Szweicki',
-    role: 'Ведущий менеджер по работе с клиентами',
+    roleKey: 'contact.team.roles.leadCustomerManager',
     image: teamImg1,
   },
   {
     name: 'Bartosz',
-    role: 'Специалист по покупке автомобилей',
+    roleKey: 'contact.team.roles.carPurchaseSpecialist',
     image: teamImg2,
   },
   {
     name: 'Adrian',
-    role: 'Специалист по логистике автомобилей',
+    roleKey: 'contact.team.roles.carLogisticsSpecialist',
     image: teamImg3,
   },
   {
     name: 'Grażyna',
-    role: 'Специалист по обслуживанию клиентов',
+    roleKey: 'contact.team.roles.customerServiceSpecialist',
     image: teamImg1,
   },
 ];
@@ -194,14 +195,24 @@ const iconPaths = {
 };
 
 export default function Contact() {
+  const { t } = useI18n();
   const [activeTab, setActiveTab] = useState<ActiveTab>('all');
   const [currentPage, setCurrentPage] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const perPage = useCardsPerPage(containerRef);
+  
+  const contactCards = contactCardsConfig.map((card) => ({
+    ...card,
+    title: t(card.titleKey),
+    text: t(card.textKey),
+    meta: t(card.metaKey),
+    action: t(card.actionKey),
+  }));
 
-  useEffect(() => {
+  const handleTabChange = useCallback((tab: ActiveTab) => {
+    setActiveTab(tab);
     setCurrentPage(0);
-  }, [activeTab]);
+  }, []);
 
   const filteredReviews =
     activeTab === 'all'
@@ -222,9 +233,9 @@ export default function Contact() {
     <section className="bg-gray-50 text-gray-950">
       <div className="mx-auto w-[min(1110px,calc(100%-28px))] py-8 md:py-10">
         <div className="text-center">
-          <h1 className="text-2xl font-black md:text-3xl">Свяжитесь с нами</h1>
+          <h1 className="text-2xl font-black md:text-3xl">{t('contact.title')}</h1>
           <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-slate-500">
-            Мы ждем вашего сообщения - выберите удобный способ коммуникации ниже!
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -252,7 +263,7 @@ export default function Contact() {
                         : 'border-blue-300 bg-blue-50 text-blue-700'
                   }`}
                 >
-                  24/7 онлайн
+                  {t('contact.onlineBadge')}
                 </span>
               </div>
               <h2 className="mt-5 text-lg font-black">{card.title}</h2>
@@ -266,8 +277,7 @@ export default function Contact() {
         </div>
 
         <p className="mx-auto mt-5 max-w-3xl text-center text-xs leading-5 text-slate-500">
-          Поддержка BidCars доступна активным пользователям платформы с важными деталями
-          касательно ставок, покупки и доставки автомобилей.
+          {t('contact.supportNote')}
         </p>
       </div>
 
@@ -285,9 +295,9 @@ export default function Contact() {
                       : 'border-gray-200 bg-white text-gray-700 hover:border-blue-600 hover:text-blue-600'
                   }`}
                   type="button"
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => handleTabChange(tab.id)}
                 >
-                  {tab.label}{' '}
+                  {t(`contact.reviews.all`)}{' '}
                   <span className={isActive ? 'text-white' : 'text-red-600'}>{tab.rating}</span>
                 </button>
               );
@@ -389,10 +399,9 @@ export default function Contact() {
         <div className="border-t border-gray-300 pt-8">
           <div className="grid gap-6 md:grid-cols-[1fr_320px] md:items-start">
             <div>
-              <h2 className="text-xl font-black">Наше местоположение</h2>
+              <h2 className="text-xl font-black">{t('contact.location.title')}</h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-slate-600">
-                Мы работаем по всему Европейскому Союзу. Нажимая на точку, вы можете
-                увидеть наш главный офис и построить маршрут.
+                {t('contact.location.text')}
               </p>
             </div>
 
@@ -430,14 +439,13 @@ export default function Contact() {
         </div>
 
         <section className="mt-12">
-          <h2 className="text-xl font-black">Наша команда</h2>
+          <h2 className="text-xl font-black">{t('contact.team.title')}</h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
-            Наша профессиональная команда менеджеров всегда готова помочь вам доставить
-            автомобиль вашей мечты быстро и надежно.
+            {t('contact.team.text')}
           </p>
 
           <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {team.map((member) => (
+            {teamMembers.map((member) => (
               <article key={member.name} className="rounded-lg bg-white p-4 shadow-sm">
                 <img
                   className="h-48 w-full rounded-md object-cover object-center"
@@ -445,7 +453,7 @@ export default function Contact() {
                   alt={member.name}
                 />
                 <h3 className="mt-4 text-sm font-black">{member.name}</h3>
-                <p className="mt-2 text-xs leading-5 text-slate-500">{member.role}</p>
+                <p className="mt-2 text-xs leading-5 text-slate-500">{t(member.roleKey)}</p>
               </article>
             ))}
           </div>
