@@ -43,7 +43,7 @@ function StepIndicator({
   `;
 
   return (
-    <div className="flex items-start justify-center mb-12">
+    <div className="flex items-start justify-center mb-12 px-4">
       {/* Phase 1 */}
       <div onClick={() => onNavigate(1)} className="flex flex-col items-center cursor-pointer">
         <span className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 1 ? "text-[#1a1a2e]" : "text-[#999999]"}`}>
@@ -95,7 +95,7 @@ export default function PurchaseProcess() {
   return (
     <>
       <style>{pulseCSS}</style>
-      <div className="font-sans bg-[#f0f2f5] min-h-screen px-6 pt-12 pb-[60px]">
+      <div className="font-sans bg-[#f0f2f5] min-h-screen pt-12 pb-[60px]">
         <StepIndicator
           activePhase={activePhase}
           onNavigate={handleNavigate}
