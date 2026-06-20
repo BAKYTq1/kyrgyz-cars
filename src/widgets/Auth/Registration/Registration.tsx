@@ -1,5 +1,14 @@
-import { useState, useEffect } from "react";
-import { useI18n } from "../../../shared/i18n/I18nProvider"; // Проверь правильность пути к провайдеру
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useI18n } from "../../../shared/i18n/I18nProvider";
+import { useAppDispatch, useAppSelector } from "../../../lib/store";
+import {
+  registerThunk,
+  verifyEmailThunk,
+  resendOtpThunk,
+  clearError,
+  resetRegistrationState,
+} from "../../../lib/auth/Login";
 
 const slides = [
   {
@@ -7,14 +16,14 @@ const slides = [
       "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=80",
     name: "ŁUKASZ SZCZYGIEŁ",
     rating: 3,
-    text: "Sprowadzić auto z USA to nic trudnego, wystarczy sobie je wyszukać, sprawdzić raportem i wylicytować, później postępować zgodnie z harmonogramem. Opłaty o cały proces jasne dla każdego. Polecam BidCars bo wiedzą jak to robić zgodnie ze sztuką. Jedno auto już prawie gotowe, dwa kolejne w drodze.",
+    text: "Sprowadzić auto z USA to nic trudnego, wystarczy sobie je wyszukać, sprawdzić raportem i wylicytować, później postępować zgodnie z harmonogramem. Opłaty o cały proces jasne dla każdego. Polecam CarDeals bo wiedzą jak to robić zgodnie ze sztuką. Jedno auto już prawie gotowe, dwa kolejne w drodze.",
   },
   {
     image:
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=900&q=80",
     name: "АЗАМАТ БАКЫТБЕК",
     rating: 5,
-    text: "Отличный сервис! Купил Toyota Camry через BidCars — всё прозрачно, доставка точно в срок. Менеджеры всегда на связи, объясняли каждый шаг. Буду рекомендовать всем друзьям.",
+    text: "Отличный сервис! Купил Toyota Camry через CarDeals — всё прозрачно, доставка точно в срок. Менеджеры всегда на связи, объясняли каждый шаг. Буду рекомендовать всем друзьям.",
   },
   {
     image:
@@ -152,9 +161,17 @@ function Slideshow({
   );
 }
 
+const OTP_LENGTH = 6;
+const RESEND_COOLDOWN = 60; // секунд
+
 export function Registration() {
   const { t } = useI18n();
-  const [step, setStep] = useState<1 | 2>(1);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { loading, error, registeredEmail, registrationSuccess } =
+    useAppSelector((s) => s.auth);
+
+  const [step, setStep] = useState<1 | 2 | 3>(1);
   const [current, setCurrent] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -176,20 +193,46 @@ export function Registration() {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [agreeOrderTerms, setAgreeOrderTerms] = useState(false);
   const [isAdult, setIsAdult] = useState(false);
+  const [step2Errors, setStep2Errors] = useState<{
+    password?: string;
+    confirmPassword?: string;
+    checks?: string;
+  }>({});
 
-  const handleNextStep = () => {
-    const newErrors: typeof errors = {};
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.trim()) newErrors.email = t("auth.registration.emailRequired");
-    else if (!emailRegex.test(email))
-      newErrors.email = t("auth.registration.emailInvalid");
-    if (!firstName.trim())
-      newErrors.firstName = t("auth.registration.firstNameRequired");
-    if (!lastName.trim())
-      newErrors.lastName = t("auth.registration.lastNameRequired");
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) setStep(2);
-  };
+  // ── Шаг 3: подтверждение email ──
+  const [otp, setOtp] = useState<string[]>(Array(OTP_LENGTH).fill(""));
+  const otpRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const [resendCooldown, setResendCooldown] = useState(0);
+
+  // Редирект после успешной верификации
+  useEffect(() => {
+    if (registrationSuccess) {
+      navigate("/login");
+    }
+  }, [registrationSuccess]);
+
+  // Чистим ошибку и состояние регистрации при размонтировании
+  useEffect(() => {
+    return () => {
+      dispatch(clearError());
+      dispatch(resetRegistrationState());
+    };
+  }, []);
+
+  // Когда регистрация прошла успешно — переходим на шаг 3
+  useEffect(() => {
+    if (registeredEmail) {
+      setStep(3);
+      setResendCooldown(RESEND_COOLDOWN);
+    }
+  }, [registeredEmail]);
+
+  // Таймер для повторной отправки кода
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const tick = setInterval(() => setResendCooldown((c) => c - 1), 1000);
+    return () => clearInterval(tick);
+  }, [resendCooldown]);
 
   const go = (next: number) => {
     setVisible(false);
@@ -203,6 +246,94 @@ export function Registration() {
     const tInterval = setInterval(() => go(current + 1), 5500);
     return () => clearInterval(tInterval);
   }, [current]);
+
+  const handleNextStep = () => {
+    const newErrors: typeof errors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) newErrors.email = t("auth.registration.emailRequired");
+    else if (!emailRegex.test(email))
+      newErrors.email = t("auth.registration.emailInvalid");
+    if (!firstName.trim())
+      newErrors.firstName = t("auth.registration.firstNameRequired");
+    if (!lastName.trim())
+      newErrors.lastName = t("auth.registration.lastNameRequired");
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      dispatch(clearError());
+      setStep(2);
+    }
+  };
+
+  const handleSubmitRegister = () => {
+    const newErrors: typeof step2Errors = {};
+    if (!password) newErrors.password = t("auth.registration.passwordRequired");
+    else if (password.length < 8)
+      newErrors.password = t("auth.registration.passwordTooShort");
+    if (confirmPassword !== password)
+      newErrors.confirmPassword = t("auth.registration.passwordMismatch");
+    if (!agreeTerms || !agreeOrderTerms || !isAdult)
+      newErrors.checks = t("auth.registration.checksRequired");
+    setStep2Errors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
+
+    dispatch(
+      registerThunk({
+        email: email.trim(),
+        first_name: firstName.trim(),
+        last_name: lastName.trim(),
+        password,
+        password2: confirmPassword,
+      }),
+    );
+  };
+
+  // ── OTP helpers ──
+  const handleOtpChange = (index: number, value: string) => {
+    const digit = value.replace(/\D/g, "").slice(-1);
+    const next = [...otp];
+    next[index] = digit;
+    setOtp(next);
+    if (digit && index < OTP_LENGTH - 1) {
+      otpRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      otpRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleOtpPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const pasted = e.clipboardData.getData("text").replace(/\D/g, "");
+    if (!pasted) return;
+    e.preventDefault();
+    const next = Array(OTP_LENGTH).fill("");
+    pasted
+      .slice(0, OTP_LENGTH)
+      .split("")
+      .forEach((d, i) => (next[i] = d));
+    setOtp(next);
+    const lastIndex = Math.min(pasted.length, OTP_LENGTH) - 1;
+    otpRefs.current[lastIndex]?.focus();
+  };
+
+  const handleVerify = () => {
+    const code = otp.join("");
+    if (code.length !== OTP_LENGTH || !registeredEmail) return;
+    dispatch(clearError());
+    dispatch(verifyEmailThunk({ email: registeredEmail, code }));
+  };
+
+  const handleResend = () => {
+    if (!registeredEmail || resendCooldown > 0) return;
+    dispatch(clearError());
+    dispatch(resendOtpThunk({ email: registeredEmail }));
+    setResendCooldown(RESEND_COOLDOWN);
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col min-[1100px]:flex-row">
@@ -226,7 +357,7 @@ export function Registration() {
             </svg>
           </div>
           <span className="text-lg font-bold text-gray-800 tracking-widest">
-            BIDCARS
+            CarDeals
           </span>
         </div>
 
@@ -252,10 +383,14 @@ export function Registration() {
             </a>
 
             <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">
-              {t("auth.registration.title")}
+              {step === 3
+                ? t("auth.registration.verifyTitle")
+                : t("auth.registration.title")}
             </h1>
             <p className="text-gray-400 text-sm mb-4 sm:mb-5">
-              {t("auth.registration.subtitle")}
+              {step === 3
+                ? `${t("auth.registration.verifySubtitle")} ${registeredEmail ?? ""}`
+                : t("auth.registration.subtitle")}
             </p>
 
             {/* Прогресс */}
@@ -292,9 +427,18 @@ export function Registration() {
             <div className="w-full h-1 bg-gray-200 rounded-full mb-4 sm:mb-5">
               <div
                 className="h-1 bg-blue-500 rounded-full transition-all duration-300"
-                style={{ width: step === 1 ? "50%" : "100%" }}
+                style={{
+                  width: step === 1 ? "33%" : step === 2 ? "66%" : "100%",
+                }}
               />
             </div>
+
+            {/* ── Ошибка от сервера ── */}
+            {error && (
+              <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600">
+                {error}
+              </div>
+            )}
 
             {/* Шаг 1 */}
             {step === 1 && (
@@ -474,10 +618,27 @@ export function Registration() {
                   <input
                     type="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      if (step2Errors.password)
+                        setStep2Errors({ ...step2Errors, password: undefined });
+                    }}
+                    onKeyDown={(e) =>
+                      e.key === "Enter" && handleSubmitRegister()
+                    }
+                    disabled={loading}
                     placeholder={t("auth.registration.passwordPlaceholder")}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
+                    className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 disabled:opacity-60 transition-colors ${
+                      step2Errors.password
+                        ? "border-red-500 focus:ring-red-400"
+                        : "border-gray-200 focus:ring-blue-400"
+                    }`}
                   />
+                  {step2Errors.password && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {step2Errors.password}
+                    </p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -487,12 +648,32 @@ export function Registration() {
                   <input
                     type="password"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      if (step2Errors.confirmPassword)
+                        setStep2Errors({
+                          ...step2Errors,
+                          confirmPassword: undefined,
+                        });
+                    }}
+                    onKeyDown={(e) =>
+                      e.key === "Enter" && handleSubmitRegister()
+                    }
+                    disabled={loading}
                     placeholder={t(
                       "auth.registration.confirmPasswordPlaceholder",
                     )}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
+                    className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 disabled:opacity-60 transition-colors ${
+                      step2Errors.confirmPassword
+                        ? "border-red-500 focus:ring-red-400"
+                        : "border-gray-200 focus:ring-blue-400"
+                    }`}
                   />
+                  {step2Errors.confirmPassword && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {step2Errors.confirmPassword}
+                    </p>
+                  )}
                 </div>
 
                 <div className="space-y-2.5 pt-2">
@@ -553,26 +734,129 @@ export function Registration() {
                       {t("auth.registration.isAdult")}
                     </span>
                   </label>
+                  {step2Errors.checks && (
+                    <p className="text-red-500 text-xs">{step2Errors.checks}</p>
+                  )}
                 </div>
 
                 <button
-                  type="submit"
-                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-3"
+                  type="button"
+                  onClick={handleSubmitRegister}
+                  disabled={loading}
+                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-3 disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
                 >
-                  {t("auth.registration.submit")}
+                  {loading && (
+                    <svg
+                      className="w-4 h-4 animate-spin"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      />
+                    </svg>
+                  )}
+                  {loading
+                    ? t("auth.registration.loading")
+                    : t("auth.registration.submit")}
                 </button>
               </div>
             )}
 
-            <p className="text-center text-sm text-gray-400 mt-10 sm:mt-16">
-              {t("auth.registration.haveAccount")}{" "}
-              <a
-                href="/login"
-                className="text-blue-500 hover:underline font-medium"
-              >
-                {t("auth.registration.login")}
-              </a>
-            </p>
+            {/* Шаг 3 — подтверждение email */}
+            {step === 3 && (
+              <div className="space-y-5">
+                <div className="flex justify-between gap-2">
+                  {otp.map((digit, i) => (
+                    <input
+                      key={i}
+                      ref={(el) => (otpRefs.current[i] = el)}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={digit}
+                      disabled={loading}
+                      onChange={(e) => handleOtpChange(i, e.target.value)}
+                      onKeyDown={(e) => handleOtpKeyDown(i, e)}
+                      onPaste={handleOtpPaste}
+                      className="w-12 h-14 text-center text-xl font-semibold border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-60"
+                    />
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleVerify}
+                  disabled={loading || otp.join("").length !== OTP_LENGTH}
+                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
+                >
+                  {loading && (
+                    <svg
+                      className="w-4 h-4 animate-spin"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      />
+                    </svg>
+                  )}
+                  {loading
+                    ? t("auth.registration.verifying")
+                    : t("auth.registration.verifyButton")}
+                </button>
+
+                <p className="text-center text-sm text-gray-400">
+                  {t("auth.registration.didNotReceiveCode")}{" "}
+                  {resendCooldown > 0 ? (
+                    <span className="text-gray-400">
+                      {t("auth.registration.resendIn")} {resendCooldown}s
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleResend}
+                      disabled={loading}
+                      className="text-blue-500 hover:underline font-medium disabled:opacity-60"
+                    >
+                      {t("auth.registration.resendCode")}
+                    </button>
+                  )}
+                </p>
+              </div>
+            )}
+
+            {step !== 3 && (
+              <p className="text-center text-sm text-gray-400 mt-10 sm:mt-16">
+                {t("auth.registration.haveAccount")}{" "}
+                <a
+                  href="/login"
+                  className="text-blue-500 hover:underline font-medium"
+                >
+                  {t("auth.registration.login")}
+                </a>
+              </p>
+            )}
           </div>
         </div>
       </div>

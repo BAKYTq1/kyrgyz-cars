@@ -201,7 +201,7 @@ export function ForgotPasswordd() {
             </svg>
           </div>
           <span className="text-xl font-black text-[#1e293b] tracking-wider font-mono">
-            BIDCARS
+            CarDeals
           </span>
         </div>
 

@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { useI18n } from "../../../shared/i18n/I18nProvider"; // Проверь правильность пути к твоему провайдеру
+import { useNavigate } from "react-router-dom";
+import { useI18n } from "../../../shared/i18n/I18nProvider";
+import { useAppDispatch, useAppSelector } from "../../../lib/store";
+import { loginThunk, clearError } from "../../../lib/auth/Login";
 
 const slides = [
   {
@@ -7,14 +10,14 @@ const slides = [
       "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=80",
     name: "PIOTR JASICA",
     rating: 3,
-    text: "To kolejny samochód sprowadzony z USA, ale pierwszy przez firmę BidCars, dlatego mając porównanie mogę szczerze polecić. Pełen profesjonalizm od pierwszego kontaktu do momentu dostarczenia pojazdu, na bieżąco informacje mailowe o statusie transakcji, również kontakt telefoniczny na najwyższym poziom...",
+    text: "To kolejny samochód sprowadzony z USA, ale pierwszy przez firmę CarDeals, dlatego mając porównanie mogę szczerze polecić. Pełen profesjonalizm od pierwszego kontaktu do momentu dostarczenia pojazdu, na bieżąco informacje mailowe o statusie transakcji, również kontakt telefoniczny na najwyższym poziom...",
   },
   {
     image:
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=900&q=80",
     name: "АЗАМАТ БАКЫТБЕК",
     rating: 5,
-    text: "Отличный сервис! Купил Toyota Camry через BidCars — всё прозрачно, доставка точно в срок. Менеджеры всегда на связи, объясняли каждый шаг. Буду рекомендовать всем друзьям.",
+    text: "Отличный сервис! Купил Toyota Camry через CarDeals — всё прозрачно, доставка точно в срок. Менеджеры всегда на связи, объясняли каждый шаг. Буду рекомендовать всем друзьям.",
   },
   {
     image:
@@ -146,12 +149,28 @@ function Slideshow({
 
 export function Login() {
   const { t } = useI18n();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { loading, error, isAuthenticated } = useAppSelector((s) => s.auth);
+
   const [current, setCurrent] = useState(0);
   const [visible, setVisible] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [showPass, setShowPass] = useState(false);
+
+  // Редирект если уже авторизован — в личный кабинет
+  useEffect(() => {
+    if (isAuthenticated) navigate("/account");
+  }, [isAuthenticated]);
+
+  // Чистим ошибку при размонтировании
+  useEffect(() => {
+    return () => {
+      dispatch(clearError());
+    };
+  }, []);
 
   const go = (next: number) => {
     setVisible(false);
@@ -165,6 +184,11 @@ export function Login() {
     const tInterval = setInterval(() => go(current + 1), 5500);
     return () => clearInterval(tInterval);
   }, [current]);
+
+  const handleSubmit = async () => {
+    if (!email.trim() || !password.trim()) return;
+    dispatch(loginThunk({ email: email.trim(), password }));
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col min-[1100px]:flex-row">
@@ -188,13 +212,12 @@ export function Login() {
             </svg>
           </div>
           <span className="text-lg font-bold text-gray-800 tracking-widest">
-            BIDCARS
+            CarDeals
           </span>
         </div>
 
         <div className="flex-1 flex items-start justify-center">
           <div className="w-full max-w-[520px]">
-            {/* Иконка перехода на регистрацию */}
             <a
               href="/registration"
               title={t("auth.login.register")}
@@ -222,6 +245,13 @@ export function Login() {
               {t("auth.login.subtitle")}
             </p>
 
+            {/* ── Ошибка от сервера ── */}
+            {error && (
+              <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600">
+                {error}
+              </div>
+            )}
+
             <div className="space-y-3 sm:space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -229,11 +259,13 @@ export function Login() {
                   <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                   placeholder={t("auth.login.emailPlaceholder")}
-                  className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
+                  disabled={loading}
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300 disabled:opacity-60"
                 />
               </div>
 
@@ -247,8 +279,10 @@ export function Login() {
                     type={showPass ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                     placeholder={t("auth.login.passwordPlaceholder")}
-                    className="w-full px-4 py-2.5 pr-11 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300"
+                    disabled={loading}
+                    className="w-full px-4 py-2.5 pr-11 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300 disabled:opacity-60"
                   />
                   <button
                     type="button"
@@ -307,9 +341,32 @@ export function Login() {
 
               <button
                 type="button"
-                className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1"
+                onClick={handleSubmit}
+                disabled={loading || !email.trim() || !password.trim()}
+                className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1 disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
               >
-                {t("auth.login.submit")}
+                {loading && (
+                  <svg
+                    className="w-4 h-4 animate-spin"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v8H4z"
+                    />
+                  </svg>
+                )}
+                {loading ? t("auth.login.loading") : t("auth.login.submit")}
               </button>
             </div>
 
