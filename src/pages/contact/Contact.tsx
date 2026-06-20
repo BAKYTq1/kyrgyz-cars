@@ -53,7 +53,7 @@ const reviewsData: Review[] = [
     id: 1,
     platform: 'google',
     rating: 5,
-    text: 'Fantastic auto USA firm. BidCars team helped me with every step.',
+    text: 'Fantastic auto USA firm. CarDeals team helped me with every step.',
     name: 'Yaroslav Waliszewski',
     date: '2 месяца назад',
     avatar: teamImg1,
@@ -417,7 +417,7 @@ export default function Contact() {
                 </svg>
               </div>
               <div className="text-sm">
-                <p className="font-black">BidCars</p>
+                <p className="font-black">CarDeals</p>
                 <p className="mt-2 leading-6 text-slate-600">
                   Wierzbowa 28/46, 45-045 Poznan, Poland
                   <br />
@@ -429,7 +429,7 @@ export default function Contact() {
 
           <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
             <iframe
-              title="BidCars map"
+              title="CarDeals map"
               className="h-[320px] w-full md:h-[390px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
