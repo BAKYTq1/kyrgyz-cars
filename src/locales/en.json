@@ -313,15 +313,15 @@
     "pre": {
       "heroTitle": "Car buying process",
       "heroSubtitle": "Interested in importing cars from the USA? Read our guide on how the car buying process works on our site. We explain everything important step by step. US auctions will no longer be a mystery to you.",
-      "introTitle": "4 steps to buying a car with BidCars",
-      "introP1": "To make the process of importing cars from the USA clear and transparent, we created BidCars. Auctions are held without intermediaries, without hidden costs — you make all the decisions yourself! You choose the car and the amount you are willing to pay, and we help you win the auction! Important: there are no costs in BidCars until you win the bid.",
-      "introP2": "Registration and participation in the auction are free! We only require a refundable deposit to secure your bids! BidCars makes it quick and easy to order, buy and deliver cars, including door-to-door delivery. BidCars is 100% transparency and full control over the location of your car.",
+      "introTitle": "4 steps to buying a car with CarDeals",
+      "introP1": "To make the process of importing cars from the USA clear and transparent, we created CarDeals. Auctions are held without intermediaries, without hidden costs — you make all the decisions yourself! You choose the car and the amount you are willing to pay, and we help you win the auction! Important: there are no costs in CarDeals until you win the bid.",
+      "introP2": "Registration and participation in the auction are free! We only require a refundable deposit to secure your bids! CarDeals makes it quick and easy to order, buy and deliver cars, including door-to-door delivery. CarDeals is 100% transparency and full control over the location of your car.",
       "steps": [
         {
           "num": "STEP 1",
           "title": "Find your dream car",
           "body": [
-            "Choose from over 450,000 listings. Our search engine and detailed filters will help you easily find the car you need in our database. You don't need to create an account at BidCars to browse cars and auctions.",
+            "Choose from over 450,000 listings. Our search engine and detailed filters will help you easily find the car you need in our database. You don't need to create an account at CarDeals to browse cars and auctions.",
             "An account is only needed to participate in the auction. The registration process is simple and will take no more than 5 minutes."
           ],
           "listTitle": "After creating an account you will also get:",
@@ -351,14 +351,14 @@
           "num": "STEP 3",
           "title": "The auction starts — feel the excitement of bidding!",
           "body": [
-            "Specify the maximum amount you are willing to pay for the car. The BidCars calculator will show a preliminary list of expenses. The car will be put up for auction on your behalf.",
+            "Specify the maximum amount you are willing to pay for the car. The CarDeals calculator will show a preliminary list of expenses. The car will be put up for auction on your behalf.",
             "US auctions take place in two stages:"
           ],
           "list": [
             "Pre-Bids — placed several days before the start, open 5 days before the main auction.",
             "Live auction — starts from the highest pre-bid. The one who offered more wins."
           ],
-          "footer": "BidCars represents you at the live auction within your set maximum. This allows you to buy a car at the lowest possible price."
+          "footer": "CarDeals represents you at the live auction within your set maximum. This allows you to buy a car at the lowest possible price."
         },
         {
           "num": "STEP 4",
@@ -381,8 +381,8 @@
         {
           "title": "Car bid accepted",
           "payment": false,
-          "description": "After winning the car and logging into the BidCars personal account, the auction status changes to \"Car won\". This means the bid was accepted — it's time to open a bottle of champagne!",
-          "imageCaption": "2015 Audi S3 — \"Car won\" status on BidCars"
+          "description": "After winning the car and logging into the CarDeals personal account, the auction status changes to \"Car won\". This means the bid was accepted — it's time to open a bottle of champagne!",
+          "imageCaption": "2015 Audi S3 — \"Car won\" status on CarDeals"
         },
         {
           "title": "Payment for the car",
@@ -401,7 +401,7 @@
         {
           "title": "Car transportation updates",
           "payment": false,
-          "description": "The \"Transport\" tab in the BidCars personal account provides information about:",
+          "description": "The \"Transport\" tab in the CarDeals personal account provides information about:",
           "bullets": [
             "Car pickup from the auction house,",
             "Car delivery to the shipping terminal,",
@@ -438,11 +438,11 @@
           "quote": "Customs clearance authorization for 2015 Audi S3 has been sent to your email address. Please fill in the form within 3 days."
         },
         {
-          "title": "BidCars commission fee",
+          "title": "CarDeals commission fee",
           "payment": true,
-          "description": "A few days before arrival in Europe, a link to pay the BidCars service fee is sent. Payment can be made via instant bank transfer or credit card (Stripe-based).",
-          "quote": "Your car is on its way and will soon arrive at the port in Europe. Expected arrival date is Monday, December 11, 2023. Please make payment for our logistics services:\n\nhttps://payments.bid.cars/en/fee/WAULC68E14A227038/482925780\n\nBest regards, BidCars.",
-          "imageCaption": "BidCars payment portal"
+          "description": "A few days before arrival in Europe, a link to pay the CarDeals service fee is sent. Payment can be made via instant bank transfer or credit card (Stripe-based).",
+          "quote": "Your car is on its way and will soon arrive at the port in Europe. Expected arrival date is Monday, December 11, 2023. Please make payment for our logistics services:\n\nhttps://payments.bid.cars/en/fee/WAULC68E14A227038/482925780\n\nBest regards, CarDeals.",
+          "imageCaption": "CarDeals payment portal"
         },
         {
           "title": "Customs clearance invoice",
@@ -462,7 +462,7 @@
           "title": "Car pickup confirmation",
           "payment": false,
           "description": "After the car is picked up, an email and SMS are sent with pickup confirmation, transport company phone number and amount due.",
-          "quote": "2015 Audi S3 has been picked up from the port. BidCars transport company (+48 726 099 099). The driver will contact you regarding delivery. Please prepare 450 EUR — cash payment to the driver."
+          "quote": "2015 Audi S3 has been picked up from the port. CarDeals transport company (+48 726 099 099). The driver will contact you regarding delivery. Please prepare 450 EUR — cash payment to the driver."
         },
         {
           "title": "Car document scans",
@@ -481,13 +481,13 @@
           "payment": false,
           "description": "Upon dispatch, an SMS notification is automatically generated informing about the shipment.",
           "quote": "Documents for 2015 Audi S3 are scheduled for dispatch on Thursday (2023-12-21). DPD courier (1000667692324U).",
-          "imageCaption": "BidCars document envelope"
+          "imageCaption": "CarDeals document envelope"
         },
         {
-          "title": "BidCars service completion",
+          "title": "CarDeals service completion",
           "payment": false,
-          "description": "Completion of BidCars service means successful completion of all transaction stages — from winning the auction to delivering the car and documents. Clients can count on support at every step.",
-          "extra": "BidCars ensures full transparency and provides detailed service reporting, guaranteeing clarity and honesty.",
+          "description": "Completion of CarDeals service means successful completion of all transaction stages — from winning the auction to delivering the car and documents. Clients can count on support at every step.",
+          "extra": "CarDeals ensures full transparency and provides detailed service reporting, guaranteeing clarity and honesty.",
           "isCompletion": true
         }
       ]
@@ -496,7 +496,7 @@
   "auth": {
     "published": "Published on",
     "registration": {
-      "title": "Welcome to BidCars",
+      "title": "Welcome to CarDeals",
       "subtitle": "Set up your account and start placing your first bids!",
       "stepOf": "Step",
       "stepTotal": "/ 2",
@@ -519,7 +519,7 @@
       "passwordPlaceholder": "Enter your password",
       "confirmPassword": "Confirm password",
       "confirmPasswordPlaceholder": "Confirm your password",
-      "promoEmails": "I want to receive BidCars promotional emails",
+      "promoEmails": "I want to receive CarDeals promotional emails",
       "agreeTerms": "I agree to the",
       "terms": "Terms",
       "agreeOrderTerms": "I agree to the",
@@ -530,7 +530,7 @@
       "login": "Sign in"
     },
     "login": {
-      "title": "Sign in to BidCars",
+      "title": "Sign in to CarDeals",
       "subtitle": "Enter your details below.",
       "email": "Email address",
       "emailPlaceholder": "Enter your email address",
@@ -568,7 +568,7 @@
     "button": "About Us",
     "gallery": {
       "alt1": "Office and computers for ordering cars",
-      "alt2": "BidCars car carrier trucks",
+      "alt2": "CarDeals car carrier trucks",
       "alt3": "Presentation of a sports car at the exhibition",
       "alt4": "Loading cars into a sea container",
       "alt5": "Transportation of passenger cars"

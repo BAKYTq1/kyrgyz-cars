@@ -11,7 +11,7 @@ const galleryImages = [
   {
     id: 2,
     src: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=600",
-    alt: "Грузовые автомобили автовозы BidCars",
+    alt: "Грузовые автомобили автовозы CarDeals",
   },
   {
     id: 3,

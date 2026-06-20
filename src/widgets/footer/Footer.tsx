@@ -106,7 +106,7 @@ export default function Footer() {
             <Link to="/rules" className="hover:text-white transition">{t('footer.links.rules')}</Link>
             <Link to="/privacy" className="hover:text-white transition">{t('footer.links.privacy')}</Link>
           </div>
-          <span>© 2026 BidCars. {t('footer.copyright')}</span>
+          <span>© 2026 CarDeals. {t('footer.copyright')}</span>
           <div className="flex items-center gap-3">
             <span className="cursor-pointer hover:text-white">{t('footer.timezone')}</span>
             <span className="cursor-pointer hover:text-white">{t('footer.currentLanguage')}</span>

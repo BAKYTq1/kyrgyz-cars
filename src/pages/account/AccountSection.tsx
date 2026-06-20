@@ -188,7 +188,7 @@ export function AccountProfile() {
             className="mt-0.5 w-4 h-4 accent-blue-500 cursor-pointer shrink-0"
           />
           <span className="text-sm text-slate-600 leading-relaxed">
-            Разрешить делать ставки на транспортные средства, которые BidCars не
+            Разрешить делать ставки на транспортные средства, которые CarDeals не
             рекомендует из-за их аукционной истории или документации,
             препятствующей регистрации в Польше.
           </span>
@@ -208,7 +208,7 @@ export function AccountProfile() {
             className="w-4 h-4 accent-blue-500 cursor-pointer"
           />
           <span className="text-sm text-slate-600">
-            Я хочу получать электронные письма BidCars
+            Я хочу получать электронные письма CarDeals
           </span>
         </label>
 
