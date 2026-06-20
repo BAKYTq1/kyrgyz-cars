@@ -1,111 +1,47 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useI18n } from '../../shared/i18n/I18nProvider';
 
 type MenuItem = {
-  label: string;
+  labelKey?: string;
+  label?: string;
   icon: string;
   path?: string;
 };
 
-type FaqItem = {
-  question: string;
-  answer: string;
-};
-
-const mainMenu: MenuItem[] = [
-  { label: 'Процесс покупки', icon: 'help', path: '/help' },
-  { label: 'Поддержка и консультация', icon: 'support', path: '/support' },
-  { label: 'Доставка, транспортировка и документы', icon: 'truck', path: '/delivery' },
-  { label: 'Формальные аспекты и правила', icon: 'info', path: '/formal' },
-  { label: 'Платежи и связанные вопросы', icon: 'diamond', path: '/payments' },
-  { label: 'Депозит', icon: 'lock', path: '/deposit' },
+const mainMenuConfig: MenuItem[] = [
+  { labelKey: 'help.menu.purchaseProcess', icon: 'help', path: '/help' },
+  { labelKey: 'help.menu.supportConsultation', icon: 'support', path: '/support' },
+  { labelKey: 'help.menu.deliveryDocuments', icon: 'truck', path: '/delivery' },
+  { labelKey: 'help.menu.formalRules', icon: 'info', path: '/formal' },
+  { labelKey: 'help.menu.payments', icon: 'diamond', path: '/payments' },
+  { labelKey: 'help.menu.deposit', icon: 'lock', path: '/deposit' },
 ];
 
-const firstLinks = [
-  'Шаг за шагом - до покупки',
-  'Шаг за шагом - после покупки',
-  'Документы продажи',
+const firstLinksConfig = [
+  'help.links.beforePurchase',
+  'help.links.afterPurchase',
+  'help.links.saleDocuments',
 ];
 
-const secondLinks = ['Сроки доставки', 'О нас', 'Blog'];
+const secondLinksConfig = ['help.links.deliveryTimes', 'help.links.about', 'help.links.blog'];
 
-const purchaseFaqs: FaqItem[] = [
+const purchaseFaqsConfig = [
   {
-    question: 'Сложен ли процесс покупки и импорта автомобилей через BidCars?',
-    answer:
-      'Процесс покупки автомобилей через платформу BidCars отличается простотой и прозрачностью. Ключевым моментом является наличие базовых навыков навигации по сайту, включая такие задачи, как размещение ставок на аукционе, внесение залога и осуществление международных переводов в долларах США (USD) и евро (EUR) через собственный банк. Мы берем на себя все формальности для клиента: от связи с аукционным домом, оформления документов, организации транспортировки в США, погрузки и разгрузки контейнеров до таможенного оформления и доставки автомобиля по указанному адресу.',
+    questionKey: 'help.faq.processQuestion',
+    answerKey: 'help.faq.processAnswer',
   },
   {
-    question: 'Do I personally participate in live bidding when using your service, or does BidCars bid on my behalf?',
-    answer:
-      'При использовании нашего сервиса процесс торгов несколько отличается от традиционных онлайн-аукционов. Как пользователь, вы не делаете ставки в режиме реального времени лично. Вместо этого вы делегируете ставки на нашем сайте, указывая максимальную сумму, которую вы готовы предложить, на странице выбранного автомобиля. Эта сумма является конфиденциальной, видимой только нам в BidCars и не разглашается до начала онлайн-аукциона в аукционном доме.Если указанная вами сумма превышает начальную ставку онлайн-аукциона (т.е., превышает конечную ставку предварительного аукциона), то мы представим ваши интересы в пределах указанной вами максимальной суммы во время онлайн-аукциона. Однако важно помнить, что из-за технических ограничений пользователи не могут напрямую участвовать в торгах во время онлайн-аукциона. Вы можете указать только максимальную сумму, которую хотите предложить за конкретный автомобиль. Стоит отметить, что существует возможность увеличить эту сумму за 10 минут до начала финального онлайн-аукциона.Наш опыт показывает, что такой способ покупки автомобиля, как правило, более обдуман, поскольку исключает эмоциональный фактор, часто влияющий на ход торгов. Покупка, совершённая без эмоционального подтекста, обычно оказывается более успешной и приносящей больше удовлетворения.',
+    questionKey: 'help.faq.biddingQuestion',
+    answerKey: 'help.faq.biddingAnswer',
   },
   {
-    question: 'Is the fee calculator available on the BidCars website accurate?',
-    answer:
-      'The calculator gives an estimated import cost based on available auction and logistics data. The final cost can change because of exchange rates, bank fees, storage, late payment penalties, or document-related fees.',
-  },
-  {
-    question: 'Are all vehicles from IAAI and Copart displayed on BidCars website?',
-    answer:
-      'Most vehicles with scheduled auction dates are displayed. Some lots can be unavailable because of seller restrictions, missing sale dates, or technical limitations from the auction provider.',
-  },
-  {
-    question: 'How to bid for a vehicle on BidCars?',
-    answer:
-      'Create an account, add a refundable deposit, open the vehicle page, enter your maximum bid, and confirm it before the auction starts.',
-  },
-  {
-    question: 'Preliminary phase, live auction',
-    answer:
-      'The preliminary phase collects early bids before the final auction. In the live auction, bids are placed in real time until the vehicle is sold or your maximum bid is reached.',
-  },
-  {
-    question: 'What to do after winning the auction?',
-    answer:
-      'After winning, you will receive payment details and next steps. Pay within the required deadline so the vehicle can be released and prepared for transport.',
-  },
-  {
-    question: 'How to pay for the auctioned vehicle?',
-    answer:
-      'Payment is usually made by international bank transfer in USD. The exact amount, bank details, and transfer title are sent after the auction is won.',
-  },
-  {
-    question: 'What is the BidCars commission?',
-    answer:
-      'BidCars charges a fixed service commission. It is shown separately from the auction price and logistics costs.',
-  },
-  {
-    question: 'What is the price of the selected vehicle?',
-    answer:
-      'The final auction price is known only after bidding ends. You can use previous sales and market estimates to plan your maximum bid.',
-  },
-  {
-    question: 'Offer for acceptance by the seller.',
-    answer:
-      'Some auctions require seller approval after the highest bid. In that case, the seller can accept, reject, or counter the offer.',
-  },
-  {
-    question: 'Is signing a contract required before participating in an auction?',
-    answer:
-      'Registration and acceptance of platform terms are usually enough to participate. Additional documents may be requested for specific transactions.',
-  },
-  {
-    question: 'What are the options for corporate purchasing if there is no corporate account on the BidCars platform?',
-    answer:
-      'A company can contact support to prepare the correct billing and registration details before placing bids.',
-  },
-  {
-    question: 'Is it possible to simultaneously bid on two or more vehicles - until the first one is won?',
-    answer:
-      'Yes, but every winning bid creates an obligation to purchase. Bid carefully if you are bidding on multiple vehicles at the same time.',
-  },
-  {
-    question: 'How does one proceed in the situation where multiple people, through BidCars, attend the auction of the same vehicle?',
-    answer:
-      'The platform accepts bids from different users independently. The highest valid bid represented during the live auction has priority.',
+    questionKey: 'help.faq.calculatorQuestion',
+    answerKey: 'help.faq.calculatorAnswer',
   },
 ];
+
+// FAQ data will be populated dynamically from i18n
 
 function MenuIcon({ name }: { name: string }) {
   const common = {
@@ -154,7 +90,23 @@ function MenuIcon({ name }: { name: string }) {
 }
 
 export default function Help() {
+  const { t } = useI18n();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  
+  const mainMenu: MenuItem[] = mainMenuConfig.map((item) => ({
+    ...item,
+    label: t(item.labelKey || ''),
+  }));
+  
+  const firstLinks = firstLinksConfig.map((key) => t(key));
+  
+  const secondLinks = secondLinksConfig.map((key) => t(key));
+  
+  const purchaseFaqsData = purchaseFaqsConfig.map((item) => ({
+    ...item,
+    question: t(item.questionKey),
+    answer: t(item.answerKey),
+  }));
 
   return (
     <section className="min-h-screen bg-[#f4f5f7] py-6 text-[#0f2740]">
@@ -189,7 +141,7 @@ export default function Help() {
               onClick={() => setOpenIndex(null)}
               className="block w-full px-4 pb-2 text-right text-[11px] font-medium text-[#1677d2]"
             >
-              Показать все
+              {t('help.showAll')}
             </button>
           </nav>
 
@@ -233,10 +185,10 @@ export default function Help() {
         </aside>
 
         <main>
-          <h1 className="mb-3 text-[19px] font-medium text-[#0f2740]">Purchase Process</h1>
+          <h1 className="mb-3 text-[19px] font-medium text-[#0f2740]">{t('help.title')}</h1>
 
           <div className="space-y-2">
-            {purchaseFaqs.map((faq, index) => {
+            {purchaseFaqsData.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
                 <article key={faq.question} className="bg-white">

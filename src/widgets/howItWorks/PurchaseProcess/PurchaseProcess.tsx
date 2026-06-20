@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom"; // Импортируем хук для работы с URL
 import { PrePurchaseProcess1 } from "../PrePurchaseProcess1/PrePurchaseProcess1";
 import { PostPurchaseProcess } from "../PrePurchaseProcess2/PrePurchaseProcess2";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
@@ -42,7 +43,7 @@ function StepIndicator({
   `;
 
   return (
-    <div className="flex items-start justify-center mb-12">
+    <div className="flex items-start justify-center mb-12 px-4">
       {/* Phase 1 */}
       <div onClick={() => onNavigate(1)} className="flex flex-col items-center cursor-pointer">
         <span className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 1 ? "text-[#1a1a2e]" : "text-[#999999]"}`}>
@@ -79,22 +80,32 @@ function StepIndicator({
 
 export default function PurchaseProcess() {
   const { t } = useI18n();
-  const [activePhase, setActivePhase] = useState(1);
+  
+  // Инициализируем работу с query-параметрами URL
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Достаем значение "phase" из URL. Если его там нет, по умолчанию ставим 1
+  const activePhase = Number(searchParams.get("phase")) || 1;
+
+  // Функция переключения, которая теперь обновляет URL вместо локального стейта
+  const handleNavigate = (phase: number) => {
+    setSearchParams({ phase: String(phase) });
+  };
 
   return (
     <>
       <style>{pulseCSS}</style>
-      <div className="font-sans bg-[#f0f2f5] min-h-screen px-6 pt-12 pb-[60px]">
+      <div className="font-sans bg-[#f0f2f5] min-h-screen pt-12 pb-[60px]">
         <StepIndicator
           activePhase={activePhase}
-          onNavigate={setActivePhase}
+          onNavigate={handleNavigate}
           label1={t("howItWorks.prePurchase")}
           label2={t("howItWorks.postPurchase")}
         />
         {activePhase === 1 ? (
-          <PrePurchaseProcess1 _onNavigateToPhase={setActivePhase} />
+          <PrePurchaseProcess1 _onNavigateToPhase={handleNavigate} />
         ) : (
-          <PostPurchaseProcess _onNavigateToPhase={setActivePhase} />
+          <PostPurchaseProcess _onNavigateToPhase={handleNavigate} />
         )}
       </div>
     </>

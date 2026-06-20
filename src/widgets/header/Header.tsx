@@ -50,6 +50,11 @@ function MobileUserLinks({ onNavigate }: { onNavigate: () => void }) {
     </Link>
   );
 }
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import LocaleSwitcher from '../../shared/i18n/LocaleSwitcher'
+import { useI18n } from '../../shared/i18n/I18nProvider'
+import logo from '../../assets/Снимок_экрана_2026-06-17_165818-removebg-preview.png'
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -66,6 +71,7 @@ export default function Header() {
           <span className="text-xl font-bold text-gray-900 tracking-wide">
             DEALCARS
           </span>
+          <img src={logo} alt="Logo" className="w-22 h-20" />
         </Link>
 
         <div className="hidden md:flex flex-1 max-w-2xl border border-gray-300 rounded-lg overflow-hidden">

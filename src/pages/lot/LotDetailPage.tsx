@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { FaCar, FaClock, FaMapMarkerAlt, FaFileAlt, FaShieldAlt, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useAppDispatch, useAppSelector } from '../../lib/store'
 import { fetchLotById } from '../../lib/lot/lotSlice'
 import { useI18n } from '../../shared/i18n/I18nProvider'
 import { CountdownTimer } from '../../shared/ui/countdown/Countdown'
+import HowItWorksPage from '../../widgets/how-it-works/HowItWorksPage'
 
 const transmissionMap: Record<number, string> = { 0: '—', 1: 'Автомат', 2: 'Механика', 3: 'CVT' }
 const driveMap: Record<number, string> = { 0: '—', 1: 'FWD', 2: 'RWD', 3: 'AWD', 4: '4WD' }
@@ -17,7 +18,7 @@ export default function LotDetailPage() {
   const { currentLot: car, loading, error } = useAppSelector(state => state.lots)
   const [activeImage, setActiveImage] = useState(0)
   const [bidAmount, setBidAmount] = useState('')
-
+  const navigate = useNavigate()
   useEffect(() => {
     if (id) dispatch(fetchLotById(Number(id)))
   }, [id])
@@ -64,9 +65,9 @@ export default function LotDetailPage() {
 
         {/* Хлебные крошки */}
         <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3">
-          <span className="hover:text-blue-500 cursor-pointer">Главная</span>
+          <span onClick={() => navigate('/')} className="hover:text-blue-500 cursor-pointer">Главная</span>
           <span>/</span>
-          <span className="hover:text-blue-500 cursor-pointer">Каталог</span>
+          <span onClick={() => navigate('/catalog')} className="hover:text-blue-500 cursor-pointer">Каталог</span>
           <span>/</span>
           <span className="text-gray-600 truncate">{car.name}</span>
         </div>
@@ -274,6 +275,7 @@ export default function LotDetailPage() {
           </div>
         </div>
       </div>
+      <HowItWorksPage/>
     </div>
   )
 }

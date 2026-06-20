@@ -1,14 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useI18n } from '../../shared/i18n/I18nProvider';
 
 export type FaqItem = {
   question: string;
   answer: string;
-};
-
-type MenuItem = {
-  label: string;
-  icon: string;
-  path: string;
 };
 
 type HelpCategoryLayoutProps = {
@@ -18,23 +13,6 @@ type HelpCategoryLayoutProps = {
   openIndex: number | null;
   setOpenIndex: (index: number | null) => void;
 };
-
-const mainMenu: MenuItem[] = [
-  { label: 'Процесс покупки', icon: 'help', path: '/help' },
-  { label: 'Поддержка и консультация', icon: 'support', path: '/support' },
-  { label: 'Доставка, транспортировка и документы', icon: 'truck', path: '/delivery' },
-  { label: 'Формальные аспекты и правила', icon: 'info', path: '/formal' },
-  { label: 'Платежи и связанные вопросы', icon: 'diamond', path: '/payments' },
-  { label: 'Депозит', icon: 'lock', path: '/deposit' },
-];
-
-const firstLinks = [
-  'Шаг за шагом - до покупки',
-  'Шаг за шагом - после покупки',
-  'Документы продажи',
-];
-
-const secondLinks = ['Сроки доставки', 'О нас'];
 
 function MenuIcon({ name }: { name: string }) {
   const common = {
@@ -89,6 +67,33 @@ export default function HelpCategoryLayout({
   openIndex,
   setOpenIndex,
 }: HelpCategoryLayoutProps) {
+  const { t } = useI18n();
+  
+  const mainMenuConfig = [
+    { labelKey: 'help.menu.purchaseProcess', icon: 'help', path: '/help' },
+    { labelKey: 'help.menu.supportConsultation', icon: 'support', path: '/support' },
+    { labelKey: 'help.menu.deliveryDocuments', icon: 'truck', path: '/delivery' },
+    { labelKey: 'help.menu.formalRules', icon: 'info', path: '/formal' },
+    { labelKey: 'help.menu.payments', icon: 'diamond', path: '/payments' },
+    { labelKey: 'help.menu.deposit', icon: 'lock', path: '/deposit' },
+  ];
+  
+  const mainMenu = mainMenuConfig.map((item) => ({
+    ...item,
+    label: t(item.labelKey),
+  }));
+  
+  const firstLinksConfig = [
+    'help.links.beforePurchase',
+    'help.links.afterPurchase',
+    'help.links.saleDocuments',
+  ];
+  
+  const firstLinks = firstLinksConfig.map((key) => t(key));
+  
+  const secondLinksConfig = ['help.links.deliveryTimes', 'help.links.about'];
+  
+  const secondLinks = secondLinksConfig.map((key) => t(key));
   return (
     <section className="min-h-screen bg-[#f4f5f7] py-6 text-[#0f2740]">
       <div className="mx-auto grid w-[min(1160px,calc(100%-32px))] gap-6 md:grid-cols-[280px_minmax(0,1fr)]">
