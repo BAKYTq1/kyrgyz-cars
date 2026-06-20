@@ -82,7 +82,7 @@ const reviewsData: Review[] = [
     id: 6,
     platform: 'trustpilot',
     rating: 5,
-    text: 'Превосходный опыт работы с командой BidCars. Всё чётко и в срок.',
+    text: 'Превосходный опыт работы с командой CarDeals. Всё чётко и в срок.',
     name: 'Камилла',
     date: '18.03.2026',
   },
@@ -221,26 +221,26 @@ export default function About() {
 
           <div className="grid gap-4 md:grid-cols-2 lg:min-h-[420px] lg:grid-cols-[1.15fr_0.85fr_0.85fr_1.15fr]">
             <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 md:min-h-72">
-              <img className="h-full w-full object-cover" src={galleryImg1} alt="BidCars" />
+              <img className="h-full w-full object-cover" src={galleryImg1} alt="CarDeals" />
             </div>
             <div className="grid gap-4">
               <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 lg:min-h-0">
-                <img className="h-full w-full object-cover" src={galleryImg2} alt="BidCars logistics" />
+                <img className="h-full w-full object-cover" src={galleryImg2} alt="CarDeals logistics" />
               </div>
               <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 lg:min-h-0">
-                <img className="h-full w-full object-cover" src={galleryImg3} alt="BidCars port" />
+                <img className="h-full w-full object-cover" src={galleryImg1} alt="CarDeals" />
               </div>
             </div>
             <div className="grid gap-4">
               <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 lg:min-h-0">
-                <img className="h-full w-full object-cover" src={galleryImg4} alt="BidCars truck" />
+                <img className="h-full w-full object-cover" src={galleryImg4} alt="CarDeals truck" />
               </div>
               <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 lg:min-h-0">
-                <img className="h-full w-full object-cover" src={galleryImg5} alt="BidCars auto" />
+                <img className="h-full w-full object-cover" src={galleryImg5} alt="CarDeals auto" />
               </div>
             </div>
             <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 md:min-h-72">
-              <img className="h-full w-full object-cover" src={galleryImg6} alt="BidCars shipping" />
+              <img className="h-full w-full object-cover" src={galleryImg6} alt="CarDeals shipping" />
             </div>
           </div>
         </div>
@@ -421,7 +421,7 @@ export default function About() {
             </div>
 
             <div className="relative mx-auto h-56 w-full max-w-[220px] overflow-hidden bg-slate-800 shadow-xl md:h-64 lg:max-w-[240px]">
-              <div className="absolute left-5 top-5 text-sm font-bold text-sky-300">BidCars</div>
+              <div className="absolute left-5 top-5 text-sm font-bold text-sky-300">CarDeals</div>
               <div className="absolute inset-x-5 bottom-12 text-center text-xs font-semibold text-white">
                 Weź udział w licytacjach za darmo!
               </div>

@@ -66,7 +66,7 @@
     "timerPrefix": "Left"
   },
   "about": {
-    "title": "Meet BidCars",
+    "title": "Meet CarDeals",
     "subtitle": "We are experts in importing vehicles from the USA, and our passion and knowledge in this field have been growing since 2015.",
     "stats": {
       "dailyBids": "Daily bids",
@@ -82,7 +82,7 @@
     "auctions": {
       "title": "Auctions",
       "text": "Our company has been purchasing and transporting cars from the United States since 2015. Since then, we have successfully imported thousands of vehicles from different parts of North America. In addition to cars, we also import motorcycles, ATVs and jet skis. We serve private clients, dealers and wholesale buyers.",
-      "textSecond": "Thanks to our long-term cooperation with foreign companies, we can guarantee the best agreed rates for sea and land transport. At BidCars, we focus on transparent and convenient purchasing, so transport costs are known before placing a bid. Our website includes a calculator that estimates the total transaction cost and helps avoid hidden fees."
+      "textSecond": "Thanks to our long-term cooperation with foreign companies, we can guarantee the best agreed rates for sea and land transport. At CarDeals, we focus on transparent and convenient purchasing, so transport costs are known before placing a bid. Our website includes a calculator that estimates the total transaction cost and helps avoid hidden fees."
     },
     "deliveryCards": {
       "seaShipping": {
@@ -91,7 +91,7 @@
       },
       "customs": {
         "title": "Customs clearance",
-        "text": "At the port of Rotterdam, BidCars works with customs agencies to keep the clearance process moving without delays."
+        "text": "At the port of Rotterdam, CarDeals works with customs agencies to keep the clearance process moving without delays."
       },
       "homeDelivery": {
         "title": "Home delivery",
@@ -119,11 +119,11 @@
       "message": {
         "title": "Send a message",
         "text": "Write to us and we will prepare a detailed reply.",
-        "meta": "support@bidcars.eu",
+        "meta": "support@CarDeals.eu",
         "action": "Write"
       }
     },
-    "supportNote": "BidCars support is available to active platform users for important details about bidding, purchasing and vehicle delivery.",
+    "supportNote": "CarDeals support is available to active platform users for important details about bidding, purchasing and vehicle delivery.",
     "location": {
       "title": "Our location",
       "text": "We work throughout the European Union. By clicking the point, you can see our main office and build a route."
@@ -159,18 +159,18 @@
       "blog": "Blog"
     },
     "faq": {
-      "processQuestion": "Is the process of buying and importing cars through BidCars complicated?",
-      "processAnswer": "The car purchase process through the BidCars platform is simple and transparent. The key requirement is basic website navigation skills, including placing auction bids, paying a deposit, and making international transfers in USD and EUR through your own bank. We handle all formalities for the client: communication with the auction house, documents, transport in the USA, container loading and unloading, customs clearance and delivery to the specified address.",
-      "biddingQuestion": "Do I personally participate in live bidding when using your service, or does BidCars bid on my behalf?",
-      "biddingAnswer": "When using our service, you do not bid live personally. Instead, you delegate the bid on our website by entering the maximum amount you are ready to offer on the selected vehicle page. This amount is confidential and visible only to BidCars before the auction starts. If your amount is high enough, we represent your interests during the live auction within your maximum bid.",
-      "calculatorQuestion": "Is the fee calculator available on the BidCars website accurate?",
+      "processQuestion": "Is the process of buying and importing cars through CarDeals complicated?",
+      "processAnswer": "The car purchase process through the CarDeals platform is simple and transparent. The key requirement is basic website navigation skills, including placing auction bids, paying a deposit, and making international transfers in USD and EUR through your own bank. We handle all formalities for the client: communication with the auction house, documents, transport in the USA, container loading and unloading, customs clearance and delivery to the specified address.",
+      "biddingQuestion": "Do I personally participate in live bidding when using your service, or does CarDeals bid on my behalf?",
+      "biddingAnswer": "When using our service, you do not bid live personally. Instead, you delegate the bid on our website by entering the maximum amount you are ready to offer on the selected vehicle page. This amount is confidential and visible only to CarDeals before the auction starts. If your amount is high enough, we represent your interests during the live auction within your maximum bid.",
+      "calculatorQuestion": "Is the fee calculator available on the CarDeals website accurate?",
       "calculatorAnswer": "The calculator gives an estimated import cost based on available auction and logistics data. The final cost can change because of exchange rates, bank fees, storage, late payment penalties, or document-related fees.",
       "support": {
         "title": "Support and Consultation",
-        "q1": "How can I contact BidCars support?",
+        "q1": "How can I contact CarDeals support?",
         "a1": "You can contact support through online chat, email, or phone. Our team helps with platform use, bidding questions, payments, documents, and delivery updates.",
-        "q2": "Can BidCars help me choose a vehicle?",
-        "a2": "BidCars provides tools, vehicle data, and consultation, but the final purchase decision, budget, and risk assessment remain with the client.",
+        "q2": "Can CarDeals help me choose a vehicle?",
+        "a2": "CarDeals provides tools, vehicle data, and consultation, but the final purchase decision, budget, and risk assessment remain with the client.",
         "q3": "Can I get additional information about a vehicle?",
         "a3": "Available vehicle data is shown on the lot page. If reports or additional photos are available, support can help you find them before bidding.",
         "q4": "Do you inspect vehicles before the auction?",
@@ -183,17 +183,17 @@
         "q1": "How much does it cost to import a vehicle?",
         "a1": "The total import cost depends on the auction price, auction fees, inland transport in the USA, ocean shipping, customs clearance, taxes, port handling, and delivery to the final address.",
         "q2": "Do you offer home delivery?",
-        "a2": "Yes. After the vehicle reaches Europe and customs procedures are completed, BidCars can organize delivery to the address selected by the client.",
+        "a2": "Yes. After the vehicle reaches Europe and customs procedures are completed, CarDeals can organize delivery to the address selected by the client.",
         "q3": "To which ports do you ship vehicles?",
-        "a3": "Vehicles are usually shipped to major European ports used by BidCars logistics partners. The destination port depends on country, route availability, and the best current transport option.",
+        "a3": "Vehicles are usually shipped to major European ports used by CarDeals logistics partners. The destination port depends on country, route availability, and the best current transport option.",
         "q4": "When will I receive the vehicle documents?",
         "a4": "Documents are prepared and transferred after the auction house releases them and all required payments are completed.",
         "q5": "Where can I check the vehicle status?",
-        "a5": "The vehicle status can be checked in your BidCars account. Important updates are also sent by the support team.",
+        "a5": "The vehicle status can be checked in your CarDeals account. Important updates are also sent by the support team.",
         "q6": "Can I request additional inspections or photos of the vehicle at the port terminal?",
         "a6": "Additional photos or inspection requests may be possible depending on the terminal and vehicle location.",
-        "q7": "Is it possible to use your export services for vehicles that were not purchased directly through BidCars?",
-        "a7": "In selected cases, BidCars can help with export or logistics for vehicles purchased outside the platform."
+        "q7": "Is it possible to use your export services for vehicles that were not purchased directly through CarDeals?",
+        "a7": "In selected cases, CarDeals can help with export or logistics for vehicles purchased outside the platform."
       },
       "formal": {
         "title": "Formal Aspects and Rules",
@@ -218,8 +218,8 @@
         "a3": "Bank transfer fees are usually charged by the client bank and are not included in the auction invoice.",
         "q4": "Can I pay by card?",
         "a4": "Vehicle payment normally requires bank transfer. Some smaller platform-related payments may depend on available payment methods.",
-        "q5": "When do I pay the BidCars commission?",
-        "a5": "The BidCars commission is paid separately according to the instructions provided after the vehicle is purchased."
+        "q5": "When do I pay the CarDeals commission?",
+        "a5": "The CarDeals commission is paid separately according to the instructions provided after the vehicle is purchased."
       },
       "deposit": {
         "title": "Deposit",
