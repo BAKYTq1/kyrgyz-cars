@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { useI18n } from '../../shared/i18n/I18nProvider';
 
 import galleryImg1 from '../../assets/about1.jpg';
-import galleryImg2 from '../../assets/about1.jpg';
+import galleryImg2 from '../../assets/about3.jpg';
 import galleryImg3 from '../../assets/about3.jpg';
 import galleryImg4 from '../../assets/about1.jpg';
 import galleryImg5 from '../../assets/about3.jpg';
@@ -211,56 +211,83 @@ export default function About() {
     <section className="bg-gray-100 py-10 text-gray-900 md:py-14 lg:py-16">
       <div className="mx-auto w-[min(1180px,calc(100%-24px))]">
         {/* Header + Gallery */}
-        <div className="text-left md:text-center">
-          <h2 className="mb-4 text-4xl font-black leading-tight text-gray-950 md:text-6xl">
+        <div className="text-center">
+          <h2 className="mb-2 text-2xl font-black leading-tight text-gray-950 md:mb-4 md:text-6xl">
             {t('about.title')}
           </h2>
-          <p className="mx-auto mb-8 max-w-3xl text-base leading-7 text-gray-600 md:text-lg">
+          <p className="mx-auto mb-12 max-w-3xl text-sm leading-5 text-gray-500 md:mb-8 md:text-lg md:leading-7 md:text-gray-600">
             {t('about.subtitle')}
           </p>
 
-          <div className="grid gap-4 md:grid-cols-2 lg:min-h-[420px] lg:grid-cols-[1.15fr_0.85fr_0.85fr_1.15fr]">
+          {/* Mobile gallery: one tall image and two stacked images. */}
+          <div className="grid h-[250px] grid-cols-2 grid-rows-2 gap-4 md:hidden">
+            <div className="row-span-2 overflow-hidden rounded-xl bg-gray-200">
+              <img className="h-full w-full object-cover" src={galleryImg1} alt={t('about.gallery.alt1')} />
+            </div>
+            <div className="min-h-0 overflow-hidden rounded-xl bg-gray-200">
+              <img
+                className="h-full w-full object-cover"
+                src={galleryImg7}
+                alt={t('about.gallery.alt2')}
+              />
+            </div>
+            <div className="min-h-0 overflow-hidden rounded-xl bg-gray-200">
+              <img className="h-full w-full object-cover" src={galleryImg3} alt={t('about.gallery.alt3')} />
+            </div>
+          </div>
+
+          {/* Full gallery for tablet and desktop. */}
+          <div className="hidden gap-4 md:grid md:grid-cols-2 lg:min-h-[420px] lg:grid-cols-[1.15fr_0.85fr_0.85fr_1.15fr]">
             <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 md:min-h-72">
-              <img className="h-full w-full object-cover" src={galleryImg1} alt="CarDeals" />
+              <img className="h-full w-full object-cover" src={galleryImg1} alt={t('about.gallery.alt1')} />
             </div>
             <div className="grid gap-4">
               <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 lg:min-h-0">
-                <img className="h-full w-full object-cover" src={galleryImg2} alt="CarDeals logistics" />
+                <img className="h-full w-full object-cover" src={galleryImg2} alt={t('about.gallery.alt2')} />
               </div>
               <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 lg:min-h-0">
-                <img className="h-full w-full object-cover" src={galleryImg1} alt="CarDeals" />
+                <img className="h-full w-full object-cover" src={galleryImg1} alt={t('about.gallery.alt1')} />
               </div>
             </div>
             <div className="grid gap-4">
               <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 lg:min-h-0">
-                <img className="h-full w-full object-cover" src={galleryImg4} alt="CarDeals truck" />
+                <img className="h-full w-full object-cover" src={galleryImg4} alt={t('about.gallery.alt4')} />
               </div>
               <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 lg:min-h-0">
-                <img className="h-full w-full object-cover" src={galleryImg5} alt="CarDeals auto" />
+                <img className="h-full w-full object-cover" src={galleryImg5} alt={t('about.gallery.alt5')} />
               </div>
             </div>
             <div className="min-h-56 overflow-hidden rounded-lg bg-gray-200 md:min-h-72">
-              <img className="h-full w-full object-cover" src={galleryImg6} alt="CarDeals shipping" />
+              <img className="h-full w-full object-cover" src={galleryImg6} alt={t('about.gallery.alt4')} />
             </div>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="my-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="my-12 grid grid-cols-2 gap-x-5 gap-y-8 md:my-10 md:gap-4 lg:grid-cols-4">
           {stats.map((stat, index) => (
             <div
               key={stat.labelKey}
-              className="min-h-36 rounded-lg border border-gray-200 bg-white p-5 shadow-sm md:p-6"
+              className="min-w-0 px-2 md:min-h-36 md:rounded-lg md:border md:border-gray-200 md:bg-white md:p-6 md:shadow-sm"
             >
-              <h3 className="mb-3 text-3xl font-black leading-none text-red-600 md:text-4xl">
+              <h3
+                className={`mb-4 whitespace-nowrap font-normal leading-none tracking-tight text-[#2196f3] md:mb-3 md:text-4xl md:font-black md:text-red-600 ${
+                  index === 3
+                    ? 'text-[clamp(1.45rem,7vw,2.25rem)]'
+                    : 'text-[clamp(2rem,10vw,2.75rem)]'
+                }`}
+              >
                 {stat.prefix}
                 {animatedStats[index].toLocaleString('en-US', {
+                  useGrouping: false,
                   minimumFractionDigits: stat.decimals ?? 0,
                   maximumFractionDigits: stat.decimals ?? 0,
                 })}
                 {stat.suffix}
               </h3>
-              <p className="leading-6 text-gray-600">{t(stat.labelKey)}</p>
+              <p className="text-sm leading-5 text-gray-600 md:text-base md:leading-6">
+                {t(stat.labelKey)}
+              </p>
             </div>
           ))}
         </div>
@@ -413,7 +440,7 @@ export default function About() {
           <div className="grid items-center gap-8 md:grid-cols-[minmax(0,1fr)_220px] lg:grid-cols-[minmax(0,1fr)_260px]">
             <div>
               <h3 className="mb-4 text-base font-black leading-tight text-black">{t('about.auctions.title')}</h3>
-              <p className="max-w-3xl text-[11px] leading-[1.75] text-slate-700 md:text-xs">
+              <p className="max-w-3xl text-sm leading-7 text-slate-700 md:text-base md:leading-8">
                 {t('about.auctions.text')}
                 <br />
                 {t('about.auctions.textSecond')}

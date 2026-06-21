@@ -112,6 +112,7 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
 }
 
 export function PostPurchaseProcess({ _onNavigateToPhase }: { _onNavigateToPhase?: (phase: number) => void } = {}) {
+  void _onNavigateToPhase;
   const { t, tl } = useI18n();
   const [activeStep, setActiveStep] = useState(1);
   const total = 16;
