@@ -6,10 +6,12 @@ import {
 } from "react-redux";
 import lotReducer from "./lot/lotSlice";
 import authReducer from "./auth/Login";
+import registerReducer from "./auth/Register";
 
 export const store = configureStore({
   reducer: {
     lots: lotReducer,
+    register: registerReducer,
     auth: authReducer,
   },
 });

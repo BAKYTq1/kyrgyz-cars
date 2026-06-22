@@ -1,4 +1,6 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useAppDispatch } from "../../lib/store";
+import { logoutThunk } from "../../lib/auth/Login";
 
 const BREADCRUMBS: Record<string, string> = {
   "": "Обзор",
@@ -165,12 +167,16 @@ const RefundIcon = () => (
 );
 
 export default function AccountLayout() {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const segment = pathname.split("/").filter(Boolean).pop() ?? "";
   const pageLabel = BREADCRUMBS[segment] ?? segment;
 
-  const handleLogout = () => navigate("/");
+  const handleLogout = async () => {
+    await dispatch(logoutThunk());
+    navigate("/");
+  };
 
   return (
     <div

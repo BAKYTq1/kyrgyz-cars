@@ -7,52 +7,44 @@ export interface LoginPayload {
   password: string;
 }
 
-export interface LoginResponse {
-  access: string;
-  refresh: string;
-}
-
-// Под реальный API: POST /api/register/
-export interface RegisterPayload {
-  email: string;
-  first_name?: string;
-  last_name?: string;
-  password: string;
-  password2: string;
-}
-
-export interface RegisterResponse {
-  detail: string; // "Код подтверждения отправлен на ..."
-  user: {
-    id: string;
-    email: string;
-    first_name: string;
-    last_name: string;
-    created_at: string;
-  };
-}
-
-// Под реальный API: POST /api/verify-email/
-export interface VerifyEmailPayload {
-  email: string;
-  code: string; // ⚠️ Проверь точное имя поля в реальной схеме Swagger (может быть "token" или "otp")
-}
-
-export interface VerifyEmailResponse {
-  detail: string;
-}
-
-// Под реальный API: POST /api/resend-otp/
-export interface ResendOtpPayload {
-  email: string;
-}
-
 export interface User {
   id: string;
   email: string;
   first_name: string;
   last_name: string;
+  created_at?: string;
+  phone?: string;
+  country?: string;
+  address?: string;
+  city?: string;
+  postal_code?: string;
+  default_destination?: string;
+  high_risk_consent?: boolean;
+  newsletter_subscribed?: boolean;
 }
+
+// Реальный ответ бэкенда на /api/login/ — содержит токены И user сразу
+export interface LoginResponse {
+  access: string;
+  refresh: string;
+  user: User;
+}
+
+// Под реальный API: PUT/PATCH /api/me/ — модель "UpdateProfile" в Swagger.
+// ⚠️ Проверь точные имена полей в Swagger UI (Model "UpdateProfile"), я предположил
+// набор по форме AccountProfile.tsx. Поправь при необходимости.
+export type UpdateMePayload = Partial<{
+  first_name: string;
+  last_name: string;
+  phone: string;
+  country: string;
+  address: string;
+  city: string;
+  postal_code: string;
+  default_destination: string;
+  high_risk_consent: boolean;
+  newsletter_subscribed: boolean;
+}>;
 
 // ─── State ────────────────────────────────────────────────────────────────────
 interface AuthState {
@@ -60,11 +52,9 @@ interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
   loading: boolean;
+  meLoading: boolean;
   error: string | null;
   isAuthenticated: boolean;
-  // ── для флоу регистрации с подтверждением email ──
-  registeredEmail: string | null; // email, который нужно подтвердить
-  registrationSuccess: boolean; // флаг успешной финальной верификации
 }
 
 const initialState: AuthState = {
@@ -72,10 +62,9 @@ const initialState: AuthState = {
   accessToken: tokenStorage.getAccess(),
   refreshToken: tokenStorage.getRefresh(),
   loading: false,
+  meLoading: false,
   error: null,
   isAuthenticated: !!tokenStorage.getAccess(),
-  registeredEmail: null,
-  registrationSuccess: false,
 };
 
 // ─── Thunks ───────────────────────────────────────────────────────────────────
@@ -99,65 +88,43 @@ export const loginThunk = createAsyncThunk(
   },
 );
 
-export const registerThunk = createAsyncThunk(
-  "auth/register",
-  async (payload: RegisterPayload, { rejectWithValue }) => {
-    try {
-      return await apiFetch<RegisterResponse>(
-        "/register/",
-        {
-          method: "POST",
-          body: JSON.stringify(payload),
-        },
-        false,
-      );
-    } catch (error) {
-      return rejectWithValue((error as Error).message);
-    }
-  },
-);
-
-export const verifyEmailThunk = createAsyncThunk(
-  "auth/verifyEmail",
-  async (payload: VerifyEmailPayload, { rejectWithValue }) => {
-    try {
-      return await apiFetch<VerifyEmailResponse>(
-        "/verify-email/",
-        {
-          method: "POST",
-          body: JSON.stringify(payload),
-        },
-        false,
-      );
-    } catch (error) {
-      return rejectWithValue((error as Error).message);
-    }
-  },
-);
-
-export const resendOtpThunk = createAsyncThunk(
-  "auth/resendOtp",
-  async (payload: ResendOtpPayload, { rejectWithValue }) => {
-    try {
-      return await apiFetch<{ detail: string }>(
-        "/resend-otp/",
-        {
-          method: "POST",
-          body: JSON.stringify(payload),
-        },
-        false,
-      );
-    } catch (error) {
-      return rejectWithValue((error as Error).message);
-    }
-  },
-);
-
+// Используется, если нужно перезагрузить/обновить данные профиля отдельно
+// (например, после возврата на сайт спустя время, или для принудительного refetch).
 export const fetchMeThunk = createAsyncThunk(
   "auth/me",
   async (_, { rejectWithValue }) => {
     try {
       return await apiFetch<User>("/me/");
+    } catch (error) {
+      return rejectWithValue((error as Error).message);
+    }
+  },
+);
+
+// Полное обновление профиля (PUT) — заменяет все поля целиком
+export const updateMeThunk = createAsyncThunk(
+  "auth/updateMe",
+  async (payload: UpdateMePayload, { rejectWithValue }) => {
+    try {
+      return await apiFetch<User>("/me/", {
+        method: "PUT",
+        body: JSON.stringify(payload),
+      });
+    } catch (error) {
+      return rejectWithValue((error as Error).message);
+    }
+  },
+);
+
+// Частичное обновление (PATCH) — для сохранения одного поля по onBlur
+export const patchMeThunk = createAsyncThunk(
+  "auth/patchMe",
+  async (payload: UpdateMePayload, { rejectWithValue }) => {
+    try {
+      return await apiFetch<User>("/me/", {
+        method: "PATCH",
+        body: JSON.stringify(payload),
+      });
     } catch (error) {
       return rejectWithValue((error as Error).message);
     }
@@ -178,7 +145,7 @@ export const logoutThunk = createAsyncThunk(
 );
 
 // ─── Slice ────────────────────────────────────────────────────────────────────
-const authSlice = createSlice({
+const loginSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
@@ -192,11 +159,6 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       tokenStorage.clear();
     },
-    resetRegistrationState(state) {
-      state.registeredEmail = null;
-      state.registrationSuccess = false;
-      state.error = null;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -208,6 +170,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.accessToken = action.payload.access;
         state.refreshToken = action.payload.refresh;
+        state.user = action.payload.user;
         state.isAuthenticated = true;
       })
       .addCase(loginThunk.rejected, (state, action) => {
@@ -216,53 +179,33 @@ const authSlice = createSlice({
       });
 
     builder
-      .addCase(registerThunk.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(fetchMeThunk.pending, (state) => {
+        state.meLoading = true;
       })
-      .addCase(registerThunk.fulfilled, (state, action) => {
-        state.loading = false;
-        state.registeredEmail = action.payload.user.email;
-      })
-      .addCase(registerThunk.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    builder
-      .addCase(verifyEmailThunk.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(verifyEmailThunk.fulfilled, (state) => {
-        state.loading = false;
-        state.registrationSuccess = true;
-      })
-      .addCase(verifyEmailThunk.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    builder
-      .addCase(resendOtpThunk.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(resendOtpThunk.fulfilled, (state) => {
-        state.loading = false;
-      })
-      .addCase(resendOtpThunk.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload as string;
-      });
-
-    builder
       .addCase(fetchMeThunk.fulfilled, (state, action) => {
+        state.meLoading = false;
         state.user = action.payload;
       })
       .addCase(fetchMeThunk.rejected, (state) => {
+        state.meLoading = false;
         state.isAuthenticated = false;
         tokenStorage.clear();
+      });
+
+    builder
+      .addCase(updateMeThunk.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(updateMeThunk.rejected, (state, action) => {
+        state.error = action.payload as string;
+      });
+
+    builder
+      .addCase(patchMeThunk.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(patchMeThunk.rejected, (state, action) => {
+        state.error = action.payload as string;
       });
 
     builder.addCase(logoutThunk.fulfilled, (state) => {
@@ -274,6 +217,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { clearError, clearAuth, resetRegistrationState } =
-  authSlice.actions;
-export default authSlice.reducer;
+export const { clearError, clearAuth } = loginSlice.actions;
+export default loginSlice.reducer;

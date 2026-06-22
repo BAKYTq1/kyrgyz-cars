@@ -3,6 +3,7 @@
     "search": "Search",
     "login": "Sign in",
     "register": "Create account",
+    "account": "My account",
     "all": "All",
     "archive": "Archive"
   },
@@ -17,7 +18,8 @@
     "navAbout": "About us",
     "navContacts": "Contacts",
     "hours": "Mon-Fri 10:00-22:00 CET",
-    "mobileSearch": "Search..."
+    "mobileSearch": "Search...",
+    "navMyOrders": "My orders"
   },
   "hero": {
     "tags": [
@@ -507,7 +509,18 @@
       "title": "Welcome to CarDeals",
       "subtitle": "Set up your account and start placing your first bids!",
       "stepOf": "Step",
-      "stepTotal": "/ 2",
+      "stepTotal": "/ 3",
+      "passwordRequired": "Password is required",
+      "passwordTooShort": "Password must be at least 8 characters long",
+      "passwordMismatch": "Passwords do not match",
+      "loading": "Creating account...",
+      "verifyTitle": "Verify your email",
+      "verifySubtitle": "We sent a verification code to",
+      "verifyButton": "Verify",
+      "verifying": "Verifying...",
+      "didNotReceiveCode": "Didn't receive the code?",
+      "resendIn": "Resend available in {seconds}s",
+      "resendCode": "Resend code",
       "back": "Go back",
       "email": "Email address",
       "emailPlaceholder": "Enter your email address",
@@ -535,7 +548,14 @@
       "isAdult": "I hereby declare that I am over eighteen years of age.",
       "submit": "Create account",
       "haveAccount": "Already have an account?",
-      "login": "Sign in"
+      "login": "Sign in",
+      "account": "My account",
+      "logout": "Log out",
+      "passwordNeedsLetterAndNumber": "Password must contain at least one letter and one number",
+      "passwordWeak": "Weak password",
+      "passwordMedium": "Medium password",
+      "passwordStrong": "Strong password",
+      "phoneInvalid": "Phone number must contain {length} digits"
     },
     "login": {
       "title": "Sign in to CarDeals",
@@ -548,7 +568,8 @@
       "submit": "Sign in",
       "forgotPassword": "Forgot password / Resend activation email?",
       "noAccount": "Not registered?",
-      "register": "Create account"
+      "register": "Create account",
+      "loading": "Signing in..."
     },
     "forgotPassword": {
       "title": "Forgot password / Resend activation email?",

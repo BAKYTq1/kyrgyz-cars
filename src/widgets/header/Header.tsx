@@ -1,3 +1,63 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import LocaleSwitcher from "../../shared/i18n/LocaleSwitcher";
+import { useI18n } from "../../shared/i18n/I18nProvider";
+import { useAppSelector } from "../../lib/store";
+
+function UserIcon() {
+  return (
+    <svg
+      className="w-5 h-5 text-gray-500"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0zM12 14c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5z"
+      />
+    </svg>
+  );
+}
+
+function UserMenu() {
+  const { t } = useI18n();
+  const { user } = useAppSelector((s) => s.auth);
+
+  return (
+    <Link
+      to="/account"
+      className="flex items-center gap-2 pl-2 pr-3 py-1.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+    >
+      <div className="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center shrink-0">
+        <UserIcon />
+      </div>
+      <span className="text-sm text-gray-700 max-w-[100px] truncate">
+        {user?.first_name || t("common.account")}
+      </span>
+    </Link>
+  );
+}
+
+function MobileUserLinks({ onNavigate }: { onNavigate: () => void }) {
+  const { t } = useI18n();
+  const { user } = useAppSelector((s) => s.auth);
+
+  return (
+    <Link
+      to="/account"
+      onClick={onNavigate}
+      className="flex items-center gap-3 border border-gray-300 rounded-lg py-2.5 px-3 text-gray-700"
+    >
+      <div className="w-7 h-7 bg-gray-100 rounded-full flex items-center justify-center shrink-0">
+        <UserIcon />
+      </div>
+      {user?.first_name || t("common.account")}
+    </Link>
+  );
+}
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LocaleSwitcher from '../../shared/i18n/LocaleSwitcher'
