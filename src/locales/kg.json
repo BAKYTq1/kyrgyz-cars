@@ -3,6 +3,7 @@
     "search": "Издөө",
     "login": "Кирүү",
     "register": "Катталуу",
+    "account": "Жеке кабинет",
     "all": "Баары",
     "archive": "Архив"
   },
@@ -17,7 +18,8 @@
     "navAbout": "Биз жөнүндө",
     "navContacts": "Байланыш",
     "hours": "Дш-Жм 10:00-22:00 CET",
-    "mobileSearch": "Издөө..."
+    "mobileSearch": "Издөө...",
+    "navMyOrders": "Менин буйрутмаларым"
   },
   "hero": {
     "tags": [
@@ -499,7 +501,18 @@
       "title": "BidCars'ка кош келиңиз",
       "subtitle": "Аккаунтуңузду орнотуп, биринчи ставкаларыңызды жасай баштаңыз!",
       "stepOf": "Кадам",
-      "stepTotal": "/ 2",
+      "stepTotal": "/ 3",
+      "passwordRequired": "Сырсөз милдеттүү",
+      "passwordTooShort": "Сырсөз кеминде 8 белгиден турушу керек",
+      "passwordMismatch": "Сырсөздөр дал келбейт",
+      "loading": "Катталып жатат...",
+      "verifyTitle": "Почтаңызды ырастаңыз",
+      "verifySubtitle": "Биз ырастоо кодун бул дарекке жөнөттүк:",
+      "verifyButton": "Ырастоо",
+      "verifying": "Текшерилип жатат...",
+      "didNotReceiveCode": "Код келбедиби?",
+      "resendIn": "{seconds} сек. ичинде кайра жөнөтүлөт",
+      "resendCode": "Кодду кайра жөнөтүү",
       "back": "Артка",
       "email": "Электрондук почта",
       "emailPlaceholder": "Электрондук почтаңызды киргизиңиз",
@@ -527,7 +540,14 @@
       "isAdult": "Ушуну менен мен он сегиз жаштан чоң экендигимди билдирем.",
       "submit": "Катталуу",
       "haveAccount": "Аккаунтуңуз барбы?",
-      "login": "Кирүү"
+      "login": "Кирүү",
+      "account": "Жеке кабинет",
+      "logout": "Чыгуу",
+      "passwordNeedsLetterAndNumber": "Сырсөз кеминде бир тамга жана бир сан камтышы керек",
+      "passwordWeak": "Алсыз сырсөз",
+      "passwordMedium": "Орточо сырсөз",
+      "passwordStrong": "Ишенимдүү сырсөз",
+      "phoneInvalid": "Сан {length} цифраларды камтышы керек"
     },
     "login": {
       "title": "BidCars'ка кириңиз",
@@ -540,7 +560,8 @@
       "submit": "Кирүү",
       "forgotPassword": "Сырсөздү унуттуңузбу / Активация катын кайра жөнөтүү?",
       "noAccount": "Катталган жоксузбу?",
-      "register": "Катталуу"
+      "register": "Катталуу",
+      "loading": "Кирүү..."
     },
     "forgotPassword": {
       "title": "Сырсөздү унуттуңузбу / Активация катын кайра жөнөтүү?",
