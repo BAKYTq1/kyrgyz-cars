@@ -29,6 +29,43 @@
   gap: 20px;
 }
 
+.mobileToolbar {
+  display: none;
+}
+
+.filtersOverlay {
+  display: none;
+}
+
+.mobileToolButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  height: 42px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 4px;
+  background: #fff;
+  color: #242b35;
+  box-shadow: 0 2px 7px rgb(15 23 42 / 6%);
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+
+  svg {
+    width: 21px;
+    height: 21px;
+    flex: 0 0 auto;
+    fill: none;
+    stroke: #7295bf;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
 .cardsGrid {
   display: flex;
   flex-direction: column;
@@ -85,4 +122,64 @@
     color: #ffffff;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
   }
+}
+
+@media (max-width: 767px) {
+  .catalogWrapper {
+    padding: 12px 0 28px;
+    background: #f4f6f8;
+  }
+
+  .container {
+    display: block;
+    padding: 0 12px;
+  }
+
+  .sidebarColumn {
+    display: none;
+  }
+
+  .contentColumn {
+    gap: 12px;
+  }
+
+  .mobileToolbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+  }
+
+  .filtersOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end;
+    background: rgb(15 23 42 / 48%);
+    backdrop-filter: blur(2px);
+    animation: overlayIn 160ms ease-out;
+  }
+
+  .filtersDrawer {
+    width: min(92vw, 370px);
+    height: 100%;
+    overflow-y: auto;
+    background: #fff;
+    box-shadow: -10px 0 35px rgb(15 23 42 / 18%);
+    animation: drawerIn 220ms ease-out;
+
+    > * {
+      min-height: 100%;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+}
+
+@keyframes drawerIn {
+  from { transform: translateX(100%); }
 }

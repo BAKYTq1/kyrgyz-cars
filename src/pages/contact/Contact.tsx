@@ -53,7 +53,7 @@ const reviewsData: Review[] = [
     id: 1,
     platform: 'google',
     rating: 5,
-    text: 'Fantastic auto USA firm. BidCars team helped me with every step.',
+    text: 'Fantastic auto USA firm. CarDeals team helped me with every step.',
     name: 'Yaroslav Waliszewski',
     date: '2 месяца назад',
     avatar: teamImg1,
@@ -143,7 +143,7 @@ function useCardsPerPage(containerRef: React.RefObject<HTMLDivElement | null>) {
 
 const teamMembers = [
   {
-    name: 'Patryk Szweicki',
+    name: 'Patryk Szwałek',
     roleKey: 'contact.team.roles.leadCustomerManager',
     image: teamImg1,
   },
@@ -158,7 +158,7 @@ const teamMembers = [
     image: teamImg3,
   },
   {
-    name: 'Grażyna',
+    name: 'Gracjan',
     roleKey: 'contact.team.roles.customerServiceSpecialist',
     image: teamImg1,
   },
@@ -417,7 +417,7 @@ export default function Contact() {
                 </svg>
               </div>
               <div className="text-sm">
-                <p className="font-black">BidCars</p>
+                <p className="font-black">CarDeals</p>
                 <p className="mt-2 leading-6 text-slate-600">
                   Wierzbowa 28/46, 45-045 Poznan, Poland
                   <br />
@@ -429,7 +429,7 @@ export default function Contact() {
 
           <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
             <iframe
-              title="BidCars map"
+              title="CarDeals map"
               className="h-[320px] w-full md:h-[390px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -438,22 +438,29 @@ export default function Contact() {
           </div>
         </div>
 
-        <section className="mt-12">
-          <h2 className="text-xl font-black">{t('contact.team.title')}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600">
+        <section className="mt-12 overflow-hidden">
+          <h2 className="text-2xl font-black tracking-tight md:text-xl">{t('contact.team.title')}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-[1.55] text-slate-500 md:mt-3 md:leading-6 md:text-slate-600">
             {t('contact.team.text')}
           </p>
 
-          <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto mt-8 grid max-w-[320px] grid-cols-2 gap-3 md:mt-7 md:max-w-none md:gap-5 lg:grid-cols-4">
             {teamMembers.map((member) => (
-              <article key={member.name} className="rounded-lg bg-white p-4 shadow-sm">
+              <article
+                key={member.name}
+                className="min-w-0 rounded-md bg-[#f7f7f9] p-5 md:rounded-lg md:bg-white md:p-4 md:shadow-sm"
+              >
                 <img
-                  className="h-48 w-full rounded-md object-cover object-center"
+                  className="h-28 w-full rounded-md object-cover object-center sm:h-36 md:h-48"
                   src={member.image}
                   alt={member.name}
                 />
-                <h3 className="mt-4 text-sm font-black">{member.name}</h3>
-                <p className="mt-2 text-xs leading-5 text-slate-500">{t(member.roleKey)}</p>
+                <h3 className="mt-4 break-words text-base font-bold leading-5 md:text-sm md:font-black">
+                  {member.name}
+                </h3>
+                <p className="mt-1 break-words text-sm leading-5 text-slate-500 md:mt-2 md:text-xs">
+                  {t(member.roleKey)}
+                </p>
               </article>
             ))}
           </div>

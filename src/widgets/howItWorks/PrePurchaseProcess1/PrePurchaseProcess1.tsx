@@ -1,6 +1,6 @@
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 
-const carImage = "https://placehold.co/400x250/e8f0fe/2196f3?text=BidCars";
+const carImage = "https://tse3.mm.bing.net/th/id/OIP.38kAPqXaO8Lm5AF1D4ysOQHaE8?pid=Api&h=220&P=0";
 
 interface StepData {
   num: string;
@@ -54,6 +54,7 @@ function StepCard({ step }: { step: StepData }) {
 }
 
 export function PrePurchaseProcess1({ _onNavigateToPhase }: { _onNavigateToPhase?: (phase: number) => void } = {}) {
+  void _onNavigateToPhase;
   const { t, tl } = useI18n();
 
   const steps: StepData[] = Array.from({ length: 4 }, (_, i) => ({

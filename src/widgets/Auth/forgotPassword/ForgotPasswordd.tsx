@@ -54,7 +54,7 @@ function Slideshow({
         <img
           key={index}
           src={slide.image}
-          alt="BidCars Background"
+          alt="CarDeals Background"
           className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 select-none"
           style={{ opacity: index === current ? 1 : 0 }}
         />

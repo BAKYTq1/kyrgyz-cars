@@ -133,7 +133,7 @@ export const patchMeThunk = createAsyncThunk(
 
 export const logoutThunk = createAsyncThunk(
   "auth/logout",
-  async (_, { rejectWithValue }) => {
+  async () => {
     try {
       await apiFetch("/logout/", { method: "POST" });
     } catch {

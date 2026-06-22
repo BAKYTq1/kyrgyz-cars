@@ -64,8 +64,16 @@
     "timerPrefix": "Left"
   },
   "about": {
-    "title": "Meet BidCars",
+    "title": "Meet CarDeals",
     "subtitle": "We are experts in importing vehicles from the USA, and our passion and knowledge in this field have been growing since 2015.",
+    "button": "About Us",
+    "gallery": {
+      "alt1": "Office and computers for ordering cars",
+      "alt2": "CarDeals car carrier trucks",
+      "alt3": "Presentation of a sports car at the exhibition",
+      "alt4": "Loading cars into a sea container",
+      "alt5": "Transportation of passenger cars"
+    },
     "stats": {
       "dailyBids": "Daily bids",
       "importedVehicles": "Imported vehicles",
@@ -80,7 +88,7 @@
     "auctions": {
       "title": "Auctions",
       "text": "Our company has been purchasing and transporting cars from the United States since 2015. Since then, we have successfully imported thousands of vehicles from different parts of North America. In addition to cars, we also import motorcycles, ATVs and jet skis. We serve private clients, dealers and wholesale buyers.",
-      "textSecond": "Thanks to our long-term cooperation with foreign companies, we can guarantee the best agreed rates for sea and land transport. At BidCars, we focus on transparent and convenient purchasing, so transport costs are known before placing a bid. Our website includes a calculator that estimates the total transaction cost and helps avoid hidden fees."
+      "textSecond": "Thanks to our long-term cooperation with foreign companies, we can guarantee the best agreed rates for sea and land transport. At CarDeals, we focus on transparent and convenient purchasing, so transport costs are known before placing a bid. Our website includes a calculator that estimates the total transaction cost and helps avoid hidden fees."
     },
     "deliveryCards": {
       "seaShipping": {
@@ -89,7 +97,7 @@
       },
       "customs": {
         "title": "Customs clearance",
-        "text": "At the port of Rotterdam, BidCars works with customs agencies to keep the clearance process moving without delays."
+        "text": "At the port of Rotterdam, CarDeals works with customs agencies to keep the clearance process moving without delays."
       },
       "homeDelivery": {
         "title": "Home delivery",
@@ -117,11 +125,11 @@
       "message": {
         "title": "Send a message",
         "text": "Write to us and we will prepare a detailed reply.",
-        "meta": "support@bidcars.eu",
+        "meta": "support@CarDeals.eu",
         "action": "Write"
       }
     },
-    "supportNote": "BidCars support is available to active platform users for important details about bidding, purchasing and vehicle delivery.",
+    "supportNote": "CarDeals support is available to active platform users for important details about bidding, purchasing and vehicle delivery.",
     "location": {
       "title": "Our location",
       "text": "We work throughout the European Union. By clicking the point, you can see our main office and build a route."
@@ -157,18 +165,18 @@
       "blog": "Blog"
     },
     "faq": {
-      "processQuestion": "Is the process of buying and importing cars through BidCars complicated?",
-      "processAnswer": "The car purchase process through the BidCars platform is simple and transparent. The key requirement is basic website navigation skills, including placing auction bids, paying a deposit, and making international transfers in USD and EUR through your own bank. We handle all formalities for the client: communication with the auction house, documents, transport in the USA, container loading and unloading, customs clearance and delivery to the specified address.",
-      "biddingQuestion": "Do I personally participate in live bidding when using your service, or does BidCars bid on my behalf?",
-      "biddingAnswer": "When using our service, you do not bid live personally. Instead, you delegate the bid on our website by entering the maximum amount you are ready to offer on the selected vehicle page. This amount is confidential and visible only to BidCars before the auction starts. If your amount is high enough, we represent your interests during the live auction within your maximum bid.",
-      "calculatorQuestion": "Is the fee calculator available on the BidCars website accurate?",
+      "processQuestion": "Is the process of buying and importing cars through CarDeals complicated?",
+      "processAnswer": "The car purchase process through the CarDeals platform is simple and transparent. The key requirement is basic website navigation skills, including placing auction bids, paying a deposit, and making international transfers in USD and EUR through your own bank. We handle all formalities for the client: communication with the auction house, documents, transport in the USA, container loading and unloading, customs clearance and delivery to the specified address.",
+      "biddingQuestion": "Do I personally participate in live bidding when using your service, or does CarDeals bid on my behalf?",
+      "biddingAnswer": "When using our service, you do not bid live personally. Instead, you delegate the bid on our website by entering the maximum amount you are ready to offer on the selected vehicle page. This amount is confidential and visible only to CarDeals before the auction starts. If your amount is high enough, we represent your interests during the live auction within your maximum bid.",
+      "calculatorQuestion": "Is the fee calculator available on the CarDeals website accurate?",
       "calculatorAnswer": "The calculator gives an estimated import cost based on available auction and logistics data. The final cost can change because of exchange rates, bank fees, storage, late payment penalties, or document-related fees.",
       "support": {
         "title": "Support and Consultation",
-        "q1": "How can I contact BidCars support?",
+        "q1": "How can I contact CarDeals support?",
         "a1": "You can contact support through online chat, email, or phone. Our team helps with platform use, bidding questions, payments, documents, and delivery updates.",
-        "q2": "Can BidCars help me choose a vehicle?",
-        "a2": "BidCars provides tools, vehicle data, and consultation, but the final purchase decision, budget, and risk assessment remain with the client.",
+        "q2": "Can CarDeals help me choose a vehicle?",
+        "a2": "CarDeals provides tools, vehicle data, and consultation, but the final purchase decision, budget, and risk assessment remain with the client.",
         "q3": "Can I get additional information about a vehicle?",
         "a3": "Available vehicle data is shown on the lot page. If reports or additional photos are available, support can help you find them before bidding.",
         "q4": "Do you inspect vehicles before the auction?",
@@ -181,17 +189,17 @@
         "q1": "How much does it cost to import a vehicle?",
         "a1": "The total import cost depends on the auction price, auction fees, inland transport in the USA, ocean shipping, customs clearance, taxes, port handling, and delivery to the final address.",
         "q2": "Do you offer home delivery?",
-        "a2": "Yes. After the vehicle reaches Europe and customs procedures are completed, BidCars can organize delivery to the address selected by the client.",
+        "a2": "Yes. After the vehicle reaches Europe and customs procedures are completed, CarDeals can organize delivery to the address selected by the client.",
         "q3": "To which ports do you ship vehicles?",
-        "a3": "Vehicles are usually shipped to major European ports used by BidCars logistics partners. The destination port depends on country, route availability, and the best current transport option.",
+        "a3": "Vehicles are usually shipped to major European ports used by CarDeals logistics partners. The destination port depends on country, route availability, and the best current transport option.",
         "q4": "When will I receive the vehicle documents?",
         "a4": "Documents are prepared and transferred after the auction house releases them and all required payments are completed.",
         "q5": "Where can I check the vehicle status?",
-        "a5": "The vehicle status can be checked in your BidCars account. Important updates are also sent by the support team.",
+        "a5": "The vehicle status can be checked in your CarDeals account. Important updates are also sent by the support team.",
         "q6": "Can I request additional inspections or photos of the vehicle at the port terminal?",
         "a6": "Additional photos or inspection requests may be possible depending on the terminal and vehicle location.",
-        "q7": "Is it possible to use your export services for vehicles that were not purchased directly through BidCars?",
-        "a7": "In selected cases, BidCars can help with export or logistics for vehicles purchased outside the platform."
+        "q7": "Is it possible to use your export services for vehicles that were not purchased directly through CarDeals?",
+        "a7": "In selected cases, CarDeals can help with export or logistics for vehicles purchased outside the platform."
       },
       "formal": {
         "title": "Formal Aspects and Rules",
@@ -216,8 +224,8 @@
         "a3": "Bank transfer fees are usually charged by the client bank and are not included in the auction invoice.",
         "q4": "Can I pay by card?",
         "a4": "Vehicle payment normally requires bank transfer. Some smaller platform-related payments may depend on available payment methods.",
-        "q5": "When do I pay the BidCars commission?",
-        "a5": "The BidCars commission is paid separately according to the instructions provided after the vehicle is purchased."
+        "q5": "When do I pay the CarDeals commission?",
+        "a5": "The CarDeals commission is paid separately according to the instructions provided after the vehicle is purchased."
       },
       "deposit": {
         "title": "Deposit",
@@ -315,15 +323,15 @@
     "pre": {
       "heroTitle": "Car buying process",
       "heroSubtitle": "Interested in importing cars from the USA? Read our guide on how the car buying process works on our site. We explain everything important step by step. US auctions will no longer be a mystery to you.",
-      "introTitle": "4 steps to buying a car with BidCars",
-      "introP1": "To make the process of importing cars from the USA clear and transparent, we created BidCars. Auctions are held without intermediaries, without hidden costs — you make all the decisions yourself! You choose the car and the amount you are willing to pay, and we help you win the auction! Important: there are no costs in BidCars until you win the bid.",
-      "introP2": "Registration and participation in the auction are free! We only require a refundable deposit to secure your bids! BidCars makes it quick and easy to order, buy and deliver cars, including door-to-door delivery. BidCars is 100% transparency and full control over the location of your car.",
+      "introTitle": "4 steps to buying a car with CarDeals",
+      "introP1": "To make the process of importing cars from the USA clear and transparent, we created CarDeals. Auctions are held without intermediaries, without hidden costs — you make all the decisions yourself! You choose the car and the amount you are willing to pay, and we help you win the auction! Important: there are no costs in CarDeals until you win the bid.",
+      "introP2": "Registration and participation in the auction are free! We only require a refundable deposit to secure your bids! CarDeals makes it quick and easy to order, buy and deliver cars, including door-to-door delivery. CarDeals is 100% transparency and full control over the location of your car.",
       "steps": [
         {
           "num": "STEP 1",
           "title": "Find your dream car",
           "body": [
-            "Choose from over 450,000 listings. Our search engine and detailed filters will help you easily find the car you need in our database. You don't need to create an account at BidCars to browse cars and auctions.",
+            "Choose from over 450,000 listings. Our search engine and detailed filters will help you easily find the car you need in our database. You don't need to create an account at CarDeals to browse cars and auctions.",
             "An account is only needed to participate in the auction. The registration process is simple and will take no more than 5 minutes."
           ],
           "listTitle": "After creating an account you will also get:",
@@ -353,14 +361,14 @@
           "num": "STEP 3",
           "title": "The auction starts — feel the excitement of bidding!",
           "body": [
-            "Specify the maximum amount you are willing to pay for the car. The BidCars calculator will show a preliminary list of expenses. The car will be put up for auction on your behalf.",
+            "Specify the maximum amount you are willing to pay for the car. The CarDeals calculator will show a preliminary list of expenses. The car will be put up for auction on your behalf.",
             "US auctions take place in two stages:"
           ],
           "list": [
             "Pre-Bids — placed several days before the start, open 5 days before the main auction.",
             "Live auction — starts from the highest pre-bid. The one who offered more wins."
           ],
-          "footer": "BidCars represents you at the live auction within your set maximum. This allows you to buy a car at the lowest possible price."
+          "footer": "CarDeals represents you at the live auction within your set maximum. This allows you to buy a car at the lowest possible price."
         },
         {
           "num": "STEP 4",
@@ -383,8 +391,8 @@
         {
           "title": "Car bid accepted",
           "payment": false,
-          "description": "After winning the car and logging into the BidCars personal account, the auction status changes to \"Car won\". This means the bid was accepted — it's time to open a bottle of champagne!",
-          "imageCaption": "2015 Audi S3 — \"Car won\" status on BidCars"
+          "description": "After winning the car and logging into the CarDeals personal account, the auction status changes to \"Car won\". This means the bid was accepted — it's time to open a bottle of champagne!",
+          "imageCaption": "2015 Audi S3 — \"Car won\" status on CarDeals"
         },
         {
           "title": "Payment for the car",
@@ -403,7 +411,7 @@
         {
           "title": "Car transportation updates",
           "payment": false,
-          "description": "The \"Transport\" tab in the BidCars personal account provides information about:",
+          "description": "The \"Transport\" tab in the CarDeals personal account provides information about:",
           "bullets": [
             "Car pickup from the auction house,",
             "Car delivery to the shipping terminal,",
@@ -440,11 +448,11 @@
           "quote": "Customs clearance authorization for 2015 Audi S3 has been sent to your email address. Please fill in the form within 3 days."
         },
         {
-          "title": "BidCars commission fee",
+          "title": "CarDeals commission fee",
           "payment": true,
-          "description": "A few days before arrival in Europe, a link to pay the BidCars service fee is sent. Payment can be made via instant bank transfer or credit card (Stripe-based).",
-          "quote": "Your car is on its way and will soon arrive at the port in Europe. Expected arrival date is Monday, December 11, 2023. Please make payment for our logistics services:\n\nhttps://payments.bid.cars/en/fee/WAULC68E14A227038/482925780\n\nBest regards, BidCars.",
-          "imageCaption": "BidCars payment portal"
+          "description": "A few days before arrival in Europe, a link to pay the CarDeals service fee is sent. Payment can be made via instant bank transfer or credit card (Stripe-based).",
+          "quote": "Your car is on its way and will soon arrive at the port in Europe. Expected arrival date is Monday, December 11, 2023. Please make payment for our logistics services:\n\nhttps://payments.bid.cars/en/fee/WAULC68E14A227038/482925780\n\nBest regards, CarDeals.",
+          "imageCaption": "CarDeals payment portal"
         },
         {
           "title": "Customs clearance invoice",
@@ -464,7 +472,7 @@
           "title": "Car pickup confirmation",
           "payment": false,
           "description": "After the car is picked up, an email and SMS are sent with pickup confirmation, transport company phone number and amount due.",
-          "quote": "2015 Audi S3 has been picked up from the port. BidCars transport company (+48 726 099 099). The driver will contact you regarding delivery. Please prepare 450 EUR — cash payment to the driver."
+          "quote": "2015 Audi S3 has been picked up from the port. CarDeals transport company (+48 726 099 099). The driver will contact you regarding delivery. Please prepare 450 EUR — cash payment to the driver."
         },
         {
           "title": "Car document scans",
@@ -483,13 +491,13 @@
           "payment": false,
           "description": "Upon dispatch, an SMS notification is automatically generated informing about the shipment.",
           "quote": "Documents for 2015 Audi S3 are scheduled for dispatch on Thursday (2023-12-21). DPD courier (1000667692324U).",
-          "imageCaption": "BidCars document envelope"
+          "imageCaption": "CarDeals document envelope"
         },
         {
-          "title": "BidCars service completion",
+          "title": "CarDeals service completion",
           "payment": false,
-          "description": "Completion of BidCars service means successful completion of all transaction stages — from winning the auction to delivering the car and documents. Clients can count on support at every step.",
-          "extra": "BidCars ensures full transparency and provides detailed service reporting, guaranteeing clarity and honesty.",
+          "description": "Completion of CarDeals service means successful completion of all transaction stages — from winning the auction to delivering the car and documents. Clients can count on support at every step.",
+          "extra": "CarDeals ensures full transparency and provides detailed service reporting, guaranteeing clarity and honesty.",
           "isCompletion": true
         }
       ]
@@ -498,7 +506,7 @@
   "auth": {
     "published": "Published on",
     "registration": {
-      "title": "Welcome to BidCars",
+      "title": "Welcome to CarDeals",
       "subtitle": "Set up your account and start placing your first bids!",
       "stepOf": "Step",
       "stepTotal": "/ 3",
@@ -532,7 +540,7 @@
       "passwordPlaceholder": "Enter your password",
       "confirmPassword": "Confirm password",
       "confirmPasswordPlaceholder": "Confirm your password",
-      "promoEmails": "I want to receive BidCars promotional emails",
+      "promoEmails": "I want to receive CarDeals promotional emails",
       "agreeTerms": "I agree to the",
       "terms": "Terms",
       "agreeOrderTerms": "I agree to the",
@@ -550,7 +558,7 @@
       "phoneInvalid": "Phone number must contain {length} digits"
     },
     "login": {
-      "title": "Sign in to BidCars",
+      "title": "Sign in to CarDeals",
       "subtitle": "Enter your details below.",
       "email": "Email address",
       "emailPlaceholder": "Enter your email address",
@@ -584,17 +592,6 @@
     }
   },
 
-  "about": {
-    "title": "We load, unload and transport containers",
-    "button": "About Us",
-    "gallery": {
-      "alt1": "Office and computers for ordering cars",
-      "alt2": "BidCars car carrier trucks",
-      "alt3": "Presentation of a sports car at the exhibition",
-      "alt4": "Loading cars into a sea container",
-      "alt5": "Transportation of passenger cars"
-    }
-  },
   "featuredLots": {
     "activeTitle": "Active Lots",
     "moreTitle": "More Lots",
@@ -697,6 +694,82 @@
     "primaryDamage": "Primary Damage",
     "transmission": "Transmission",
     "auction": "Auction",
+    "sortBy": "Sort by",
+    "close": "Close filters",
+    "catalogFilter": {
+      "range": "Range",
+      "estimatedPrice": "Estimated price, $",
+      "saleType": "Sale type",
+      "mileage": "Mileage",
+      "lotCategory": "Lot category",
+      "bodyType": "Body type",
+      "fuel": "Fuel",
+      "condition": "Condition",
+      "vehicleType": "Vehicle type",
+      "color": "Color",
+      "documents": "Documents",
+      "engineVolume": "Engine displacement, L",
+      "enginePower": "Engine power, hp",
+      "engineType": "Engine type",
+      "drive": "Drive",
+      "cylinders": "Cylinders",
+      "all": "All",
+      "open": "Open",
+      "buyNow": "Buy now",
+      "withDocumentsNoDamage": "Documented and undamaged",
+      "minorDamage": "Minor damage",
+      "runAndDrive": "Run and drive",
+      "suv": "SUV",
+      "sedan": "Sedan",
+      "wagon": "Wagon",
+      "pickup": "Pickup",
+      "minivan": "Minivan",
+      "coupe": "Coupe",
+      "convertible": "Convertible",
+      "hatchback": "Hatchback",
+      "van": "Van",
+      "cvt": "CVT",
+      "robot": "Automated manual",
+      "gasoline": "Gasoline",
+      "diesel": "Diesel",
+      "hybrid": "Hybrid",
+      "electric": "Electric",
+      "gas": "Gas",
+      "flexFuel": "Flex fuel",
+      "other": "Other",
+      "starts": "Starts",
+      "doesNotStart": "Does not start",
+      "damaged": "Damaged",
+      "noDamage": "Undamaged",
+      "repaired": "Repaired",
+      "passenger": "Passenger car",
+      "truck": "Truck",
+      "motorcycle": "Motorcycle",
+      "waterTransport": "Watercraft",
+      "bus": "Bus",
+      "specialEquipment": "Special equipment",
+      "rv": "RV",
+      "black": "Black",
+      "white": "White",
+      "silver": "Silver",
+      "gray": "Gray",
+      "red": "Red",
+      "blue": "Blue",
+      "green": "Green",
+      "brown": "Brown",
+      "beige": "Beige",
+      "cleanTitle": "Clean title",
+      "salvageTitle": "Salvage title",
+      "rebuiltTitle": "Rebuilt title",
+      "noDocuments": "No documents",
+      "vEngine": "V engine",
+      "inlineEngine": "Inline engine",
+      "electricEngine": "Electric motor",
+      "frontWheel": "Front-wheel drive",
+      "rearWheel": "Rear-wheel drive",
+      "allWheel": "All-wheel drive",
+      "noCylinders": "No cylinders"
+    },
     "engineStatuses": {
       "all": "All",
       "run": "Run & Drive",
