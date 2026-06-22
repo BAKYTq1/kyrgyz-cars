@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LocaleSwitcher from "../../shared/i18n/LocaleSwitcher";
 import { useI18n } from "../../shared/i18n/I18nProvider";
 import { useAppSelector } from "../../lib/store";
+import logo from "../../assets/logotip.png";
 
 function UserIcon() {
   return (
@@ -68,12 +69,13 @@ export default function Header() {
     <header className="bg-white text-gray-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <div className="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white text-lg font-bold">D</span>
+          <div className="w-[150px] h-11 flex items-center justify-center">
+            <img
+              src={logo}
+              alt="CarDeals"
+              className="w-full h-11 object-contain"
+            />
           </div>
-          <span className="text-xl font-bold text-gray-900 tracking-wide">
-            DEALCARS
-          </span>
         </Link>
 
         <div className="hidden md:flex flex-1 max-w-2xl border border-gray-300 rounded-lg overflow-hidden">
