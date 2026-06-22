@@ -12,8 +12,9 @@ import styles from './AuctionCatalog.module.scss'
 export default function AuctionCatalog() {
   const dispatch = useAppDispatch()
   const { list, loading } = useAppSelector(state => state.lots)
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const [activeTab, setActiveTab] = useState<string>('all')
+  const [filtersOpen, setFiltersOpen] = useState(false)
   const { t } = useI18n()
   
   // Лимит отображаемых карточек за раз
@@ -33,6 +34,23 @@ export default function AuctionCatalog() {
     // Сбрасываем лимит до 30 при изменении фильтров, чтобы не прыгал скролл
     setVisibleCount(30)
   }, [dispatch, searchParams])
+
+  useEffect(() => {
+    if (!filtersOpen) return
+
+    const previousOverflow = document.body.style.overflow
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setFiltersOpen(false)
+    }
+
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', closeOnEscape)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [filtersOpen])
 
   // Фильтруем лоты по табам (клиентская часть)
   const filteredLots = (list as Car[]).filter((car) => {
@@ -58,6 +76,27 @@ export default function AuctionCatalog() {
         </aside>
 
         <main className={styles.contentColumn}>
+          <div className={styles.mobileToolbar}>
+            <button
+              type="button"
+              className={styles.mobileToolButton}
+              onClick={() => setFiltersOpen(true)}
+              aria-expanded={filtersOpen}
+              aria-controls="mobile-catalog-filters"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h16M7 12h10M10 18h4" />
+              </svg>
+              <span>{t('filters.title')}</span>
+            </button>
+            <button type="button" className={styles.mobileToolButton}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 7h10M4 12h7M4 17h4M17 6v12m0 0-3-3m3 3 3-3" />
+              </svg>
+              <span>{t('filters.sortBy')}</span>
+            </button>
+          </div>
+
           <CatalogTabs activeTab={activeTab} setActiveTab={setActiveTab} />
           
           {loading ? (
@@ -89,6 +128,25 @@ export default function AuctionCatalog() {
         </main>
 
       </div>
+
+      {filtersOpen && (
+        <div
+          className={styles.filtersOverlay}
+          role="presentation"
+          onMouseDown={() => setFiltersOpen(false)}
+        >
+          <div
+            id="mobile-catalog-filters"
+            className={styles.filtersDrawer}
+            role="dialog"
+            aria-modal="true"
+            aria-label={t('filters.title')}
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <FilterSidebar onClose={() => setFiltersOpen(false)} />
+          </div>
+        </div>
+      )}
     </section>
   )
 }

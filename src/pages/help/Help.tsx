@@ -41,7 +41,13 @@ const purchaseFaqsConfig = [
   },
 ];
 
-// FAQ data will be populated dynamically from i18n
+const helpSectionsConfig = [
+  { key: 'support', titleKey: 'help.faq.support.title', itemCount: 5 },
+  { key: 'delivery', titleKey: 'help.faq.delivery.title', itemCount: 7 },
+  { key: 'formal', titleKey: 'help.faq.formal.title', itemCount: 5 },
+  { key: 'payments', titleKey: 'help.faq.payments.title', itemCount: 5 },
+  { key: 'deposit', titleKey: 'help.faq.deposit.title', itemCount: 5 },
+] as const;
 
 function MenuIcon({ name }: { name: string }) {
   const common = {
@@ -91,7 +97,7 @@ function MenuIcon({ name }: { name: string }) {
 
 export default function Help() {
   const { t } = useI18n();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openFaq, setOpenFaq] = useState<string | null>(null);
   
   const mainMenu: MenuItem[] = mainMenuConfig.map((item) => ({
     ...item,
@@ -108,11 +114,27 @@ export default function Help() {
     answer: t(item.answerKey),
   }));
 
+  const helpSections = [
+    {
+      key: 'purchase',
+      title: t('help.title'),
+      faqs: purchaseFaqsData,
+    },
+    ...helpSectionsConfig.map((section) => ({
+      key: section.key,
+      title: t(section.titleKey),
+      faqs: Array.from({ length: section.itemCount }, (_, index) => ({
+        question: t(`help.faq.${section.key}.q${index + 1}`),
+        answer: t(`help.faq.${section.key}.a${index + 1}`),
+      })),
+    })),
+  ];
+
   return (
-    <section className="min-h-screen bg-[#f4f5f7] py-6 text-[#0f2740]">
-      <div className="mx-auto grid w-[min(1160px,calc(100%-32px))] gap-6 md:grid-cols-[280px_minmax(0,1fr)]">
-        <aside className="space-y-6">
-          <nav className="overflow-hidden rounded border border-[#d9e0e7] bg-white">
+    <section className="min-h-screen bg-[#f4f5f7] py-4 text-[#0f2740] md:py-6">
+      <div className="mx-auto grid w-[min(1160px,calc(100%-24px))] gap-10 md:w-[min(1160px,calc(100%-32px))] md:grid-cols-[280px_minmax(0,1fr)] md:gap-6">
+        <aside className="space-y-4 md:space-y-6">
+          <nav className="hidden overflow-hidden rounded border border-[#d9e0e7] bg-white md:block">
             {mainMenu.map((item, index) => {
               const className = `flex min-h-[60px] w-full items-center gap-3 border-b border-[#d9e0e7] px-4 text-left text-[13px] font-bold leading-4 text-[#0f2740] last:border-b-0 ${
                 index === 0 ? 'border-l-2 border-l-[#1677d2] bg-white' : 'hover:bg-slate-50'
@@ -138,7 +160,7 @@ export default function Help() {
             })}
             <button
               type="button"
-              onClick={() => setOpenIndex(null)}
+              onClick={() => setOpenFaq(null)}
               className="block w-full px-4 pb-2 text-right text-[11px] font-medium text-[#1677d2]"
             >
               {t('help.showAll')}
@@ -184,34 +206,41 @@ export default function Help() {
           </nav>
         </aside>
 
-        <main>
-          <h1 className="mb-3 text-[19px] font-medium text-[#0f2740]">{t('help.title')}</h1>
+        <main className="min-w-0 space-y-9">
+          {helpSections.map((section, sectionIndex) => (
+            <section key={section.key} className={sectionIndex === 0 ? undefined : 'md:hidden'}>
+              <h2 className="mb-3 text-[19px] font-medium text-[#0f2740]">{section.title}</h2>
 
-          <div className="space-y-2">
-            {purchaseFaqsData.map((faq, index) => {
-              const isOpen = openIndex === index;
-              return (
-                <article key={faq.question} className="bg-white">
-                  <button
-                    type="button"
-                    onClick={() => setOpenIndex(isOpen ? null : index)}
-                    className="flex min-h-[48px] w-full items-center justify-between gap-4 px-5 text-left text-[13px] font-medium leading-5 text-[#0f2740] hover:bg-[#fbfcfe]"
-                  >
-                    <span>{faq.question}</span>
-                    <span className="shrink-0 text-lg leading-none text-[#7e99b4]">
-                      {isOpen ? '−' : '+'}
-                    </span>
-                  </button>
+              <div className="space-y-2">
+                {section.faqs.map((faq, index) => {
+                  const faqKey = `${section.key}-${index}`;
+                  const isOpen = openFaq === faqKey;
 
-                  {isOpen && (
-                    <div className="border-t border-[#eef1f4] px-5 pb-5 pt-3 text-[13px] leading-6 text-[#58718c]">
-                      {faq.answer}
-                    </div>
-                  )}
-                </article>
-              );
-            })}
-          </div>
+                  return (
+                    <article key={faqKey} className="bg-white">
+                      <button
+                        type="button"
+                        onClick={() => setOpenFaq(isOpen ? null : faqKey)}
+                        aria-expanded={isOpen}
+                        className="flex min-h-[48px] w-full items-center justify-between gap-4 px-5 text-left text-[13px] font-medium leading-5 text-[#0f2740] hover:bg-[#fbfcfe]"
+                      >
+                        <span>{faq.question}</span>
+                        <span className="shrink-0 text-lg leading-none text-[#7e99b4]">
+                          {isOpen ? '−' : '+'}
+                        </span>
+                      </button>
+
+                      {isOpen && (
+                        <div className="border-t border-[#eef1f4] px-5 pb-5 pt-3 text-[13px] leading-6 text-[#58718c]">
+                          {faq.answer}
+                        </div>
+                      )}
+                    </article>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
         </main>
       </div>
     </section>

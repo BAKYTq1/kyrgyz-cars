@@ -1,127 +1,203 @@
-import { useState } from 'react'
+import type { ReactNode } from 'react'
 import { useI18n } from '../../shared/i18n/I18nProvider'
 import styles from './FilterSidebar.module.scss'
 
-export default function FilterSidebar() {
+type ChipOption = {
+  label: string
+  active?: boolean
+  color?: 'blue' | 'red' | 'black' | 'white'
+}
+
+function FilterSection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className={styles.filterBlock}>
+      <h4 className={styles.blockTitle}>{title}</h4>
+      {children}
+    </section>
+  )
+}
+
+function RangeFilter({ from, to, labels }: { from: string; to: string; labels: { range: string; from: string; to: string } }) {
+  return (
+    <div className={styles.rangeFilter}>
+      <input className={styles.rangeSlider} type="range" min="0" max="100" defaultValue="100" aria-label={labels.range} />
+      <div className={styles.rangeGroup}>
+        <input className={styles.rangeInput} defaultValue={from} aria-label={labels.from} />
+        <span className={styles.rangeDash}>—</span>
+        <input className={styles.rangeInput} defaultValue={to} aria-label={labels.to} />
+      </div>
+    </div>
+  )
+}
+
+function Chips({ options }: { options: ChipOption[] }) {
+  return (
+    <div className={styles.chips}>
+      {options.map(({ label, active, color }) => (
+        <button
+          type="button"
+          key={label}
+          className={`${styles.chip} ${active ? styles.activeChip : ''} ${color ? styles[color] : ''}`}
+        >
+          {color && <span className={styles.colorDot} />}
+          {label}
+          <span className={styles.chipInfo}>i</span>
+        </button>
+      ))}
+    </div>
+  )
+}
+
+export default function FilterSidebar({ onClose }: { onClose?: () => void }) {
   const { t } = useI18n()
-  const [activeBrand, setActiveBrand] = useState<string>('')
-  const [engineStatus, setEngineStatus] = useState<string>('all')
+  const f = (key: string) => t(`filters.catalogFilter.${key}`)
+  const rangeLabels = {
+    range: f('range'),
+    from: t('filters.rangeFrom'),
+    to: t('filters.rangeTo'),
+  }
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarHeader}>
         <span className={styles.sidebarTitle}>{t('filters.title')}</span>
-        <button className={styles.clearAllBtn}>{t('filters.clearAll')}</button>
-      </div>
-
-      {/* Блок 1: Поиск Марки */}
-      <div className={styles.filterBlock}>
-        <h4 className={styles.blockTitle}>{t('filters.brand')}</h4>
-        <input 
-          type="text" 
-          placeholder={t('filters.brandPlaceholder')} 
-          className={styles.searchInput} 
-        />
-        <div className={styles.scrollList}>
-          {['Acura', 'Audi', 'BMW', 'Chevrolet', 'Ford', 'Honda', 'Hyundai', 'Kia', 'Lexus', 'Mercedes-Benz', 'Toyota', 'Volkswagen'].map(brand => (
-            <button 
-              key={brand} 
-              className={`${styles.listItem} ${activeBrand === brand ? styles.activeItem : ''}`}
-              onClick={() => setActiveBrand(brand === activeBrand ? '' : brand)}
-            >
-              {brand}
-              {activeBrand === brand && <span className={styles.checkIcon}>✓</span>}
-            </button>
-          ))}
+        <div className={styles.headerActions}>
+          <button type="button" className={styles.clearAllBtn}>{t('filters.clearAll')}</button>
+          {onClose && (
+            <button type="button" className={styles.closeButton} onClick={onClose} aria-label={t('filters.close')}>×</button>
+          )}
         </div>
       </div>
 
-      <hr className={styles.divider} />
+      <div className={styles.filtersBody}>
+        <FilterSection title={f('estimatedPrice')}>
+          <RangeFilter from="0" to="1 000 000" labels={rangeLabels} />
+        </FilterSection>
 
-      {/* Блок 2: Диапазон Года выпуска */}
-      <div className={styles.filterBlock}>
-        <h4 className={styles.blockTitle}>{t('filters.year')}</h4>
-        <div className={styles.rangeGroup}>
-          <input type="number" placeholder={t('filters.rangeFrom')} className={styles.rangeInput} />
-          <span className={styles.rangeDash}>—</span>
-          <input type="number" placeholder={t('filters.rangeTo')} className={styles.rangeInput} />
-        </div>
-      </div>
+        <FilterSection title={t('filters.year')}>
+          <RangeFilter from="1950" to="2027" labels={rangeLabels} />
+        </FilterSection>
 
-      <hr className={styles.divider} />
+        <FilterSection title={f('saleType')}>
+          <Chips options={[
+            { label: f('all'), active: true },
+            { label: f('open') },
+            { label: f('buyNow'), color: 'red' },
+          ]} />
+        </FilterSection>
 
-      {/* Блок 3: Статус двигателя */}
-      <div className={styles.filterBlock}>
-        <h4 className={styles.blockTitle}>{t('filters.engineStatus')}</h4>
-        <div className={styles.statusGroup}>
-          <button 
-            className={`${styles.statusButton} ${engineStatus === 'all' ? styles.activeStatus : ''}`}
-            onClick={() => setEngineStatus('all')}
-          >
-            {t('filters.engineStatuses.all')}
-          </button>
-          <button 
-            className={`${styles.statusButton} ${engineStatus === 'run' ? styles.activeStatus : ''}`}
-            onClick={() => setEngineStatus('run')}
-          >
-            <span className={styles.dotGreen} /> {t('filters.engineStatuses.run')}
-          </button>
-          <button 
-            className={`${styles.statusButton} ${engineStatus === 'stat' ? styles.activeStatus : ''}`}
-            onClick={() => setEngineStatus('stat')}
-          >
-            <span className={styles.dotOrange} /> {t('filters.engineStatuses.stat')}
-          </button>
-        </div>
-      </div>
+        <FilterSection title={f('mileage')}>
+          <RangeFilter from="0" to="500 000" labels={rangeLabels} />
+        </FilterSection>
 
-      <hr className={styles.divider} />
+        <FilterSection title={f('lotCategory')}>
+          <Chips options={[
+            { label: f('all'), active: true },
+            { label: f('withDocumentsNoDamage') },
+            { label: f('minorDamage') },
+            { label: f('runAndDrive') },
+          ]} />
+        </FilterSection>
 
-      {/* Блок 4: Тип повреждения */}
-      <div className={styles.filterBlock}>
-        <h4 className={styles.blockTitle}>{t('filters.primaryDamage')}</h4>
-        <select className={styles.selectInput}>
-          <option value="">{t('filters.damages.any')}</option>
-          <option value="1">{t('filters.damages.front')}</option>
-          <option value="2">{t('filters.damages.rear')}</option>
-          <option value="3">{t('filters.damages.side')}</option>
-          <option value="4">{t('filters.damages.hail')}</option>
-          <option value="5">{t('filters.damages.flood')}</option>
-        </select>
-      </div>
+        <FilterSection title={f('bodyType')}>
+          <Chips options={[
+            { label: f('all'), active: true },
+            { label: f('suv') }, { label: f('sedan') }, { label: f('wagon') },
+            { label: f('pickup') }, { label: f('minivan') }, { label: f('coupe') },
+            { label: f('convertible') }, { label: f('hatchback') }, { label: f('van') },
+          ]} />
+        </FilterSection>
 
-      <hr className={styles.divider} />
+        <FilterSection title={t('filters.transmission')}>
+          <Chips options={[
+            { label: f('all'), active: true },
+            { label: t('filters.transmissions.auto') },
+            { label: t('filters.transmissions.manual') },
+            { label: f('cvt') },
+            { label: f('robot') },
+          ]} />
+        </FilterSection>
 
-      {/* Блок 5: Коробка передач */}
-      <div className={styles.filterBlock}>
-        <h4 className={styles.blockTitle}>{t('filters.transmission')}</h4>
-        <div className={styles.checkboxGroup}>
-          <label className={styles.checkboxLabel}>
-            <input type="checkbox" className={styles.checkbox} />
-            <span>{t('filters.transmissions.auto')}</span>
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input type="checkbox" className={styles.checkbox} />
-            <span>{t('filters.transmissions.manual')}</span>
-          </label>
-        </div>
-      </div>
+        <FilterSection title={f('fuel')}>
+          <Chips options={[
+            { label: f('all'), active: true },
+            { label: f('gasoline') }, { label: f('diesel') }, { label: f('hybrid') },
+            { label: f('electric') }, { label: f('gas') }, { label: f('flexFuel') },
+            { label: f('other') },
+          ]} />
+        </FilterSection>
 
-      <hr className={styles.divider} />
+        <FilterSection title={f('condition')}>
+          <Chips options={[
+            { label: f('all'), active: true }, { label: f('runAndDrive') },
+            { label: f('starts') }, { label: f('doesNotStart') },
+            { label: f('damaged') }, { label: f('noDamage') }, { label: f('repaired') },
+          ]} />
+        </FilterSection>
 
-      {/* Блок 6: Аукцион */}
-      <div className={styles.filterBlock}>
-        <h4 className={styles.blockTitle}>{t('filters.auction')}</h4>
-        <div className={styles.checkboxGroup}>
-          <label className={styles.checkboxLabel}>
-            <input type="checkbox" className={styles.checkbox} />
-            <span>Copart</span>
-          </label>
-          <label className={styles.checkboxLabel}>
-            <input type="checkbox" className={styles.checkbox} />
-            <span>IAAI</span>
-          </label>
-        </div>
+        <FilterSection title={f('vehicleType')}>
+          <Chips options={[
+            { label: f('all'), active: true }, { label: f('passenger') },
+            { label: f('truck') }, { label: f('motorcycle') }, { label: f('waterTransport') },
+            { label: f('bus') }, { label: f('specialEquipment') }, { label: f('rv') },
+          ]} />
+        </FilterSection>
+
+        <FilterSection title={f('color')}>
+          <Chips options={[
+            { label: f('all'), active: true }, { label: f('black'), color: 'black' },
+            { label: f('white'), color: 'white' }, { label: f('silver') },
+            { label: f('gray') }, { label: f('red'), color: 'red' },
+            { label: f('blue'), color: 'blue' }, { label: f('green') },
+            { label: f('brown') }, { label: f('beige') }, { label: f('other') },
+          ]} />
+        </FilterSection>
+
+        <FilterSection title={f('documents')}>
+          <Chips options={[
+            { label: f('all'), active: true }, { label: f('cleanTitle') },
+            { label: f('salvageTitle') }, { label: f('rebuiltTitle') },
+            { label: f('noDocuments') },
+          ]} />
+        </FilterSection>
+
+        <FilterSection title={f('engineVolume')}>
+          <RangeFilter from="0" to="12" labels={rangeLabels} />
+        </FilterSection>
+
+        <FilterSection title={f('enginePower')}>
+          <RangeFilter from="0" to="1000" labels={rangeLabels} />
+        </FilterSection>
+
+        <FilterSection title={f('engineType')}>
+          <Chips options={[
+            { label: f('all'), active: true }, { label: f('vEngine') },
+            { label: f('inlineEngine') }, { label: f('electricEngine') },
+          ]} />
+        </FilterSection>
+
+        <FilterSection title={f('drive')}>
+          <Chips options={[
+            { label: f('all'), active: true },
+            { label: '4×4' },
+            { label: '4×2' },
+            { label: f('frontWheel') }, { label: f('rearWheel') }, { label: f('allWheel') },
+          ]} />
+        </FilterSection>
+
+        <FilterSection title={f('cylinders')}>
+          <Chips options={[
+            { label: f('all'), active: true },
+            { label: '3 cyl' },
+            { label: '4 cyl' },
+            { label: '6 cyl' },
+            { label: '8 cyl' },
+            { label: '10 cyl' },
+            { label: '12 cyl' },
+            { label: f('noCylinders') },
+          ]} />
+        </FilterSection>
+
       </div>
     </div>
   )

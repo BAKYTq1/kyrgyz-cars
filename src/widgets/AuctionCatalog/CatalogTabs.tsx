@@ -1,4 +1,3 @@
-import React from 'react'
 import { useI18n } from '../../shared/i18n/I18nProvider'
 import styles from './CatalogTabs.module.scss'
 

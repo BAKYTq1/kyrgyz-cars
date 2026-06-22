@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LocaleSwitcher from '../../shared/i18n/LocaleSwitcher'
 import { useI18n } from '../../shared/i18n/I18nProvider'
-import logo from '../../assets/Снимок_экрана_2026-06-17_165818-removebg-preview.png'
+import logo from '../../assets/logotip.png'
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -12,7 +12,7 @@ export default function Header() {
     <header className="bg-white text-gray-800 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <img src={logo} alt="Logo" className="w-22 h-20" />
+          <img src={logo} alt="Logo" className="w-15 h-7" />
         </Link>
 
         <div className="hidden md:flex flex-1 max-w-2xl border border-gray-300 rounded-lg overflow-hidden">

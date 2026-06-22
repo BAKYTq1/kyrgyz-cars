@@ -95,7 +95,7 @@ async function fetchWeatherForTerminal(
 function CheckIcon() {
   return (
     <svg
-      className="w-5 h-5 text-green-500 flex-shrink-0"
+      className="w-4 h-4 md:w-5 md:h-5 text-green-500 flex-shrink-0"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -152,25 +152,25 @@ function TerminalCard({
   return (
     <div
       id={`terminal-${terminal.id}`}
-      className="border border-gray-200 rounded-xl bg-white mb-6 overflow-hidden"
+      className="bg-white mb-6 md:border md:border-gray-200 md:rounded-xl md:overflow-hidden"
     >
       {/* Terminal header */}
-      <div className="flex justify-between items-center px-6 py-4 border-b border-gray-100">
-        <div>
-          <span className="text-base font-semibold text-gray-900">{name}</span>
-          <span className="text-xs text-gray-400 ml-2">
+      <div className="flex justify-between items-center py-4 md:px-6 border-b border-gray-100">
+        <div className="min-w-0 pr-2">
+          <span className="text-sm md:text-base font-semibold text-gray-700 md:text-gray-900">{name}</span>
+          <span className="text-[10px] md:text-xs text-gray-400 ml-1 md:ml-2 whitespace-nowrap">
             ({t("deliveryTimes.localTime")} {localTime})
           </span>
         </div>
-        <span className="bg-green-500 text-white text-xs font-semibold px-4 py-1.5 rounded-full">
+        <span className="bg-green-500 text-white text-[10px] md:text-xs font-medium md:font-semibold px-4 py-1.5 rounded-full flex-shrink-0">
           {t("deliveryTimes.working")}
         </span>
       </div>
 
       {/* Weather grid */}
-      <div className="grid grid-cols-3 gap-0 border-b border-gray-100">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-0 py-5 md:py-0 md:border-b md:border-gray-100">
         {/* Temperature */}
-        <div className="p-5 border-r border-gray-100">
+        <div className="p-5 border border-gray-200 rounded-md md:border-y-0 md:border-l-0 md:rounded-none md:border-r md:border-gray-100">
           <p className="text-xs text-gray-400 mb-3">
             {t("deliveryTimes.weatherToday")}
           </p>
@@ -180,21 +180,29 @@ function TerminalCard({
             </p>
           ) : (
             <>
-              <p className="text-3xl font-light text-gray-800">
-                {weather?.temp != null ? `${weather.temp}°C` : "—"}
-              </p>
-              <p className="text-xs text-gray-400 mt-1">{wDesc}</p>
+              <div className="flex items-center justify-between">
+                <p className="text-3xl font-light text-gray-800">
+                  {weather?.temp != null ? `${weather.temp}°C` : "—"}
+                </p>
+                <div
+                  className="relative block md:hidden w-9 h-9 rounded-full bg-sky-300 overflow-hidden"
+                  aria-hidden="true"
+                >
+                  <span className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-white" />
+                </div>
+              </div>
+              <p className="hidden md:block text-xs text-gray-400 mt-1">{wDesc}</p>
             </>
           )}
         </div>
 
         {/* Humidity / wind */}
-        <div className="p-5 border-r border-gray-100">
-          <div className="flex justify-between items-center py-2 border-b border-gray-100">
-            <span className="text-sm text-gray-500">
+        <div className="px-5 py-3 border border-gray-200 rounded-md md:p-5 md:border-y-0 md:border-l-0 md:rounded-none md:border-r md:border-gray-100">
+          <div className="flex justify-between items-center py-1.5 md:py-2 md:border-b md:border-gray-100">
+            <span className="text-xs md:text-sm text-gray-400 md:text-gray-500">
               {t("deliveryTimes.humidity")}
             </span>
-            <span className="text-sm font-medium text-gray-800">
+            <span className="text-xs md:text-sm font-medium text-gray-800">
               {loading
                 ? "..."
                 : weather?.humidity != null
@@ -202,11 +210,11 @@ function TerminalCard({
                   : "—"}
             </span>
           </div>
-          <div className="flex justify-between items-center py-2 border-b border-gray-100">
-            <span className="text-sm text-gray-500">
+          <div className="flex justify-between items-center py-1.5 md:py-2 md:border-b md:border-gray-100">
+            <span className="text-xs md:text-sm text-gray-400 md:text-gray-500">
               {t("deliveryTimes.windSpeed")}
             </span>
-            <span className="text-sm font-medium text-gray-800">
+            <span className="text-xs md:text-sm font-medium text-gray-800">
               {loading
                 ? "..."
                 : weather?.wind != null
@@ -214,8 +222,8 @@ function TerminalCard({
                   : "—"}
             </span>
           </div>
-          <div className="flex justify-between items-center py-2">
-            <span className="text-sm text-gray-500">
+          <div className="flex justify-between items-center py-1.5 md:py-2">
+            <span className="text-xs md:text-sm text-gray-400 md:text-gray-500">
               {t("deliveryTimes.weatherAlert")}
             </span>
             <span className="text-sm text-gray-400">-</span>
@@ -223,24 +231,24 @@ function TerminalCard({
         </div>
 
         {/* Status text */}
-        <div className="p-5">
+        <div className="p-5 border border-gray-200 rounded-md md:border-0 md:rounded-none">
           <p className="text-xs text-gray-400 mb-2">
             {t("deliveryTimes.currentStatus")}
           </p>
-          <p className="text-sm text-gray-700 leading-relaxed">{status}</p>
+          <p className="text-sm text-gray-900 md:text-gray-700 leading-relaxed text-justify md:text-left">{status}</p>
         </div>
       </div>
 
       {/* Delivery steps */}
-      <div className="px-6">
+      <div className="px-2 md:px-6 pb-2 md:pb-0 border-b border-gray-200 md:border-b-0">
         {steps.map((step, i) => (
           <div
             key={i}
-            className="flex justify-between items-center py-3.5 border-b border-gray-100 last:border-0"
+            className="block md:flex md:justify-between md:items-center py-3 md:py-3.5 md:border-b md:border-gray-100 md:last:border-0"
           >
-            <span className="text-sm text-gray-800 pr-4">{step.label}</span>
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <span className="text-sm font-medium text-gray-800 whitespace-nowrap">
+            <span className="block text-sm text-gray-800 md:pr-4 leading-relaxed">{step.label}</span>
+            <div className="flex items-center gap-1 md:gap-2 mt-1 md:mt-0 flex-shrink-0">
+              <span className="text-sm font-semibold md:font-medium text-slate-600 md:text-gray-800 whitespace-nowrap">
                 {step.days}
               </span>
               <CheckIcon />
@@ -285,7 +293,7 @@ export function DeliveryTimes() {
     <div className="font-sans bg-gray-50 min-h-screen">
       {/* ── Hero ── */}
       <div
-        className="relative bg-cover bg-center py-16 px-6 text-center"
+        className="hidden md:block relative bg-cover bg-center py-16 px-6 text-center"
         style={{
           backgroundImage:
             "linear-gradient(rgba(10,18,36,0.58), rgba(10,18,36,0.72)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400&q=80')",
@@ -318,9 +326,9 @@ export function DeliveryTimes() {
       </div>
 
       {/* ── Content ── */}
-      <div className="max-w-5xl mx-auto px-4 py-6">
+      <div className="max-w-5xl mx-auto px-5 md:px-4 py-3 md:py-6 bg-white md:bg-transparent">
         {/* Updated-at / Status bar */}
-        <div className="flex justify-between items-center mb-5">
+        <div className="flex justify-between items-center pb-3 mb-0 md:pb-0 md:mb-5 border-b border-gray-100 md:border-b-0">
           <span className="text-xs text-gray-400">
             {t("deliveryTimes.updated")} {updatedAt}
           </span>

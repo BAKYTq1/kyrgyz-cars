@@ -166,7 +166,7 @@ export const fetchMeThunk = createAsyncThunk(
 
 export const logoutThunk = createAsyncThunk(
   "auth/logout",
-  async (_, { rejectWithValue }) => {
+  async () => {
     try {
       await apiFetch("/logout/", { method: "POST" });
     } catch {
@@ -204,7 +204,7 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(loginThunk.fulfilled, (state, action: LoginResponse) => {
+      .addCase(loginThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.accessToken = action.payload.access;
         state.refreshToken = action.payload.refresh;
@@ -257,7 +257,7 @@ const authSlice = createSlice({
       });
 
     builder
-      .addCase(fetchMeThunk.fulfilled, (state, action: User) => {
+      .addCase(fetchMeThunk.fulfilled, (state, action) => {
         state.user = action.payload;
       })
       .addCase(fetchMeThunk.rejected, (state) => {
