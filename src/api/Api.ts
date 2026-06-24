@@ -1,6 +1,5 @@
 const BASE_URL = "https://cardeals.kg/api";
 
-// ─── Token helpers ───────────────────────────────────────────────────────────
 const TOKEN_KEY = "access_token";
 const REFRESH_KEY = "refresh_token";
 
@@ -18,10 +17,6 @@ export const tokenStorage = {
     localStorage.removeItem(REFRESH_KEY);
   },
 };
-
-// ─── Refresh queue ───────────────────────────────────────────────────────────
-// Чтобы не отправлять несколько параллельных запросов на /token/refresh/,
-// если разом упало несколько 401 (например, при параллельных запросах на странице).
 let refreshPromise: Promise<string | null> | null = null;
 
 async function refreshAccessToken(): Promise<string | null> {
@@ -32,9 +27,7 @@ async function refreshAccessToken(): Promise<string | null> {
     if (!refresh) return null;
 
     try {
-      // ⚠️ Согласно Swagger Model "TokenRefresh", поле называется "access",
-      // но в него передаётся именно refresh-токен.
-      const response = await fetch(`${BASE_URL}/token/refresh/`, {
+      const response = await fetch(`https://cardeals.kg/token/refresh/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ access: refresh }),
@@ -69,7 +62,6 @@ async function refreshAccessToken(): Promise<string | null> {
   return refreshPromise;
 }
 
-// ─── Core fetch ──────────────────────────────────────────────────────────────
 export async function apiFetch<T>(
   endpoint: string,
   options: RequestInit = {},
@@ -91,15 +83,11 @@ export async function apiFetch<T>(
     headers,
   });
 
-  // ── Авто-рефреш токена при 401 ──
-  // Если это авторизованный запрос, словили 401, и это не повторная попытка
-  // (чтобы не уйти в бесконечный цикл) — пробуем обновить access токен и повторить запрос один раз.
   if (response.status === 401 && withAuth && !_isRetry) {
     const newAccess = await refreshAccessToken();
     if (newAccess) {
       return apiFetch<T>(endpoint, options, withAuth, true);
     }
-    // Рефреш не удался — токены уже очищены внутри refreshAccessToken()
   }
 
   if (!response.ok) {
@@ -113,8 +101,9 @@ export async function apiFetch<T>(
     throw new Error(errorMessage);
   }
 
-  // 204 No Content
   if (response.status === 204) return null as T;
 
   return response.json();
 }
+console.log("access:", localStorage.getItem("access_token"));
+console.log("refresh:", localStorage.getItem("refresh_token"));

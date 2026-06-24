@@ -43,7 +43,7 @@ export function AboutUs() {
         </h2>
 
         <a
-          href="#about"
+          href="/about"
           className="inline-flex items-center justify-center px-5 py-2.5 bg-[#1488e4] hover:bg-[#1070bd] text-white font-medium text-sm rounded-full transition-colors duration-200 shrink-0 self-start sm:self-auto group"
         >
           {t("about.button")}

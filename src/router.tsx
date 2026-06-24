@@ -15,7 +15,7 @@ import AccountHome from './pages/account/AccountHome'
 import { AccountProfile } from './pages/account/AccountSection'
 import { Registration } from './widgets/Auth/Registration/Registration'
 import { Login } from './widgets/Auth/Login/Login'
-import { ForgotPasswordd } from './widgets/Auth/forgotPassword/ForgotPasswordd'
+// import { ForgotPasswordd } from './widgets/Auth/forgotPassword/ForgotPasswordd'
 import { PopularMakes } from './widgets/PopularMakes/PopularMakes'
 import PrePurchaseProcess1 from './widgets/howItWorks/PrePurchaseProcess1/PrePurchaseProcess1'
 import PurchaseProcess from './widgets/howItWorks/PurchaseProcess/PurchaseProcess'
@@ -27,6 +27,7 @@ import { Settings } from './widgets/settings/Settings'
 import { Shipping } from './widgets/shipping/Shipping'
 import { Watchlist } from './widgets/watchlist/Watchlist'
 import AuctionCatalog from './widgets/AuctionCatalog/AuctionCatalog'
+import { ForgotPasswordd } from './widgets/Auth/forgotPassword/ForgotPasswordd'
 
 export const router = createBrowserRouter([
   {
@@ -82,8 +83,8 @@ export const router = createBrowserRouter([
     path: 'forgotpassword',
     element: <ForgotPasswordd />,
   },
-  {
-    path: 'forgot-password',
-    element: <ForgotPasswordd />,
-  },
+  // {
+  //   path: 'forgot-password',
+  //   element: <ForgotPasswordd />,
+  // },
 ])

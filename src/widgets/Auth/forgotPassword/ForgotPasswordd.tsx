@@ -1,5 +1,16 @@
-import { useState, useEffect } from "react";
-import { useI18n } from "../../../shared/i18n/I18nProvider"; // Скорректируйте путь к вашему провайдеру локализации
+import { useState, useEffect, useRef } from "react";
+import { useI18n } from "../../../shared/i18n/I18nProvider";
+import { useAppDispatch, useAppSelector } from "../../../lib/store";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/logotip.png";
+import {
+  requestResetThunk,
+  verifyResetThunk,
+  confirmResetThunk,
+  clearForgotPasswordError,
+} from "../../../lib/auth/ForgotPassword";
+
+type Step = "email" | "code" | "newPassword" | "done";
 
 const slides = [
   {
@@ -139,10 +150,185 @@ function Slideshow({
   );
 }
 
+function OtpInput({
+  value,
+  onChange,
+  hasError,
+  onComplete,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  hasError?: boolean;
+  onComplete?: (code: string) => void;
+}) {
+  const length = 6;
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const digits = value.split("").slice(0, length);
+  while (digits.length < length) digits.push("");
+
+  const focusInput = (index: number) => {
+    inputRefs.current[index]?.focus();
+  };
+
+  const handleChange = (index: number, raw: string) => {
+    const digit = raw.replace(/\D/g, "").slice(-1);
+    const newDigits = [...digits];
+    newDigits[index] = digit;
+    const newValue = newDigits.join("");
+    onChange(newValue);
+
+    if (digit && index < length - 1) {
+      focusInput(index + 1);
+    }
+
+    if (digit && index === length - 1 && newValue.length === length) {
+      onComplete?.(newValue);
+    }
+  };
+
+  const handleKeyDown = (
+    index: number,
+    e: React.KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (e.key === "Backspace") {
+      if (!digits[index] && index > 0) {
+        e.preventDefault();
+        const newDigits = [...digits];
+        newDigits[index - 1] = "";
+        onChange(newDigits.join(""));
+        focusInput(index - 1);
+      }
+    } else if (e.key === "ArrowLeft" && index > 0) {
+      e.preventDefault();
+      focusInput(index - 1);
+    } else if (e.key === "ArrowRight" && index < length - 1) {
+      e.preventDefault();
+      focusInput(index + 1);
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pasted = e.clipboardData.getData("text").replace(/\D/g, "");
+    if (!pasted) return;
+    const newValue = pasted.slice(0, length);
+    onChange(newValue);
+    const nextIndex = Math.min(newValue.length, length - 1);
+    focusInput(nextIndex);
+    if (newValue.length === length) {
+      onComplete?.(newValue);
+    }
+  };
+
+  return (
+    <div className="flex gap-2 justify-between">
+      {digits.map((digit, index) => (
+        <input
+          key={index}
+          ref={(el) => {
+            inputRefs.current[index] = el;
+          }}
+          type="text"
+          inputMode="numeric"
+          maxLength={1}
+          value={digit}
+          autoFocus={index === 0}
+          onChange={(e) => handleChange(index, e.target.value)}
+          onKeyDown={(e) => handleKeyDown(index, e)}
+          onPaste={handlePaste}
+          className={`w-12 h-12 text-center text-lg font-medium border rounded-xl bg-white focus:outline-none focus:ring-2 transition-all ${
+            hasError
+              ? "border-red-500 focus:ring-red-200"
+              : "border-gray-200 focus:border-blue-400 focus:ring-blue-100"
+          }`}
+        />
+      ))}
+    </div>
+  );
+}
+
+function PasswordInput({
+  value,
+  onChange,
+  placeholder,
+  hasError,
+  autoFocus,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+  hasError?: boolean;
+  autoFocus?: boolean;
+}) {
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <div className="relative">
+      <input
+        type={visible ? "text" : "password"}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        autoFocus={autoFocus}
+        className={`w-full px-4 py-2.5 pr-11 border rounded-xl text-sm bg-white focus:outline-none focus:ring-2 transition-all ${
+          hasError
+            ? "border-red-500 focus:ring-red-200"
+            : "border-gray-200 focus:border-blue-400 focus:ring-blue-100"
+        }`}
+      />
+      <button
+        type="button"
+        tabIndex={-1}
+        onClick={() => setVisible((v) => !v)}
+        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+      >
+        {visible ? (
+          <svg
+            className="w-[18px] h-[18px]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        ) : (
+          <svg
+            className="w-[18px] h-[18px]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M3 3l18 18" />
+            <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83" />
+            <path d="M9.88 4.12A9.77 9.77 0 0 1 12 4c6.5 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68M6.61 6.61C4.07 8.36 2 12 2 12s3.5 7 10 7a9.6 9.6 0 0 0 5.39-1.61" />
+          </svg>
+        )}
+      </button>
+    </div>
+  );
+}
+
 export function ForgotPasswordd() {
   const { t } = useI18n();
+  const dispatch = useAppDispatch();
+  const { loading, error, resetToken } = useAppSelector(
+    (state) => state.forgotPassword,
+  );
+
+  const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [code, setCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fieldError, setFieldError] = useState<string | null>(null);
+
   const [current, setCurrent] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -159,55 +345,121 @@ export function ForgotPasswordd() {
     return () => clearInterval(timer);
   }, [current]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmitEmail = async (e: React.FormEvent) => {
     e.preventDefault();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!email.trim()) {
-      setError(
+      setFieldError(
         t("auth.forgotPassword.emailRequired") ||
           "Электронная почта обязательна для заполнения",
       );
-    } else if (!emailRegex.test(email)) {
-      setError(
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      setFieldError(
         t("auth.forgotPassword.emailInvalid") ||
           "Введите корректный адрес электронной почты",
       );
-    } else {
-      setError(null);
-      console.log("Ссылка для сброса отправлена на:", email);
+      return;
+    }
+
+    setFieldError(null);
+    const result = await dispatch(requestResetThunk({ email }));
+    if (requestResetThunk.fulfilled.match(result)) {
+      setStep("code");
     }
   };
 
+  const submitCode = async (codeValue: string) => {
+    if (!codeValue || codeValue.length < 6) {
+      setFieldError(
+        t("auth.forgotPassword.codeRequired") || "Введите код из письма",
+      );
+      return;
+    }
+
+    setFieldError(null);
+    const result = await dispatch(verifyResetThunk({ email, code: codeValue }));
+    if (verifyResetThunk.fulfilled.match(result)) {
+      setStep("newPassword");
+    }
+  };
+
+  const handleSubmitCode = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await submitCode(code);
+  };
+
+  const handleSubmitNewPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!newPassword || !confirmPassword) {
+      setFieldError(
+        t("auth.forgotPassword.passwordRequired") ||
+          "Заполните оба поля пароля",
+      );
+      return;
+    }
+    if (newPassword.length < 8) {
+      setFieldError(
+        t("auth.forgotPassword.passwordTooShort") ||
+          "Пароль должен содержать минимум 8 символов",
+      );
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setFieldError(
+        t("auth.forgotPassword.passwordMismatch") || "Пароли не совпадают",
+      );
+      return;
+    }
+    if (!resetToken) {
+      setFieldError(
+        t("auth.forgotPassword.tokenMissing") ||
+          "Токен сброса не найден, начните заново",
+      );
+      return;
+    }
+
+    setFieldError(null);
+    const result = await dispatch(
+      confirmResetThunk({
+        email,
+        token: resetToken,
+        new_password: newPassword,
+        new_password2: confirmPassword,
+      }),
+    );
+    if (confirmResetThunk.fulfilled.match(result)) {
+      setStep("done");
+    }
+  };
+
+  const handleBack = () => {
+    setFieldError(null);
+    dispatch(clearForgotPasswordError());
+    if (step === "code") setStep("email");
+    if (step === "newPassword") setStep("code");
+  };
+
+  const displayError = fieldError || error;
+
   return (
-    // ≥1100px: flex-row | <1100px: flex-col
     <div className="min-h-screen bg-[#f8fafc] flex flex-col min-[1100px]:flex-row font-sans selection:bg-blue-500/20">
-      {/* ═══ Левая часть — форма ═══ */}
-      <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-[#f8fafc] px-5 sm:px-8 py-6 sm:py-7">
-        {/* Логотип */}
-        <div className="flex items-center gap-2 mb-10 sm:mb-14">
-          <div className="w-8 h-8 bg-[#2563eb] rounded-lg flex items-center justify-center shrink-0 shadow-sm shadow-blue-500/20">
-            <svg
-              className="w-4 h-4 text-white transform -rotate-12"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2.5}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-              />
-            </svg>
+      <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-white px-5 sm:px-8 py-6 sm:py-7">
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <div className="w-[150px] h-11 flex items-center justify-center">
+            <img
+              src={logo}
+              alt="CarDeals"
+              className="w-full h-11 object-contain"
+            />
           </div>
-          <span className="text-xl font-black text-[#1e293b] tracking-wider font-mono">
-            CarDeals
-          </span>
-        </div>
+        </Link>
 
         <div className="flex-1 flex items-center justify-center pb-8 sm:pb-12">
           <div className="w-full max-w-[420px]">
-            {/* Иконка замка */}
             <div className="w-12 h-12 sm:w-[52px] sm:h-[52px] rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 sm:mb-6 shadow-sm">
               <svg
                 className="w-5 h-5 text-[#2563eb]"
@@ -224,56 +476,228 @@ export function ForgotPasswordd() {
               </svg>
             </div>
 
-            <h1 className="text-lg sm:text-[23px] font-bold text-[#1e293b] tracking-tight mb-2">
-              {t("auth.forgotPassword.title")}
-            </h1>
-            <p className="text-[#94a3b8] text-xs sm:text-[13.5px] font-medium mb-5 sm:mb-6">
-              {t("auth.forgotPassword.subtitle")}
-            </p>
+            {step === "email" && (
+              <>
+                <h1 className="text-lg sm:text-[23px] font-bold text-[#1e293b] tracking-tight mb-2">
+                  {t("auth.forgotPassword.title")}
+                </h1>
+                <p className="text-[#94a3b8] text-xs sm:text-[13.5px] font-medium mb-5 sm:mb-6">
+                  {t("auth.forgotPassword.subtitle")}
+                </p>
 
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-              <div>
-                <label className="block text-[12.5px] font-semibold text-[#475569] mb-1.5">
-                  {t("auth.forgotPassword.email")}
-                  <span className="text-red-500 ml-0.5">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    if (error) setError(null);
-                  }}
-                  placeholder={t("auth.forgotPassword.emailPlaceholder")}
-                  className={`w-full px-4 py-2.5 border rounded-xl text-sm bg-white focus:outline-none focus:ring-2 transition-all ${
-                    error
-                      ? "border-red-500 focus:ring-red-200"
-                      : "border-gray-200 focus:border-blue-400 focus:ring-blue-100"
-                  }`}
-                />
-                {error && (
-                  <p className="text-red-500 text-xs mt-1.5 font-medium">
-                    {error}
-                  </p>
-                )}
+                <form
+                  onSubmit={handleSubmitEmail}
+                  className="space-y-3 sm:space-y-4"
+                >
+                  <div>
+                    <label className="block text-[12.5px] font-semibold text-[#475569] mb-1.5">
+                      {t("auth.forgotPassword.email")}
+                      <span className="text-red-500 ml-0.5">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (displayError) setFieldError(null);
+                      }}
+                      placeholder={t("auth.forgotPassword.emailPlaceholder")}
+                      className={`w-full px-4 py-2.5 border rounded-xl text-sm bg-white focus:outline-none focus:ring-2 transition-all ${
+                        displayError
+                          ? "border-red-500 focus:ring-red-200"
+                          : "border-gray-200 focus:border-blue-400 focus:ring-blue-100"
+                      }`}
+                    />
+                    {displayError && (
+                      <p className="text-red-500 text-xs mt-1.5 font-medium">
+                        {displayError}
+                      </p>
+                    )}
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full py-2.5 bg-[#2563eb] hover:bg-blue-600 active:scale-[0.995] text-white font-medium rounded-xl text-sm shadow-sm transition-all mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {loading
+                      ? t("auth.forgotPassword.sending") || "Отправка..."
+                      : t("auth.forgotPassword.submit")}
+                  </button>
+                </form>
+              </>
+            )}
+
+            {step === "code" && (
+              <>
+                <h1 className="text-lg sm:text-[23px] font-bold text-[#1e293b] tracking-tight mb-2">
+                  {t("auth.forgotPassword.codeTitle") || "Введите код"}
+                </h1>
+                <p className="text-[#94a3b8] text-xs sm:text-[13.5px] font-medium mb-5 sm:mb-6">
+                  {(t("auth.forgotPassword.codeSubtitle") ||
+                    "Мы отправили код подтверждения на") + ` ${email}`}
+                </p>
+
+                <form
+                  onSubmit={handleSubmitCode}
+                  className="space-y-3 sm:space-y-4"
+                >
+                  <div>
+                    <label className="block text-[12.5px] font-semibold text-[#475569] mb-1.5">
+                      {t("auth.forgotPassword.code") || "Код подтверждения"}
+                      <span className="text-red-500 ml-0.5">*</span>
+                    </label>
+                    <OtpInput
+                      value={code}
+                      onChange={(v) => {
+                        setCode(v);
+                        if (displayError) setFieldError(null);
+                      }}
+                      hasError={!!displayError}
+                      onComplete={(fullCode) => submitCode(fullCode)}
+                    />
+                    {displayError && (
+                      <p className="text-red-500 text-xs mt-1.5 font-medium">
+                        {displayError}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex gap-2.5">
+                    <button
+                      type="button"
+                      onClick={handleBack}
+                      disabled={loading}
+                      className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 active:scale-[0.995] text-gray-600 font-medium rounded-xl text-sm transition-all"
+                    >
+                      {t("auth.forgotPassword.back") || "Назад"}
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="flex-1 py-2.5 bg-[#2563eb] hover:bg-blue-600 active:scale-[0.995] text-white font-medium rounded-xl text-sm shadow-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {loading
+                        ? t("auth.forgotPassword.verifying") || "Проверка..."
+                        : t("auth.forgotPassword.verifyCode") ||
+                          "Подтвердить код"}
+                    </button>
+                  </div>
+                </form>
+              </>
+            )}
+
+            {step === "newPassword" && (
+              <>
+                <h1 className="text-lg sm:text-[23px] font-bold text-[#1e293b] tracking-tight mb-2">
+                  {t("auth.forgotPassword.newPasswordTitle") || "Новый пароль"}
+                </h1>
+                <p className="text-[#94a3b8] text-xs sm:text-[13.5px] font-medium mb-5 sm:mb-6">
+                  {t("auth.forgotPassword.newPasswordSubtitle") ||
+                    "Придумайте новый пароль для входа"}
+                </p>
+
+                <form
+                  onSubmit={handleSubmitNewPassword}
+                  className="space-y-3 sm:space-y-4"
+                >
+                  <div>
+                    <label className="block text-[12.5px] font-semibold text-[#475569] mb-1.5">
+                      {t("auth.forgotPassword.newPassword") || "Новый пароль"}
+                      <span className="text-red-500 ml-0.5">*</span>
+                    </label>
+                    <PasswordInput
+                      value={newPassword}
+                      onChange={(v) => {
+                        setNewPassword(v);
+                        if (displayError) setFieldError(null);
+                      }}
+                      placeholder={
+                        t("auth.forgotPassword.newPasswordPlaceholder") ||
+                        "Введите новый пароль"
+                      }
+                      hasError={!!displayError}
+                      autoFocus
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[12.5px] font-semibold text-[#475569] mb-1.5">
+                      {t("auth.forgotPassword.confirmPassword") ||
+                        "Подтвердите пароль"}
+                      <span className="text-red-500 ml-0.5">*</span>
+                    </label>
+                    <PasswordInput
+                      value={confirmPassword}
+                      onChange={(v) => {
+                        setConfirmPassword(v);
+                        if (displayError) setFieldError(null);
+                      }}
+                      placeholder={
+                        t("auth.forgotPassword.confirmPasswordPlaceholder") ||
+                        "Повторите новый пароль"
+                      }
+                      hasError={!!displayError}
+                    />
+                    {displayError && (
+                      <p className="text-red-500 text-xs mt-1.5 font-medium">
+                        {displayError}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="flex gap-2.5">
+                    <button
+                      type="button"
+                      onClick={handleBack}
+                      disabled={loading}
+                      className="px-5 py-2.5 bg-gray-100 hover:bg-gray-200 active:scale-[0.995] text-gray-600 font-medium rounded-xl text-sm transition-all"
+                    >
+                      {t("auth.forgotPassword.back") || "Назад"}
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="flex-1 py-2.5 bg-[#2563eb] hover:bg-blue-600 active:scale-[0.995] text-white font-medium rounded-xl text-sm shadow-sm transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {loading
+                        ? t("auth.forgotPassword.saving") || "Сохранение..."
+                        : t("auth.forgotPassword.savePassword") ||
+                          "Сохранить пароль"}
+                    </button>
+                  </div>
+                </form>
+              </>
+            )}
+
+            {step === "done" && (
+              <>
+                <h1 className="text-lg sm:text-[23px] font-bold text-[#1e293b] tracking-tight mb-2">
+                  {t("auth.forgotPassword.successTitle") || "Готово!"}
+                </h1>
+                <p className="text-[#94a3b8] text-xs sm:text-[13.5px] font-medium mb-5 sm:mb-6">
+                  {t("auth.forgotPassword.successSubtitle") ||
+                    "Пароль успешно изменён. Войдите с новым паролем."}
+                </p>
+                <a
+                  href="/login"
+                  className="block w-full text-center py-2.5 bg-[#2563eb] hover:bg-blue-600 active:scale-[0.995] text-white font-medium rounded-xl text-sm shadow-sm transition-all"
+                >
+                  {t("auth.forgotPassword.toLogin") || "Войти"}
+                </a>
+              </>
+            )}
+
+            {step !== "done" && (
+              <div className="text-center mt-6 sm:mt-8">
+                <a
+                  href="/login"
+                  className="text-[#94a3b8] hover:text-blue-500 text-[13.5px] font-medium transition-colors"
+                >
+                  {t("auth.forgotPassword.backToLogin")}
+                </a>
               </div>
-
-              <button
-                type="submit"
-                className="w-full py-2.5 bg-[#2563eb] hover:bg-blue-600 active:scale-[0.995] text-white font-medium rounded-xl text-sm shadow-sm transition-all mt-2"
-              >
-                {t("auth.forgotPassword.submit")}
-              </button>
-            </form>
-
-            <div className="text-center mt-6 sm:mt-8">
-              <a
-                href="/login"
-                className="text-[#94a3b8] hover:text-blue-500 text-[13.5px] font-medium transition-colors"
-              >
-                {t("auth.forgotPassword.backToLogin")}
-              </a>
-            </div>
+            )}
           </div>
         </div>
       </div>
