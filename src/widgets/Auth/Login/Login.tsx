@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 import { useAppDispatch, useAppSelector } from "../../../lib/store";
 import { loginThunk, clearError } from "../../../lib/auth/Login";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/logotip.png";
 
 const slides = [
   {
@@ -193,28 +195,17 @@ export function Login() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col min-[1100px]:flex-row">
       {/* ═══ Левая часть — форма ═══ */}
-      <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-gray-100 px-5 sm:px-8 py-6 sm:py-7">
+      <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-white px-5 sm:px-8 py-6 sm:py-7">
         {/* Логотип */}
-        <div className="flex items-center gap-2 mb-10 sm:mb-12">
-          <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center shrink-0">
-            <svg
-              className="w-4 h-4 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-              />
-            </svg>
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <div className="w-[150px] h-11 flex items-center justify-center">
+            <img
+              src={logo}
+              alt="CarDeals"
+              className="w-full h-11 object-contain"
+            />
           </div>
-          <span className="text-lg font-bold text-gray-800 tracking-widest">
-            CarDeals
-          </span>
-        </div>
+        </Link>
 
         <div className="flex-1 flex items-start justify-center">
           <div className="w-full max-w-[520px]">

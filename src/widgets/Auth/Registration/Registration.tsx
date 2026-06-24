@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 import { useAppDispatch, useAppSelector } from "../../../lib/store";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/logotip.png";
 import {
   registerThunk,
   verifyEmailThunk,
@@ -16,7 +18,7 @@ const slides = [
       "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=80",
     name: "ŁUKASZ SZCZYGIEŁ",
     rating: 3,
-    text: "Sprowadzić auto z USA to nic trudnego, wystarczy sobie je wyszukać, sprawdzić raportem i wylicytować, później postępować zgodnie z harmonogramem. Opłaty o cały proces jasne dla każdego. Polecam BidCars bo wiedzą jak to robić zgodnie ze sztuką. Jedno auto już prawie gotowe, dwa kolejne w drodze.",
+    text: "Sprowadzić auto z USA to nic trudnego, wystarczy sobie je wyszukać, sprawdzić raportem i wylicytować, później postępować zgodnie z harmonogramem. Opłaty o cały proces jasne dla każdego. Polecam CarDeals bo wiedzą jak to robić zgodnie ze sztuką. Jedno auto już prawie gotowe, dwa kolejne w drodze.",
   },
   {
     image:
@@ -465,28 +467,17 @@ export function Registration() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col min-[1100px]:flex-row">
       {/* ═══ Форма ═══ */}
-      <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-gray-100 px-5 sm:px-8 py-6 sm:py-7">
+      <div className="w-full min-[1100px]:w-[52%] min-[1100px]:flex-none flex flex-col bg-white px-5 sm:px-8 py-6 sm:py-7">
         {/* Логотип */}
-        <div className="flex items-center gap-2 mb-8 sm:mb-10">
-          <div className="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center shrink-0">
-            <svg
-              className="w-4 h-4 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-              />
-            </svg>
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <div className="w-[150px] h-11 flex items-center justify-center">
+            <img
+              src={logo}
+              alt="CarDeals"
+              className="w-full h-11 object-contain"
+            />
           </div>
-          <span className="text-lg font-bold text-gray-800 tracking-widest">
-            BIDCARS
-          </span>
-        </div>
+        </Link>
 
         <div className="flex-1 flex items-start justify-center">
           <div className="w-full max-w-[520px]">
