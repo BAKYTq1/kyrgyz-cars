@@ -1,6 +1,7 @@
 import { useI18n } from "../../../shared/i18n/I18nProvider";
 
-const carImage = "https://tse3.mm.bing.net/th/id/OIP.38kAPqXaO8Lm5AF1D4ysOQHaE8?pid=Api&h=220&P=0";
+const carImage =
+  "https://tse3.mm.bing.net/th/id/OIP.38kAPqXaO8Lm5AF1D4ysOQHaE8?pid=Api&h=220&P=0";
 
 interface StepData {
   num: string;
@@ -15,7 +16,7 @@ interface StepData {
 function StepCard({ step }: { step: StepData }) {
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 sm:p-8 flex flex-col gap-3">
-      <span className="inline-block self-start bg-blue-500 text-white text-xs font-bold tracking-widest px-4 py-1 rounded">
+      <span className="inline-block self-start bg-violet-500 text-white text-xs font-bold tracking-widest px-4 py-1 rounded">
         {step.num}
       </span>
 
@@ -24,17 +25,23 @@ function StepCard({ step }: { step: StepData }) {
       </h3>
 
       {step.body.map((p, i) => (
-        <p key={i} className="text-sm text-gray-500 leading-relaxed">{p}</p>
+        <p key={i} className="text-sm text-gray-500 leading-relaxed">
+          {p}
+        </p>
       ))}
 
       {step.list && (
         <>
           {step.listTitle && (
-            <p className="text-sm font-semibold text-gray-700">{step.listTitle}</p>
+            <p className="text-sm font-semibold text-gray-700">
+              {step.listTitle}
+            </p>
           )}
           <ul className="list-disc pl-5 space-y-1">
             {step.list.map((item, i) => (
-              <li key={i} className="text-sm text-gray-500 leading-relaxed">{item}</li>
+              <li key={i} className="text-sm text-gray-500 leading-relaxed">
+                {item}
+              </li>
             ))}
           </ul>
         </>
@@ -45,7 +52,7 @@ function StepCard({ step }: { step: StepData }) {
       )}
 
       {step.btn && (
-        <button className="mt-2 self-start bg-blue-500 hover:bg-blue-600 active:bg-blue-700 transition-colors text-white text-sm font-semibold px-6 py-2.5 rounded-md">
+        <button className="mt-2 self-start bg-violet-500 hover:bg-violet-600 active:bg-violet-700 transition-colors text-white text-sm font-semibold px-6 py-2.5 rounded-md">
           {step.btn}
         </button>
       )}
@@ -53,7 +60,9 @@ function StepCard({ step }: { step: StepData }) {
   );
 }
 
-export function PrePurchaseProcess1({ _onNavigateToPhase }: { _onNavigateToPhase?: (phase: number) => void } = {}) {
+export function PrePurchaseProcess1({
+  _onNavigateToPhase,
+}: { _onNavigateToPhase?: (phase: number) => void } = {}) {
   void _onNavigateToPhase;
   const { t, tl } = useI18n();
 
@@ -70,7 +79,6 @@ export function PrePurchaseProcess1({ _onNavigateToPhase }: { _onNavigateToPhase
   return (
     <div className="font-sans bg-slate-100 min-h-screen px-4 py-12 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-
         {/* Hero */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4 tracking-tight">
@@ -83,7 +91,7 @@ export function PrePurchaseProcess1({ _onNavigateToPhase }: { _onNavigateToPhase
 
         {/* Intro */}
         <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden mb-10 flex flex-col sm:flex-row">
-          <div className="hidden sm:block w-1.5 bg-blue-500 flex-shrink-0" />
+          <div className="hidden sm:block w-1.5 bg-violet-500 flex-shrink-0" />
           <div className="flex-1 p-6 sm:p-10">
             <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-4">
               {t("howItWorks.pre.introTitle")}

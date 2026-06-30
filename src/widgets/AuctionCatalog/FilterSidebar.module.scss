@@ -31,7 +31,7 @@
   padding: 0;
   border: 0;
   background: none;
-  color: #2478dc;
+  color: #7c3aed;
   font-size: 10px;
   font-weight: 600;
   cursor: pointer;
@@ -89,8 +89,8 @@
   margin: 1px 0 2px;
   border-radius: 10px;
   outline: none;
-  background: #1684ef;
-  accent-color: #1684ef;
+  background: #8b5cf6;
+  accent-color: #8b5cf6;
   cursor: pointer;
 }
 
@@ -115,7 +115,7 @@
   box-sizing: border-box;
 
   &:focus {
-    border-color: #1684ef;
+    border-color: #8b5cf6;
   }
 }
 
@@ -148,12 +148,12 @@
 }
 
 .activeChip {
-  border-color: #1684ef;
-  background: #1684ef;
+  border-color: #8b5cf6;
+  background: #8b5cf6;
   color: #fff;
 
   .chipInfo {
-    color: #1684ef;
+    color: #8b5cf6;
     background: #fff;
   }
 }
@@ -180,10 +180,21 @@
   background: #c8ced7;
 }
 
-.red .colorDot { background: #eb3449; border-color: #eb3449; }
-.blue .colorDot { background: #287ee8; border-color: #287ee8; }
-.black .colorDot { background: #111827; border-color: #111827; }
-.white .colorDot { background: #fff; }
+.red .colorDot {
+  background: #eb3449;
+  border-color: #eb3449;
+}
+.blue .colorDot {
+  background: #8b5cf6;
+  border-color: #8b5cf6;
+}
+.black .colorDot {
+  background: #111827;
+  border-color: #111827;
+}
+.white .colorDot {
+  background: #fff;
+}
 
 @media (max-width: 1024px) {
   .sidebar {

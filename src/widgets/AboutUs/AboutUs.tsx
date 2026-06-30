@@ -36,6 +36,52 @@ export function AboutUs() {
 
   return (
     <section className="w-full max-w-[1280px] mx-auto px-4 py-8 md:px-0 font-sans bg-gray-150">
+      <style>{`
+        @keyframes galleryCardIn {
+          from {
+            opacity: 0;
+            transform: translateY(14px) scale(0.97);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .gallery-card {
+          opacity: 0;
+          animation: galleryCardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+          will-change: transform, box-shadow;
+        }
+
+        .gallery-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 32px rgba(124, 58, 237, 0.16),
+            0 4px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        .gallery-card-img {
+          transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .gallery-card:hover .gallery-card-img {
+          transform: scale(1.07);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .gallery-card {
+            animation: none;
+            opacity: 1;
+          }
+          .gallery-card,
+          .gallery-card-img {
+            transition: none;
+          }
+        }
+      `}</style>
+
       {/* Верхняя панель: Заголовок и Кнопка */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 md:mb-8">
         <h2 className="text-xl md:text-2xl lg:text-[26px] font-semibold text-slate-900 tracking-tight">
@@ -44,7 +90,7 @@ export function AboutUs() {
 
         <a
           href="/about"
-          className="inline-flex items-center justify-center px-5 py-2.5 bg-[#1488e4] hover:bg-[#1070bd] text-white font-medium text-sm rounded-full transition-colors duration-200 shrink-0 self-start sm:self-auto group"
+          className="inline-flex items-center justify-center px-5 py-2.5 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-medium text-sm rounded-full transition-colors duration-200 shrink-0 self-start sm:self-auto group"
         >
           {t("about.button")}
           {/* Иконка стрелочки > */}
@@ -66,15 +112,16 @@ export function AboutUs() {
 
       {/* Адаптивная сетка изображений: grid-cols-2 по умолчанию для мобильных */}
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 lg:gap-3">
-        {galleryImages.map((image) => (
+        {galleryImages.map((image, index) => (
           <div
             key={image.id}
-            className="relative aspect-[3/4] md:aspect-[3/5] lg:h-[420px] w-full overflow-hidden rounded-xl shadow-sm"
+            className="gallery-card relative aspect-[3/4] md:aspect-[3/5] lg:h-[420px] w-full overflow-hidden rounded-xl shadow-sm"
+            style={{ animationDelay: `${index * 80}ms` }}
           >
             <img
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+              className="gallery-card-img w-full h-full object-cover"
               loading="lazy"
             />
           </div>

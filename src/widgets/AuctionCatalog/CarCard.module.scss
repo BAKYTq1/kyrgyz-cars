@@ -5,8 +5,12 @@
   border-radius: 12px;
   border: 1px solid #e2e8f0;
   overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-2px);
@@ -52,7 +56,7 @@
 }
 
 .sourceBadge {
-  background: #2563eb;
+  background: #7c3aed;
   color: #ffffff;
   font-size: 11px;
   font-weight: 600;
@@ -87,9 +91,18 @@
   margin-bottom: 16px;
 }
 
-.boldText { color: #334155; font-weight: 600; }
-.lightText { color: #475569; font-weight: 600; }
-.divider { margin: 0 8px; color: #cbd5e1; }
+.boldText {
+  color: #334155;
+  font-weight: 600;
+}
+.lightText {
+  color: #475569;
+  font-weight: 600;
+}
+.divider {
+  margin: 0 8px;
+  color: #cbd5e1;
+}
 
 .specsRow {
   display: flex;
@@ -173,8 +186,10 @@
   font-size: 20px;
   cursor: pointer;
   transition: color 0.2s;
-  
-  &:hover { color: #f43f5e; }
+
+  &:hover {
+    color: #f43f5e;
+  }
 }
 
 .pricingBlock {
@@ -190,8 +205,13 @@
   font-size: 13px;
 }
 
-.priceLabel { color: #64748b; }
-.priceValue { font-weight: 700; color: #1e293b; }
+.priceLabel {
+  color: #64748b;
+}
+.priceValue {
+  font-weight: 700;
+  color: #1e293b;
+}
 
 .dateRow {
   display: flex;
@@ -203,9 +223,18 @@
   border-radius: 8px;
 }
 
-.iconCalendar { font-size: 14px; }
-.timeWrapper { display: flex; flex-direction: column; }
-.timeText { font-size: 12px; font-weight: 600; color: #df2020; }
+.iconCalendar {
+  font-size: 14px;
+}
+.timeWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.timeText {
+  font-size: 12px;
+  font-weight: 600;
+  color: #df2020;
+}
 
 .currentBidBlock {
   background: #f1f5f9;
@@ -228,7 +257,7 @@
 }
 
 .actionButton {
-  background: #10b981;
+  background: #7c3aed;
   color: #ffffff;
   border: none;
   width: 100%;
@@ -240,7 +269,7 @@
   transition: background 0.15s;
 
   &:hover {
-    background: #059669;
+  background: #723fca;
   }
 }
 .auctionBadge {
@@ -254,7 +283,7 @@
 }
 
 .copart {
-  background: #0056b3; // Фирменный синий Copart
+  background: #7c3aed; // Фирменный фиолетовый Copart
 }
 
 .iaai {

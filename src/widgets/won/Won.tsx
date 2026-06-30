@@ -78,7 +78,7 @@ export function Won() {
                     }}
                     className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-50 transition-colors ${
                       selectedPerPage === opt
-                        ? "text-blue-500"
+                        ? "text-purple-600" // Изменено на text-purple-600
                         : "text-slate-800"
                     }`}
                   >
@@ -96,12 +96,12 @@ export function Won() {
                 setSortOpen((o) => !o);
                 setPerPageOpen(false);
               }}
-              className="flex items-center justify-center gap-1.5 border-2 border-blue-500 rounded-lg w-8 h-8 sm:w-auto sm:h-auto sm:px-3.5 sm:py-1.5 text-sm text-blue-500 bg-blue-50 font-medium cursor-pointer hover:bg-blue-100 transition-colors"
+              className="flex items-center justify-center gap-1.5 border-2 border-purple-500 rounded-lg w-8 h-8 sm:w-auto sm:h-auto sm:px-3.5 sm:py-1.5 text-sm text-purple-600 bg-purple-50 font-medium cursor-pointer hover:bg-purple-100 transition-colors"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path
                   d="M2 4h12M4 8h8M6 12h4"
-                  stroke="#3b82f6"
+                  stroke="#9333ea" // Изменено на фиолетовый stroke
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />
@@ -122,7 +122,7 @@ export function Won() {
                       setSortOpen(false);
                     }}
                     className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-50 transition-colors ${
-                      selectedSort === opt ? "text-blue-500" : "text-slate-800"
+                      selectedSort === opt ? "text-purple-600" : "text-slate-800" // Изменено на text-purple-600
                     }`}
                   >
                     {opt}
@@ -136,7 +136,7 @@ export function Won() {
 
       {/* Empty state */}
       <div className="bg-white border border-slate-200 rounded-xl py-10 sm:py-12 px-4 sm:px-6 text-center w-full max-w-lg mx-auto">
-        <div className="w-16 h-16 sm:w-[90px] sm:h-[90px] bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
+        <div className="w-16 h-16 sm:w-[90px] sm:h-[90px] bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6"> {/* Изменено на bg-purple-100 */}
           <svg
             className="w-8 h-8 sm:w-11 sm:h-11"
             viewBox="0 0 44 44"
@@ -144,20 +144,20 @@ export function Won() {
           >
             <path
               d="M22 8L26 16L35 17.5L28.5 24L30 33L22 29L14 33L15.5 24L9 17.5L18 16L22 8Z"
-              stroke="#3b82f6"
+              stroke="#9333ea" // Изменено на фиолетовый stroke
               strokeWidth="2"
               strokeLinejoin="round"
             />
             <path
               d="M18 22L21 25L26 19"
-              stroke="#3b82f6"
+              stroke="#9333ea" // Изменено на фиолетовый stroke
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
           </svg>
         </div>
-        <div className="text-sm sm:text-base text-blue-500 font-medium mb-3 sm:mb-3.5">
+        <div className="text-sm sm:text-base text-purple-600 font-medium mb-3 sm:mb-3.5"> {/* Изменено на text-purple-600 */}
           Выигранных ставок пока нет
         </div>
         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-sm mx-auto">

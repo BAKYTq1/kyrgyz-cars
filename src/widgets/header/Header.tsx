@@ -119,7 +119,7 @@ export default function Header() {
               </Link>
               <Link
                 to="/register"
-                className="flex items-center gap-2 text-sm px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white transition"
+                className="flex items-center gap-2 text-sm px-4 py-2 bg-violet-600 hover:bg-violet-700 rounded-lg text-white transition"
               >
                 {t("common.register")}
               </Link>
@@ -152,37 +152,37 @@ export default function Header() {
           <nav className="flex items-center gap-1 text-sm text-gray-600">
             <Link
               to="/catalog"
-              className="px-3 py-3 hover:text-blue-600 transition"
+              className="px-3 py-3 hover:text-violet-600 transition"
             >
               {t("header.navSearch")}
             </Link>
             <Link
               to="/delivery-times"
-              className="px-3 py-3 hover:text-blue-600 transition"
+              className="px-3 py-3 hover:text-violet-600 transition"
             >
               {t("header.navDelivery")}
             </Link>
             <Link
               to="/how-it-works"
-              className="px-3 py-3 hover:text-blue-600 transition"
+              className="px-3 py-3 hover:text-violet-600 transition"
             >
               {t("header.navHowItWorks")}
             </Link>
             <Link
               to="/help"
-              className="px-3 py-3 hover:text-blue-600 transition"
+              className="px-3 py-3 hover:text-violet-600 transition"
             >
               {t("header.navHelp")}
             </Link>
             <Link
               to="/about"
-              className="px-3 py-3 hover:text-blue-600 transition"
+              className="px-3 py-3 hover:text-violet-600 transition"
             >
               {t("header.navAbout")}
             </Link>
             <Link
               to="/contacts"
-              className="px-3 py-3 hover:text-blue-600 transition"
+              className="px-3 py-3 hover:text-violet-600 transition"
             >
               {t("header.navContacts")}
             </Link>
@@ -206,42 +206,42 @@ export default function Header() {
           <Link
             to="/catalog"
             onClick={() => setMenuOpen(false)}
-            className="py-2 text-gray-700 hover:text-blue-600 transition"
+            className="py-2 text-gray-700 hover:text-violet-600 transition"
           >
             {t("header.navSearch")}
           </Link>
           <Link
             to="/delivery-times"
             onClick={() => setMenuOpen(false)}
-            className="py-2 text-gray-700 hover:text-blue-600 transition"
+            className="py-2 text-gray-700 hover:text-violet-600 transition"
           >
             {t("header.navDelivery")}
           </Link>
           <Link
             to="/how-it-works"
             onClick={() => setMenuOpen(false)}
-            className="py-2 text-gray-700 hover:text-blue-600 transition"
+            className="py-2 text-gray-700 hover:text-violet-600 transition"
           >
             {t("header.navHowItWorks")}
           </Link>
           <Link
             to="/help"
             onClick={() => setMenuOpen(false)}
-            className="py-2 text-gray-700 hover:text-blue-600 transition"
+            className="py-2 text-gray-700 hover:text-violet-600 transition"
           >
             {t("header.navHelp")}
           </Link>
           <Link
             to="/about"
             onClick={() => setMenuOpen(false)}
-            className="py-2 text-gray-700 hover:text-blue-600 transition"
+            className="py-2 text-gray-700 hover:text-violet-600 transition"
           >
             {t("header.navAbout")}
           </Link>
           <Link
             to="/contacts"
             onClick={() => setMenuOpen(false)}
-            className="py-2 text-gray-700 hover:text-blue-600 transition"
+            className="py-2 text-gray-700 hover:text-violet-600 transition"
           >
             {t("header.navContacts")}
           </Link>
@@ -259,7 +259,7 @@ export default function Header() {
               <Link
                 to="/register"
                 onClick={() => setMenuOpen(false)}
-                className="flex-1 text-center bg-blue-600 rounded-lg py-2 text-white"
+                className="flex-1 text-center bg-violet-600 rounded-lg py-2 text-white"
               >
                 {t("common.register")}
               </Link>

@@ -125,14 +125,14 @@ const shortName: Record<string, string> = {
   "Can-Am Atv": "Can-Am",
 };
 
-function BrandCard({ name }: { name: string }) {
+function BrandCard({ name, index }: { name: string; index: number }) {
   const baseName = name.replace(" Motorcycle", "").replace(" Atv", "");
   const logoUrl = logoMap[name] || logoMap[baseName];
   const [imgError, setImgError] = useState(false);
 
   return (
     <div
-      className="responsive-card"
+      className="responsive-card brand-card"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -143,20 +143,9 @@ function BrandCard({ name }: { name: string }) {
         padding: "12px 8px",
         backgroundColor: "#fff",
         cursor: "pointer",
-        transition:
-          "box-shadow 0.15s, transform 0.15s, width 0.2s, height 0.2s",
         gap: 8,
         boxSizing: "border-box",
-      }}
-      onMouseEnter={(e) => {
-        const target = e.currentTarget as HTMLDivElement;
-        target.style.boxShadow = "0 4px 14px rgba(0,0,0,0.08)";
-        target.style.transform = "translateY(-1px)";
-      }}
-      onMouseLeave={(e) => {
-        const target = e.currentTarget as HTMLDivElement;
-        target.style.boxShadow = "none";
-        target.style.transform = "none";
+        animationDelay: `${Math.min(index * 35, 600)}ms`,
       }}
     >
       <div
@@ -172,12 +161,13 @@ function BrandCard({ name }: { name: string }) {
             src={logoUrl}
             alt={name}
             onError={() => setImgError(true)}
+            className="brand-card-logo"
             style={{
               maxWidth: "100%",
               maxHeight: "100%",
               objectFit: "contain",
               filter:
-                "invert(25%) sepia(10%) saturate(400%) hue-rotate(180deg) brightness(85%)",
+                "invert(25%) sepia(60%) saturate(900%) hue-rotate(225deg) brightness(85%)",
               opacity: 0.9,
             }}
           />
@@ -185,7 +175,7 @@ function BrandCard({ name }: { name: string }) {
           <span
             className="responsive-fallback-text"
             style={{
-              color: "#7a8fa6",
+              color: "#8b7aa6",
               fontWeight: 700,
               textAlign: "center",
               letterSpacing: 0.5,
@@ -277,6 +267,53 @@ export function PopularMakes() {
           .responsive-fallback-text { font-size: 8px; }
           .responsive-brand-name { font-size: 11px; max-width: 85px; }
         }
+
+        /* Появление карточек — поэтажное, мягкое */
+        @keyframes brandCardIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px) scale(0.96);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .brand-card {
+          opacity: 0;
+          animation: brandCardIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          transition: box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+            border-color 0.35s ease;
+          will-change: transform, box-shadow;
+        }
+
+        .brand-card:hover {
+          box-shadow: 0 10px 24px rgba(124, 58, 237, 0.12),
+            0 2px 6px rgba(0, 0, 0, 0.04);
+          transform: translateY(-4px);
+          border-color: #d8c9f0;
+        }
+
+        .brand-card:hover .brand-card-logo {
+          transform: scale(1.06);
+        }
+
+        .brand-card-logo {
+          transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .brand-card {
+            animation: none;
+            opacity: 1;
+          }
+          .brand-card,
+          .brand-card-logo {
+            transition: none;
+          }
+        }
       `}</style>
 
       <div style={{ width: "100%", maxWidth: 1280 }}>
@@ -313,11 +350,11 @@ export function PopularMakes() {
                   padding: "0 0 8px",
                   fontSize: 15,
                   fontWeight: activeTab === tab.id ? 600 : 400,
-                  color: activeTab === tab.id ? "#3b82f6" : "#9aa5b4",
+                  color: activeTab === tab.id ? "#7c3aed" : "#9aa5b4",
                   cursor: "pointer",
                   borderBottom:
                     activeTab === tab.id
-                      ? "2px solid #3b82f6"
+                      ? "2px solid #7c3aed"
                       : "2px solid transparent",
                   transition: "all 0.2s",
                   fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
@@ -338,6 +375,7 @@ export function PopularMakes() {
         />
 
         <div
+          key={renderTab}
           style={{
             display: "flex",
             flexWrap: "wrap",
@@ -347,8 +385,8 @@ export function PopularMakes() {
             transition: "opacity 0.25s ease-in-out",
           }}
         >
-          {items.map((item) => (
-            <BrandCard key={item.name} name={item.name} />
+          {items.map((item, index) => (
+            <BrandCard key={item.name} name={item.name} index={index} />
           ))}
         </div>
       </div>
