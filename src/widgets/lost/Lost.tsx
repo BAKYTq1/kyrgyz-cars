@@ -77,7 +77,7 @@ export function Lost() {
                     }}
                     className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-50 transition-colors ${
                       selectedPerPage === opt
-                        ? "text-blue-500"
+                        ? "text-violet-500"
                         : "text-slate-800"
                     }`}
                   >
@@ -95,12 +95,12 @@ export function Lost() {
                 setSortOpen((o) => !o);
                 setPerPageOpen(false);
               }}
-              className="flex items-center gap-1 sm:gap-1.5 border-2 border-blue-500 rounded-lg px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm text-blue-500 bg-blue-50 font-medium cursor-pointer hover:bg-blue-100 transition-colors"
+              className="flex items-center gap-1 sm:gap-1.5 border-2 border-violet-500 rounded-lg px-2.5 sm:px-3.5 py-1.5 text-xs sm:text-sm text-violet-500 bg-violet-50 font-medium cursor-pointer hover:bg-violet-100 transition-colors"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path
                   d="M2 4h12M4 8h8M6 12h4"
-                  stroke="#3b82f6"
+                  stroke="#8b5cf6"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                 />
@@ -121,7 +121,9 @@ export function Lost() {
                       setSortOpen(false);
                     }}
                     className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-50 transition-colors ${
-                      selectedSort === opt ? "text-blue-500" : "text-slate-800"
+                      selectedSort === opt
+                        ? "text-violet-500"
+                        : "text-slate-800"
                     }`}
                   >
                     {opt}
@@ -135,7 +137,7 @@ export function Lost() {
 
       {/* Empty state */}
       <div className="bg-white border border-slate-200 rounded-xl py-10 sm:py-12 px-4 sm:px-6 text-center max-w-lg mx-auto">
-        <div className="w-[70px] h-[70px] sm:w-[90px] sm:h-[90px] bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
+        <div className="w-[70px] h-[70px] sm:w-[90px] sm:h-[90px] bg-violet-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
           <svg
             width="36"
             height="36"
@@ -147,19 +149,19 @@ export function Lost() {
               cx="22"
               cy="22"
               r="12"
-              stroke="#3b82f6"
+              stroke="#8b5cf6"
               strokeWidth="2"
               strokeDasharray="4 3"
             />
             <path
               d="M18 18L26 26M26 18L18 26"
-              stroke="#3b82f6"
+              stroke="#8b5cf6"
               strokeWidth="2"
               strokeLinecap="round"
             />
           </svg>
         </div>
-        <div className="text-sm sm:text-base text-blue-500 font-medium mb-3">
+        <div className="text-sm sm:text-base text-violet-500 font-medium mb-3">
           Проигранных ставок пока нет
         </div>
         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-sm mx-auto">

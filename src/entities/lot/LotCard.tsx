@@ -116,7 +116,7 @@ export default function LotCard({ car }: { car: Car }) {
           {car.estimated_max > 0 && (
             <div className="text-right">
               <p className="text-xs text-gray-400">{t('lotCard.buyNow')}</p>
-              <p className="text-sm font-bold text-green-600">${car.estimated_max.toLocaleString()}</p>
+              <p className="text-sm font-bold text-violet-700">${car.estimated_max.toLocaleString()}</p>
             </div>
           )}
         </div>

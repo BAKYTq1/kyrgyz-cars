@@ -80,7 +80,7 @@ function StarRating({ rating }: { rating: number }) {
       {[1, 2, 3, 4, 5].map((i) => (
         <svg
           key={i}
-          className={`w-5 h-5 ${i <= rating ? "text-yellow-400" : "text-gray-500"}`}
+          className={`w-5 h-5 ${i <= rating ? "text-violet-400" : "text-gray-500"}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -132,7 +132,7 @@ function Slideshow({
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                fill="#4285F4"
+                fill="#7c3aed"
               />
               <path
                 d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
@@ -234,12 +234,12 @@ function PasswordStrengthMeter({ password }: { password: string }) {
     },
     medium: {
       label: t("auth.registration.passwordMedium"),
-      color: "#f59e0b",
+      color: "#a855f7",
       bars: 2,
     },
     strong: {
       label: t("auth.registration.passwordStrong"),
-      color: "#22c55e",
+      color: "#7c3aed",
       bars: 3,
     },
   };
@@ -483,10 +483,10 @@ export function Registration() {
           <div className="w-full max-w-[520px]">
             <a
               href="/"
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-100 flex items-center justify-center mb-5 sm:mb-6 hover:bg-blue-200 active:scale-95 transition-all cursor-pointer"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-violet-100 flex items-center justify-center mb-5 sm:mb-6 hover:bg-violet-200 active:scale-95 transition-all cursor-pointer"
             >
               <svg
-                className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-violet-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -516,7 +516,7 @@ export function Registration() {
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className={`absolute left-0 bottom-0 flex items-center gap-1 text-blue-500 hover:text-blue-600 text-sm font-medium transition-all duration-300 ${
+                className={`absolute left-0 bottom-0 flex items-center gap-1 text-violet-500 hover:text-violet-600 text-sm font-medium transition-all duration-300 ${
                   step === 2
                     ? "opacity-100 pointer-events-auto translate-x-0"
                     : "opacity-0 pointer-events-none -translate-x-2"
@@ -544,7 +544,7 @@ export function Registration() {
             </div>
             <div className="w-full h-1 bg-gray-200 rounded-full mb-4 sm:mb-5">
               <div
-                className="h-1 bg-blue-500 rounded-full transition-all duration-300"
+                className="h-1 bg-violet-500 rounded-full transition-all duration-300"
                 style={{
                   width: step === 1 ? "33%" : step === 2 ? "66%" : "100%",
                 }}
@@ -578,7 +578,7 @@ export function Registration() {
                     className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${
                       errors.email
                         ? "border-red-500 focus:ring-red-400"
-                        : "border-gray-200 focus:ring-blue-400"
+                        : "border-gray-200 focus:ring-violet-400"
                     }`}
                   />
                   {errors.email && (
@@ -604,7 +604,7 @@ export function Registration() {
                       className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${
                         errors.firstName
                           ? "border-red-500 focus:ring-red-400"
-                          : "border-gray-200 focus:ring-blue-400"
+                          : "border-gray-200 focus:ring-violet-400"
                       }`}
                     />
                     {errors.firstName && (
@@ -630,7 +630,7 @@ export function Registration() {
                       className={`w-full px-4 py-2.5 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 transition-colors ${
                         errors.lastName
                           ? "border-red-500 focus:ring-red-400"
-                          : "border-gray-200 focus:ring-blue-400"
+                          : "border-gray-200 focus:ring-violet-400"
                       }`}
                     />
                     {errors.lastName && (
@@ -650,7 +650,7 @@ export function Registration() {
                       className={`flex items-center border rounded-xl bg-white overflow-hidden focus-within:ring-2 transition-colors ${
                         errors.phone
                           ? "border-red-500 focus-within:ring-red-400"
-                          : "border-gray-200 focus-within:ring-blue-400"
+                          : "border-gray-200 focus-within:ring-violet-400"
                       }`}
                     >
                       <div className="flex items-center gap-1 px-2.5 border-r border-gray-200 shrink-0 py-2.5">
@@ -682,7 +682,7 @@ export function Registration() {
                     <button
                       type="button"
                       onClick={() => setShowCountryDrop(!showCountryDrop)}
-                      className="w-full flex items-center justify-between px-3 py-2.5 border border-green-400 rounded-xl bg-white text-sm focus:outline-none"
+                      className="w-full flex items-center justify-between px-3 py-2.5 border border-violet-400 rounded-xl bg-white text-sm focus:outline-none"
                     >
                       <div className="flex items-center gap-1.5 min-w-0">
                         <span className="text-base shrink-0">
@@ -693,7 +693,7 @@ export function Registration() {
                         </span>
                       </div>
                       <svg
-                        className="w-4 h-4 text-green-500 shrink-0 ml-1"
+                        className="w-4 h-4 text-violet-500 shrink-0 ml-1"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -727,7 +727,7 @@ export function Registration() {
                 <button
                   type="button"
                   onClick={handleNextStep}
-                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1"
+                  className="w-full py-3 bg-violet-500 hover:bg-violet-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1"
                 >
                   {t("auth.registration.continue")}
                 </button>
@@ -762,7 +762,7 @@ export function Registration() {
                       className={`w-full px-4 py-2.5 pr-11 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 disabled:opacity-60 transition-colors ${
                         step2Errors.password
                           ? "border-red-500 focus:ring-red-400"
-                          : "border-gray-200 focus:ring-blue-400"
+                          : "border-gray-200 focus:ring-violet-400"
                       }`}
                     />
                     <button
@@ -840,7 +840,7 @@ export function Registration() {
                       className={`w-full px-4 py-2.5 pr-11 border rounded-xl text-sm focus:outline-none focus:ring-2 bg-white placeholder-gray-300 disabled:opacity-60 transition-colors ${
                         step2Errors.confirmPassword
                           ? "border-red-500 focus:ring-red-400"
-                          : "border-gray-200 focus:ring-blue-400"
+                          : "border-gray-200 focus:ring-violet-400"
                       }`}
                     />
                     <button
@@ -897,7 +897,7 @@ export function Registration() {
                   type="button"
                   onClick={handleSubmitRegister}
                   disabled={loading}
-                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-3 disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-violet-500 hover:bg-violet-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-3 disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
                 >
                   {loading && (
                     <svg
@@ -945,7 +945,7 @@ export function Registration() {
                       onChange={(e) => handleOtpChange(i, e.target.value)}
                       onKeyDown={(e) => handleOtpKeyDown(i, e)}
                       onPaste={handleOtpPaste}
-                      className="w-12 h-14 text-center text-xl font-semibold border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-60"
+                      className="w-12 h-14 text-center text-xl font-semibold border border-gray-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-violet-400 disabled:opacity-60"
                     />
                   ))}
                 </div>
@@ -954,7 +954,7 @@ export function Registration() {
                   type="button"
                   onClick={handleVerify}
                   disabled={loading || otp.join("").length !== OTP_LENGTH}
-                  className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
+                  className="w-full py-3 bg-violet-500 hover:bg-violet-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
                 >
                   {loading && (
                     <svg
@@ -995,7 +995,7 @@ export function Registration() {
                       type="button"
                       onClick={handleResend}
                       disabled={loading}
-                      className="text-blue-500 hover:underline font-medium disabled:opacity-60"
+                      className="text-violet-500 hover:underline font-medium disabled:opacity-60"
                     >
                       {t("auth.registration.resendCode")}
                     </button>
@@ -1009,7 +1009,7 @@ export function Registration() {
                 {t("auth.registration.haveAccount")}{" "}
                 <a
                   href="/login"
-                  className="text-blue-500 hover:underline font-medium"
+                  className="text-violet-500 hover:underline font-medium"
                 >
                   {t("auth.registration.login")}
                 </a>

@@ -1,16 +1,16 @@
-import { Link } from 'react-router-dom'
-import { useI18n } from '../../shared/i18n/I18nProvider'
+import { Link } from "react-router-dom";
+import { useI18n } from "../../shared/i18n/I18nProvider";
 
 export default function HeroSection() {
-  const { t, tl } = useI18n()
-  const tags = tl('hero.tags')
-  const title = tl('hero.title')
+  const { t, tl } = useI18n();
+  const tags = tl("hero.tags");
+  const title = tl("hero.title");
 
   return (
     <section
       className="relative text-white py-20 px-4"
       style={{
-        minHeight: '480px',
+        minHeight: "480px",
         background:
           'linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600") center/cover no-repeat',
       }}
@@ -21,9 +21,13 @@ export default function HeroSection() {
       >
         <span
           className="font-black tracking-widest select-none"
-          style={{ color: 'rgba(255,255,255,0.07)', fontSize: '220px', lineHeight: 1 }}
+          style={{
+            color: "rgba(255,255,255,0.07)",
+            fontSize: "220px",
+            lineHeight: 1,
+          }}
         >
-          {t('hero.background')}
+          {t("hero.background")}
         </span>
       </div>
 
@@ -31,7 +35,8 @@ export default function HeroSection() {
         <div className="flex gap-6 mb-10 text-sm text-gray-300 flex-wrap">
           {tags.map((item, index) => (
             <span key={index} className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-400 inline-block" />
+              <span className="w-2 h-2 rounded-full bg-purple-400 inline-block" />{" "}
+              {/* Изменено с bg-blue-400 на bg-purple-400 */}
               {item}
             </span>
           ))}
@@ -44,23 +49,23 @@ export default function HeroSection() {
           <br />
           {title[2]}
         </h1>
-        <p className="text-gray-300 text-lg mb-8">{t('hero.subtitle')}</p>
+        <p className="text-gray-300 text-lg mb-8">{t("hero.subtitle")}</p>
 
         <div className="flex gap-4 flex-wrap">
           <Link
             to="/catalog"
-            className="px-8 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition text-white text-base"
+            className="px-8 py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-semibold transition text-white text-base"
           >
-            {t('hero.start')}
+            {t("hero.start")}
           </Link>
           <Link
             to="/how-it-works"
             className="px-8 py-3 border border-white/40 hover:border-white rounded-lg font-semibold transition text-white text-base"
           >
-            {t('hero.howItWorks')}
+            {t("hero.howItWorks")}
           </Link>
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -45,15 +45,22 @@ function StepIndicator({
   return (
     <div className="flex items-start justify-center mb-12 px-4">
       {/* Phase 1 */}
-      <div onClick={() => onNavigate(1)} className="flex flex-col items-center cursor-pointer">
-        <span className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 1 ? "text-[#1a1a2e]" : "text-[#999999]"}`}>
+      <div
+        onClick={() => onNavigate(1)}
+        className="flex flex-col items-center cursor-pointer"
+      >
+        <span
+          className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 1 ? "text-[#1a1a2e]" : "text-[#999999]"}`}
+        >
           {label1}
         </span>
-        <div className={`
+        <div
+          className={`
           ${circleBaseClass}
-          ${activePhase === 1 ? "bg-[#2196f3] text-white shadow-[0_0_0_4px_#bde0fc]" : "bg-[#c5c5c5] text-[#888888] shadow-none"}
+          ${activePhase === 1 ? "bg-[#7c3aed] text-white shadow-[0_0_0_4px_#e4d4fb]" : "bg-[#c5c5c5] text-[#888888] shadow-none"}
           ${activePhase === 2 && pulsing ? "scale-125 pulse-badge" : "scale-100"}
-        `}>
+        `}
+        >
           1
         </div>
       </div>
@@ -62,15 +69,22 @@ function StepIndicator({
       <div className="flex-1 max-w-[420px] border-t-2 border-dashed border-[#c5c5c5] mt-[30px]" />
 
       {/* Phase 2 */}
-      <div onClick={() => onNavigate(2)} className="flex flex-col items-center cursor-pointer">
-        <span className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 2 ? "text-[#1a1a2e]" : "text-[#999999]"}`}>
+      <div
+        onClick={() => onNavigate(2)}
+        className="flex flex-col items-center cursor-pointer"
+      >
+        <span
+          className={`text-[13px] font-semibold mb-2 transition-colors duration-300 ${activePhase === 2 ? "text-[#1a1a2e]" : "text-[#999999]"}`}
+        >
           {label2}
         </span>
-        <div className={`
+        <div
+          className={`
           ${circleBaseClass}
-          ${activePhase === 2 ? "bg-[#2196f3] text-white shadow-[0_0_0_4px_#bde0fc]" : "bg-[#c5c5c5] text-[#888888] shadow-none"}
+          ${activePhase === 2 ? "bg-[#7c3aed] text-white shadow-[0_0_0_4px_#e4d4fb]" : "bg-[#c5c5c5] text-[#888888] shadow-none"}
           ${activePhase === 1 && pulsing ? "scale-125 pulse-badge" : "scale-100"}
-        `}>
+        `}
+        >
           2
         </div>
       </div>
@@ -80,7 +94,7 @@ function StepIndicator({
 
 export default function PurchaseProcess() {
   const { t } = useI18n();
-  
+
   // Инициализируем работу с query-параметрами URL
   const [searchParams, setSearchParams] = useSearchParams();
 

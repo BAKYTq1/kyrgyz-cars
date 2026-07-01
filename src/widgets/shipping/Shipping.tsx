@@ -56,7 +56,9 @@ export function Shipping() {
                     setPerPageOpen(false);
                   }}
                   className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-50 transition-colors ${
-                    selectedPerPage === opt ? "text-blue-500" : "text-slate-800"
+                    selectedPerPage === opt
+                      ? "text-purple-600"
+                      : "text-slate-800" // Изменено на text-purple-600
                   }`}
                 >
                   {opt} На страницу
@@ -69,7 +71,9 @@ export function Shipping() {
 
       {/* Empty state */}
       <div className="bg-white border border-slate-200 rounded-xl py-10 sm:py-12 px-4 sm:px-6 text-center w-full max-w-lg mx-auto">
-        <div className="w-16 h-16 sm:w-[90px] sm:h-[90px] bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
+        <div className="w-16 h-16 sm:w-[90px] sm:h-[90px] bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
+          {" "}
+          {/* Изменено на bg-purple-100 */}
           <svg
             className="w-8 h-8 sm:w-12 sm:h-12"
             viewBox="0 0 48 48"
@@ -81,26 +85,36 @@ export function Shipping() {
               width="28"
               height="18"
               rx="2"
-              stroke="#3b82f6"
+              stroke="#9333ea" // Изменено на фиолетовый stroke
               strokeWidth="2"
             />
             <path
               d="M32 24h6l4 6v6h-10V24Z"
-              stroke="#3b82f6"
+              stroke="#9333ea" // Изменено на фиолетовый stroke
               strokeWidth="2"
               strokeLinejoin="round"
             />
-            <circle cx="13" cy="38" r="3" stroke="#3b82f6" strokeWidth="2" />
-            <circle cx="35" cy="38" r="3" stroke="#3b82f6" strokeWidth="2" />
+            <circle cx="13" cy="38" r="3" stroke="#9333ea" strokeWidth="2" />{" "}
+            {/* Изменено на фиолетовый stroke */}
+            <circle
+              cx="35"
+              cy="38"
+              r="3"
+              stroke="#9333ea"
+              strokeWidth="2"
+            />{" "}
+            {/* Изменено на фиолетовый stroke */}
             <path
               d="M8 24h12M8 28h8"
-              stroke="#3b82f6"
+              stroke="#9333ea" // Изменено на фиолетовый stroke
               strokeWidth="1.5"
               strokeLinecap="round"
             />
           </svg>
         </div>
-        <div className="text-sm sm:text-base text-blue-500 font-medium mb-3 sm:mb-4">
+        <div className="text-sm sm:text-base text-purple-600 font-medium mb-3 sm:mb-4">
+          {" "}
+          {/* Изменено на text-purple-600 */}
           Записей о транспортировке пока нет
         </div>
         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-sm mx-auto">

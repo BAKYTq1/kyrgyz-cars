@@ -45,8 +45,12 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
     return (
       <div className="text-center py-6">
         <div className="text-6xl mb-4">🚗</div>
-        <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-5 text-white text-3xl">✓</div>
-        <p className="text-sm text-gray-600 leading-relaxed mb-3">{description}</p>
+        <div className="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-5 text-white text-3xl">
+          ✓
+        </div>
+        <p className="text-sm text-gray-600 leading-relaxed mb-3">
+          {description}
+        </p>
         {extra && extra !== `${base}.extra` && (
           <p className="text-sm text-gray-400 leading-relaxed">{extra}</p>
         )}
@@ -56,12 +60,16 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
 
   return (
     <>
-      <p className="text-sm text-gray-600 leading-relaxed mb-4">{description}</p>
+      <p className="text-sm text-gray-600 leading-relaxed mb-4">
+        {description}
+      </p>
 
       {bullets.length > 0 && (
         <ul className="list-disc ml-5 mb-4 space-y-1.5">
           {bullets.map((b, i) => (
-            <li key={i} className="text-sm text-gray-600 leading-relaxed">{b}</li>
+            <li key={i} className="text-sm text-gray-600 leading-relaxed">
+              {b}
+            </li>
           ))}
         </ul>
       )}
@@ -73,7 +81,12 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
             {links.map((l, i) => (
               <li key={i}>
                 <span className="text-sm text-gray-700">{l.label} — </span>
-                <a href={l.url} target="_blank" rel="noreferrer" className="text-sm text-blue-500 hover:underline break-all">
+                <a
+                  href={l.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-violet-500 hover:underline break-all"
+                >
                   {l.url}
                 </a>
               </li>
@@ -83,8 +96,10 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
       )}
 
       {quote && quote !== `${base}.quote` && (
-        <div className="bg-blue-50 border border-blue-200 rounded-lg px-4 py-3.5 mb-4">
-          <p className="text-sm text-blue-800 leading-relaxed whitespace-pre-line">"{quote}"</p>
+        <div className="bg-violet-50 border border-violet-200 rounded-lg px-4 py-3.5 mb-4">
+          <p className="text-sm text-violet-800 leading-relaxed whitespace-pre-line">
+            "{quote}"
+          </p>
         </div>
       )}
 
@@ -98,7 +113,9 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
             src={image}
             alt={imageCaption || ""}
             className="w-full object-cover block"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = "none";
+            }}
           />
           {imageCaption && imageCaption !== `${base}.imageCaption` && (
             <div className="px-3.5 py-2 bg-gray-50 border-t border-gray-200">
@@ -111,7 +128,9 @@ function StepContent({ stepIndex, t, tl, pdfLabel }: StepContentProps) {
   );
 }
 
-export function PostPurchaseProcess({ _onNavigateToPhase }: { _onNavigateToPhase?: (phase: number) => void } = {}) {
+export function PostPurchaseProcess({
+  _onNavigateToPhase,
+}: { _onNavigateToPhase?: (phase: number) => void } = {}) {
   void _onNavigateToPhase;
   const { t, tl } = useI18n();
   const [activeStep, setActiveStep] = useState(1);
@@ -121,27 +140,34 @@ export function PostPurchaseProcess({ _onNavigateToPhase }: { _onNavigateToPhase
   const nextLabel = t("howItWorks.post.next");
   const pdfLabel = t("howItWorks.post.pdfLabel");
   const getTitle = (i: number) => t(`howItWorks.post.steps.${i - 1}.title`);
-  const getPayment = (i: number) => t(`howItWorks.post.steps.${i - 1}.payment`) === "true";
+  const getPayment = (i: number) =>
+    t(`howItWorks.post.steps.${i - 1}.payment`) === "true";
 
   const navButtons = (mobile = false) => (
     <div className={`flex items-center gap-3 ${mobile ? "mb-5" : "mb-6"}`}>
       <button
-        onClick={() => setActiveStep(s => Math.max(s - 1, 1))}
+        onClick={() => setActiveStep((s) => Math.max(s - 1, 1))}
         disabled={activeStep === 1}
         className={`px-${mobile ? 5 : 4} py-${mobile ? 2 : 1.5} rounded-${mobile ? "lg" : "md"} border text-sm font-semibold transition-colors ${
-          activeStep === 1 ? "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed" : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50 cursor-pointer"
+          activeStep === 1
+            ? "border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed"
+            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50 cursor-pointer"
         }`}
       >
         {backLabel}
       </button>
-      <span className={`text-sm text-gray-${mobile ? 500 : 400} font-medium flex-1 ${mobile ? "text-center" : ""}`}>
+      <span
+        className={`text-sm text-gray-${mobile ? 500 : 400} font-medium flex-1 ${mobile ? "text-center" : ""}`}
+      >
         {activeStep} / {total}
       </span>
       <button
-        onClick={() => setActiveStep(s => Math.min(s + 1, total))}
+        onClick={() => setActiveStep((s) => Math.min(s + 1, total))}
         disabled={activeStep === total}
         className={`px-${mobile ? 5 : 4} py-${mobile ? 2 : 1.5} rounded-${mobile ? "lg" : "md"} text-sm font-semibold text-white transition-colors ${
-          activeStep === total ? "bg-blue-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 cursor-pointer"
+          activeStep === total
+            ? "bg-violet-300 cursor-not-allowed"
+            : "bg-violet-500 hover:bg-violet-600 cursor-pointer"
         }`}
       >
         {nextLabel}
@@ -151,10 +177,14 @@ export function PostPurchaseProcess({ _onNavigateToPhase }: { _onNavigateToPhase
 
   const stepHeader = (size: "sm" | "lg") => (
     <div className={`flex items-center gap-3 mb-${size === "lg" ? 5 : 4}`}>
-      <div className={`w-${size === "lg" ? 8 : 9} h-${size === "lg" ? 8 : 9} rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0`}>
+      <div
+        className={`w-${size === "lg" ? 8 : 9} h-${size === "lg" ? 8 : 9} rounded-full bg-violet-500 flex items-center justify-center text-white text-sm font-bold flex-shrink-0`}
+      >
         {activeStep}
       </div>
-      <h2 className={`text-${size === "lg" ? "xl" : "lg"} font-extrabold text-gray-900 leading-tight`}>
+      <h2
+        className={`text-${size === "lg" ? "xl" : "lg"} font-extrabold text-gray-900 leading-tight`}
+      >
         {getTitle(activeStep)}
       </h2>
     </div>
@@ -163,28 +193,39 @@ export function PostPurchaseProcess({ _onNavigateToPhase }: { _onNavigateToPhase
   return (
     <div className="max-w-5xl mx-auto px-3 sm:px-4 py-4">
       <div className="flex gap-5 items-start">
-
         {/* Sidebar десктоп */}
         <div className="hidden lg:block w-72 flex-shrink-0 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-          {Array.from({ length: total }, (_, i) => i + 1).map(id => (
+          {Array.from({ length: total }, (_, i) => i + 1).map((id) => (
             <button
               key={id}
               onClick={() => setActiveStep(id)}
               className={[
                 "w-full flex items-center gap-2.5 px-3.5 py-2.5 border-b border-gray-100 last:border-b-0 text-left transition-colors",
-                activeStep === id ? "bg-blue-50 border-l-[3px] border-l-blue-500" : "border-l-[3px] border-l-transparent hover:bg-gray-50",
+                activeStep === id
+                  ? "bg-violet-50 border-l-[3px] border-l-violet-500"
+                  : "border-l-[3px] border-l-transparent hover:bg-gray-50",
               ].join(" ")}
             >
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${activeStep === id ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-500"}`}>
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${activeStep === id ? "bg-violet-500 text-white" : "bg-gray-200 text-gray-500"}`}
+              >
                 {id}
               </div>
-              <span className={`text-[13px] flex-1 leading-snug ${activeStep === id ? "text-blue-700 font-semibold" : "text-gray-700"}`}>
+              <span
+                className={`text-[13px] flex-1 leading-snug ${activeStep === id ? "text-violet-700 font-semibold" : "text-gray-700"}`}
+              >
                 {getTitle(id)}
               </span>
               {getPayment(id) && (
-                <span className="text-[10px] font-bold bg-blue-500 text-white px-1.5 py-0.5 rounded flex-shrink-0">PAYMENT</span>
+                <span className="text-[10px] font-bold bg-violet-500 text-white px-1.5 py-0.5 rounded flex-shrink-0">
+                  PAYMENT
+                </span>
               )}
-              {activeStep === id && <span className="text-blue-500 text-base flex-shrink-0">›</span>}
+              {activeStep === id && (
+                <span className="text-violet-500 text-base flex-shrink-0">
+                  ›
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -196,17 +237,27 @@ export function PostPurchaseProcess({ _onNavigateToPhase }: { _onNavigateToPhase
             {navButtons(true)}
             {stepHeader("sm")}
             <hr className="border-gray-200 mb-5" />
-            <StepContent stepIndex={activeStep - 1} t={t} tl={tl} pdfLabel={pdfLabel} />
+            <StepContent
+              stepIndex={activeStep - 1}
+              t={t}
+              tl={tl}
+              pdfLabel={pdfLabel}
+            />
           </div>
 
           {/* Десктоп */}
           <div className="hidden lg:flex bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div className="w-1.5 bg-blue-500 flex-shrink-0" />
+            <div className="w-1.5 bg-violet-500 flex-shrink-0" />
             <div className="flex-1 p-7 min-w-0">
               {navButtons(false)}
               {stepHeader("lg")}
               <hr className="border-gray-100 mb-5" />
-              <StepContent stepIndex={activeStep - 1} t={t} tl={tl} pdfLabel={pdfLabel} />
+              <StepContent
+                stepIndex={activeStep - 1}
+                t={t}
+                tl={tl}
+                pdfLabel={pdfLabel}
+              />
             </div>
           </div>
         </div>

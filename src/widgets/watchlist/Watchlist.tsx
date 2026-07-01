@@ -46,7 +46,7 @@ export function Watchlist() {
             >
               Список <span className="text-slate-400 font-normal">(0)</span>
               {activeTab === "list" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 rounded-full" />
               )}
             </button>
             <button
@@ -59,7 +59,7 @@ export function Watchlist() {
             >
               Архив
               {activeTab === "archive" && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 rounded-full" />
+                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 rounded-full" />
               )}
             </button>
           </div>
@@ -109,7 +109,7 @@ export function Watchlist() {
                       }}
                       className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-50 transition-colors ${
                         selectedPerPage === opt
-                          ? "text-blue-500"
+                          ? "text-purple-600" // Изменено на text-purple-600
                           : "text-slate-800"
                       }`}
                     >
@@ -127,12 +127,12 @@ export function Watchlist() {
                   setSortOpen((o) => !o);
                   setPerPageOpen(false);
                 }}
-                className="flex items-center gap-1.5 border-2 border-blue-500 rounded-lg px-2.5 sm:px-3.5 py-1.5 text-sm text-blue-500 bg-blue-50 font-medium hover:bg-blue-100 transition-colors"
+                className="flex items-center gap-1.5 border-2 border-purple-500 rounded-lg px-2.5 sm:px-3.5 py-1.5 text-sm text-purple-600 bg-purple-50 font-medium hover:bg-purple-100 transition-colors"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                   <path
                     d="M2 4h12M4 8h8M6 12h4"
-                    stroke="#3b82f6"
+                    stroke="#9333ea" // Изменено на фиолетовый stroke
                     strokeWidth="1.5"
                     strokeLinecap="round"
                   />
@@ -154,7 +154,7 @@ export function Watchlist() {
                       }}
                       className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-50 transition-colors ${
                         selectedSort === opt
-                          ? "text-blue-500"
+                          ? "text-purple-600" // Изменено на text-purple-600
                           : "text-slate-800"
                       }`}
                     >
@@ -170,7 +170,9 @@ export function Watchlist() {
 
       {/* Empty state */}
       <div className="bg-white border border-slate-200 rounded-xl py-10 sm:py-12 px-4 sm:px-6 text-center w-full max-w-lg mx-auto">
-        <div className="w-16 h-16 sm:w-[90px] sm:h-[90px] bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
+        <div className="w-16 h-16 sm:w-[90px] sm:h-[90px] bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6">
+          {" "}
+          {/* Изменено на bg-purple-100 */}
           <svg
             className="w-8 h-8 sm:w-[46px] sm:h-[46px]"
             viewBox="0 0 46 46"
@@ -182,27 +184,31 @@ export function Watchlist() {
               width="26"
               height="26"
               rx="4"
-              stroke="#3b82f6"
+              stroke="#9333ea" // Изменено на фиолетовый stroke
               strokeWidth="2"
             />
-            <path d="M8 18h26" stroke="#3b82f6" strokeWidth="2" />
+            <path d="M8 18h26" stroke="#9333ea" strokeWidth="2" />{" "}
+            {/* Изменено на фиолетовый stroke */}
             <path
               d="M16 8v4M26 8v4"
-              stroke="#3b82f6"
+              stroke="#9333ea" // Изменено на фиолетовый stroke
               strokeWidth="2"
               strokeLinecap="round"
             />
             <path
               d="M23 28c0-2.5 4-4 4-6.5a4 4 0 00-8 0c0 2.5 4 4 4 6.5z"
-              stroke="#3b82f6"
+              stroke="#9333ea" // Изменено на фиолетовый stroke
               strokeWidth="1.8"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            <circle cx="23" cy="30" r="1" fill="#3b82f6" />
+            <circle cx="23" cy="30" r="1" fill="#9333ea" />{" "}
+            {/* Изменено на фиолетовый fill */}
           </svg>
         </div>
-        <div className="text-sm sm:text-base text-blue-500 font-medium mb-3 sm:mb-4">
+        <div className="text-sm sm:text-base text-purple-600 font-medium mb-3 sm:mb-4">
+          {" "}
+          {/* Изменено на text-purple-600 */}
           Записей в вашем списке наблюдения пока нет
         </div>
         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-sm mx-auto">

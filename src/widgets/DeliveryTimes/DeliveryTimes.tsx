@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState } from "react";
-import { useI18n } from "../../shared/i18n/I18nProvider"; // поправь путь под свой проект
+import { useI18n } from "../../shared/i18n/I18nProvider";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface TerminalMeta {
@@ -95,7 +95,7 @@ async function fetchWeatherForTerminal(
 function CheckIcon() {
   return (
     <svg
-      className="w-4 h-4 md:w-5 md:h-5 text-green-500 flex-shrink-0"
+      className="w-4 h-4 md:w-5 md:h-5 text-purple-600 flex-shrink-0" // Изменено с text-green-500 на text-purple-600
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -157,13 +157,16 @@ function TerminalCard({
       {/* Terminal header */}
       <div className="flex justify-between items-center py-4 md:px-6 border-b border-gray-100">
         <div className="min-w-0 pr-2">
-          <span className="text-sm md:text-base font-semibold text-gray-700 md:text-gray-900">{name}</span>
+          <span className="text-sm md:text-base font-semibold text-gray-700 md:text-gray-900">
+            {name}
+          </span>
           <span className="text-[10px] md:text-xs text-gray-400 ml-1 md:ml-2 whitespace-nowrap">
             ({t("deliveryTimes.localTime")} {localTime})
           </span>
         </div>
-        <span className="bg-green-500 text-white text-[10px] md:text-xs font-medium md:font-semibold px-4 py-1.5 rounded-full flex-shrink-0">
-          {t("deliveryTimes.working")}
+        <span className="bg-purple-600 text-white text-[10px] md:text-xs font-medium md:font-semibold px-4 py-1.5 rounded-full flex-shrink-0">
+          {t("deliveryTimes.working")}{" "}
+          {/* Изменено с bg-green-500 на bg-purple-600 */}
         </span>
       </div>
 
@@ -185,13 +188,15 @@ function TerminalCard({
                   {weather?.temp != null ? `${weather.temp}°C` : "—"}
                 </p>
                 <div
-                  className="relative block md:hidden w-9 h-9 rounded-full bg-sky-300 overflow-hidden"
+                  className="relative block md:hidden w-9 h-9 rounded-full bg-purple-300 overflow-hidden"
                   aria-hidden="true"
                 >
                   <span className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-white" />
                 </div>
               </div>
-              <p className="hidden md:block text-xs text-gray-400 mt-1">{wDesc}</p>
+              <p className="hidden md:block text-xs text-gray-400 mt-1">
+                {wDesc}
+              </p>
             </>
           )}
         </div>
@@ -235,7 +240,9 @@ function TerminalCard({
           <p className="text-xs text-gray-400 mb-2">
             {t("deliveryTimes.currentStatus")}
           </p>
-          <p className="text-sm text-gray-900 md:text-gray-700 leading-relaxed text-justify md:text-left">{status}</p>
+          <p className="text-sm text-gray-900 md:text-gray-700 leading-relaxed text-justify md:text-left">
+            {status}
+          </p>
         </div>
       </div>
 
@@ -246,7 +253,9 @@ function TerminalCard({
             key={i}
             className="block md:flex md:justify-between md:items-center py-3 md:py-3.5 md:border-b md:border-gray-100 md:last:border-0"
           >
-            <span className="block text-sm text-gray-800 md:pr-4 leading-relaxed">{step.label}</span>
+            <span className="block text-sm text-gray-800 md:pr-4 leading-relaxed">
+              {step.label}
+            </span>
             <div className="flex items-center gap-1 md:gap-2 mt-1 md:mt-0 flex-shrink-0">
               <span className="text-sm font-semibold md:font-medium text-slate-600 md:text-gray-800 whitespace-nowrap">
                 {step.days}
@@ -315,8 +324,8 @@ export function DeliveryTimes() {
               className={[
                 "px-4 py-1.5 rounded-full text-sm transition-all cursor-pointer",
                 activeTab === tm.id
-                  ? "bg-white text-gray-900 font-semibold"
-                  : "bg-transparent text-white border border-white/40 hover:bg-white/15",
+                  ? "bg-purple-600 text-white font-semibold"
+                  : "bg-transparent text-white border border-white/40 hover:bg-purple-600/15",
               ].join(" ")}
             >
               {t(`deliveryTimes.terminals.${tm.id}.name`)}

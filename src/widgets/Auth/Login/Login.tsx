@@ -36,7 +36,7 @@ function StarRating({ rating }: { rating: number }) {
       {[1, 2, 3, 4, 5].map((i) => (
         <svg
           key={i}
-          className={`w-5 h-5 ${i <= rating ? "text-yellow-400" : "text-gray-500"}`}
+          className={`w-5 h-5 ${i <= rating ? "text-violet-400" : "text-gray-500"}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -88,7 +88,7 @@ function Slideshow({
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                fill="#4285F4"
+                fill="#7c3aed"
               />
               <path
                 d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
@@ -212,10 +212,10 @@ export function Login() {
             <a
               href="/registration"
               title={t("auth.login.register")}
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-blue-100 flex items-center justify-center mb-5 sm:mb-7 hover:bg-blue-200 active:scale-95 transition-all cursor-pointer"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-violet-100 flex items-center justify-center mb-5 sm:mb-7 hover:bg-violet-200 active:scale-95 transition-all cursor-pointer"
             >
               <svg
-                className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-violet-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -256,7 +256,7 @@ export function Login() {
                   onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                   placeholder={t("auth.login.emailPlaceholder")}
                   disabled={loading}
-                  className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300 disabled:opacity-60"
+                  className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-400 bg-white placeholder-gray-300 disabled:opacity-60"
                 />
               </div>
 
@@ -273,7 +273,7 @@ export function Login() {
                     onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                     placeholder={t("auth.login.passwordPlaceholder")}
                     disabled={loading}
-                    className="w-full px-4 py-2.5 pr-11 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white placeholder-gray-300 disabled:opacity-60"
+                    className="w-full px-4 py-2.5 pr-11 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-400 bg-white placeholder-gray-300 disabled:opacity-60"
                   />
                   <button
                     type="button"
@@ -323,7 +323,7 @@ export function Login() {
                   type="checkbox"
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
-                  className="w-4 h-4 rounded border-gray-300 accent-blue-500"
+                  className="w-4 h-4 rounded border-gray-300 accent-violet-500"
                 />
                 <span className="text-sm text-gray-600">
                   {t("auth.login.remember")}
@@ -334,7 +334,7 @@ export function Login() {
                 type="button"
                 onClick={handleSubmit}
                 disabled={loading || !email.trim() || !password.trim()}
-                className="w-full py-3 bg-blue-500 hover:bg-blue-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1 disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
+                className="w-full py-3 bg-violet-500 hover:bg-violet-600 active:scale-[0.99] text-white font-semibold rounded-xl transition-all text-sm mt-1 disabled:opacity-60 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
               >
                 {loading && (
                   <svg
@@ -364,7 +364,7 @@ export function Login() {
             <p className="text-center text-sm text-gray-400 mt-5 sm:mt-6">
               <a
                 href="/forgotpassword"
-                className="hover:text-blue-500 transition-colors"
+                className="hover:text-violet-500 transition-colors"
               >
                 {t("auth.login.forgotPassword")}
               </a>
@@ -373,7 +373,7 @@ export function Login() {
               {t("auth.login.noAccount")}{" "}
               <a
                 href="/registration"
-                className="text-blue-500 hover:underline font-medium"
+                className="text-violet-500 hover:underline font-medium"
               >
                 {t("auth.login.register")}
               </a>

@@ -1,9 +1,10 @@
 .catalogWrapper {
-    max-width: 1280px;
+  max-width: 1280px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 40px 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 .container {
@@ -59,7 +60,7 @@
     height: 21px;
     flex: 0 0 auto;
     fill: none;
-    stroke: #7295bf;
+    stroke: #9b7fd4;
     stroke-width: 1.8;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -82,7 +83,7 @@
 .spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid #3b82f6;
+  border: 4px solid #7c3aed;
   border-top-color: transparent;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -97,7 +98,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 .loadMoreWrapper {
   display: flex;
@@ -108,8 +111,8 @@
 
 .loadMoreBtn {
   background: #ffffff;
-  color: #2563eb;
-  border: 2px solid #2563eb;
+  color: #7c3aed;
+  border: 2px solid #7c3aed;
   padding: 12px 32px;
   font-size: 14px;
   font-weight: 700;
@@ -118,9 +121,9 @@
   transition: all 0.2s ease;
 
   &:hover {
-    background: #2563eb;
+    background: #7c3aed;
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
   }
 }
 
@@ -177,9 +180,13 @@
 }
 
 @keyframes overlayIn {
-  from { opacity: 0; }
+  from {
+    opacity: 0;
+  }
 }
 
 @keyframes drawerIn {
-  from { transform: translateX(100%); }
+  from {
+    transform: translateX(100%);
+  }
 }
